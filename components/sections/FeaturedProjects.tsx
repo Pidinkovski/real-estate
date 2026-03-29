@@ -54,7 +54,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           </p>
         </SectionWrapper>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 auto-rows-[200px]">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-5 auto-rows-[200px]">
           {displayed.map((project, i) => (
             <motion.div
               key={project.id}
