@@ -100,6 +100,7 @@ export default function Hero({ onRequestQuote }: HeroProps) {
           >
             <DirectionalButton
               onClick={scrollToProjects}
+              hoverColor="#374151"
               className="px-8 py-4 font-semibold text-sm tracking-widest uppercase"
             >
               View Projects

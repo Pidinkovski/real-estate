@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import AnimatedNavLink from './AnimatedNavLink';
+import DirectionalButton from './DirectionalButton';
 
 const navLinks = [
   { label: 'Projects', href: '#projects' },
@@ -67,14 +68,14 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden lg:flex items-center gap-6">
-            <motion.button
+            <DirectionalButton
               onClick={() => handleNavClick('#contact')}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-6 py-2.5 border border-gold text-gold text-sm font-medium tracking-widest uppercase hover:bg-gold hover:text-obsidian transition-all duration-300 rounded-full"
+              variant="outline"
+              hoverColor="#374151"
+              className="px-6 py-2.5 text-sm font-medium tracking-widest uppercase"
             >
               Request a Quote
-            </motion.button>
+            </DirectionalButton>
           </div>
 
           <button
