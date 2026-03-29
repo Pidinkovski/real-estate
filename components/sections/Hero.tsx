@@ -55,8 +55,8 @@ export default function Hero({ onRequestQuote }: HeroProps) {
           <div className="w-8 h-px bg-gold" />
         </motion.div>
 
-        <div className="max-w-5xl">
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-none mb-2">
+        <div className="max-w-4xl">
+          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-none mb-2">
             {words.map((word, i) => (
               <motion.span
                 key={i}
@@ -69,7 +69,7 @@ export default function Hero({ onRequestQuote }: HeroProps) {
               </motion.span>
             ))}
           </h1>
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-none mb-8">
+          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-none mb-8">
             {subWords.map((word, i) => (
               <motion.span
                 key={i}
