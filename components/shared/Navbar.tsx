@@ -70,8 +70,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-6">
             <DirectionalButton
               onClick={() => handleNavClick('#contact')}
-              variant="outline-gold"
-              hoverColor="#C9A84C"
+              variant="primary"
               className="px-6 py-2.5 text-sm font-medium tracking-widest uppercase"
             >
               Request a Quote
