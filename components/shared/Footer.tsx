@@ -44,7 +44,7 @@ export default function Footer() {
                   key={i}
                   href="#"
                   whileHover={{ scale: 1.1, color: '#C6A35A' }}
-                  className="w-9 h-9 border border-white/10 flex items-center justify-center text-slate-400 hover:border-gold hover:text-gold transition-all duration-300"
+                  className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:border-gold hover:text-gold transition-all duration-300"
                 >
                   <Icon size={15} />
                 </motion.a>
