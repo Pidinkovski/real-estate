@@ -60,7 +60,7 @@ export default function Services() {
           </p>
         </SectionWrapper>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {services.map((service, i) => {
             const Icon = service.icon;
             return (
@@ -69,10 +69,10 @@ export default function Services() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: i * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
-                className="group bg-obsidian p-8 hover:bg-obsidian-light transition-all duration-500 cursor-default"
+                className="group bg-obsidian border border-white/5 rounded-2xl p-8 hover:bg-obsidian-light hover:border-gold/20 transition-all duration-500 cursor-default"
               >
                 <div className="mb-6">
-                  <div className="w-12 h-12 border border-white/10 group-hover:border-gold/40 flex items-center justify-center transition-all duration-500">
+                  <div className="w-12 h-12 border border-white/10 rounded-xl group-hover:border-gold/40 flex items-center justify-center transition-all duration-500">
                     <Icon size={20} className="text-gold/70 group-hover:text-gold transition-colors duration-300" />
                   </div>
                 </div>
@@ -88,7 +88,7 @@ export default function Services() {
                   {service.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs px-2 py-1 border border-white/5 text-slate-600 group-hover:border-gold/20 group-hover:text-slate-500 transition-all duration-300"
+                      className="text-xs px-2 py-1 border border-white/5 rounded-full text-slate-600 group-hover:border-gold/20 group-hover:text-slate-500 transition-all duration-300"
                     >
                       {tag}
                     </span>

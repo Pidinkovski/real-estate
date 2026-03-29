@@ -96,7 +96,7 @@ export default function Process() {
                   className="flex flex-col items-start lg:items-center gap-4"
                 >
                   <div className="relative">
-                    <div className="w-[104px] h-[104px] border border-white/10 bg-obsidian flex flex-col items-center justify-center gap-1 group-hover:border-gold/30 transition-colors">
+                    <div className="w-[104px] h-[104px] border border-white/10 rounded-2xl bg-obsidian flex flex-col items-center justify-center gap-1 group-hover:border-gold/30 transition-colors">
                       <Icon size={24} className="text-gold/70" />
                       <span className="text-xs text-slate-600 font-mono">{step.number}</span>
                     </div>
@@ -112,7 +112,7 @@ export default function Process() {
           </div>
         </div>
 
-        <SectionWrapper className="mt-20 border border-white/5 p-8 md:p-12 bg-obsidian-light" delay={0.4}>
+        <SectionWrapper className="mt-20 border border-white/5 rounded-2xl p-8 md:p-12 bg-obsidian-light" delay={0.4}>
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div>
               <h3 className="font-display text-2xl font-semibold text-white mb-2">
