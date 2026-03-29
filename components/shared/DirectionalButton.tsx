@@ -55,10 +55,10 @@ export default function DirectionalButton({
     >
       {/* Directional fill layer */}
       <motion.span
-        className={`absolute w-full h-full ${variant === 'primary' ? 'bg-gold-light' : 'bg-gold'}`}
+        className={`absolute aspect-square ${variant === 'primary' ? 'bg-gold-light' : 'bg-gold'}`}
         initial={false}
         animate={{
-          scale: isHovered ? 2.5 : 0,
+          scale: isHovered ? 3 : 0,
         }}
         transition={{
           duration: 0.6,
@@ -67,6 +67,8 @@ export default function DirectionalButton({
         style={{
           left: hoverOrigin.x,
           top: hoverOrigin.y,
+          width: '100%',
+          height: '100%',
           transform: 'translate(-50%, -50%)',
           borderRadius: '50%',
         }}
