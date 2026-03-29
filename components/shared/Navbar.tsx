@@ -39,10 +39,10 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-5 px-4"
       >
         <div
-          className={`w-full max-w-6xl flex items-center justify-between px-6 lg:px-10 transition-all duration-500 ${
+          className={`w-full max-w-5xl flex items-center justify-between px-5 lg:px-8 transition-all duration-500 ${
             scrolled
-              ? 'bg-obsidian/80 backdrop-blur-md border border-white/10 rounded-full py-3 shadow-lg shadow-black/20'
-              : 'bg-white/5 backdrop-blur-sm border border-white/10 rounded-full py-4'
+              ? 'bg-obsidian/80 backdrop-blur-md border border-white/10 rounded-full py-2 shadow-lg shadow-black/20'
+              : 'bg-white/5 backdrop-blur-sm border border-white/10 rounded-full py-3'
           }`}
         >
           <a
