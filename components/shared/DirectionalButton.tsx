@@ -51,7 +51,7 @@ export default function DirectionalButton({
       disabled={disabled}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden ${baseClasses} ${className}`}
+      className={`relative overflow-hidden rounded-full ${baseClasses} ${className}`}
     >
       {/* Directional fill layer */}
       <motion.span

@@ -71,7 +71,7 @@ export default function Navbar() {
               onClick={() => handleNavClick('#contact')}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="px-6 py-2.5 border border-gold text-gold text-sm font-medium tracking-widest uppercase hover:bg-gold hover:text-obsidian transition-all duration-300"
+              className="px-6 py-2.5 border border-gold text-gold text-sm font-medium tracking-widest uppercase hover:bg-gold hover:text-obsidian transition-all duration-300 rounded-full"
             >
               Request a Quote
             </motion.button>
