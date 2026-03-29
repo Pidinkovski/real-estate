@@ -90,7 +90,9 @@ export default function DirectionalButton({
             ? variant === 'outline-gold'
               ? '#0f1923'
               : variant === 'outline'
-              ? '#0f1923'
+              ? '#ffffff'
+              : variant === 'primary'
+              ? '#ffffff'
               : undefined
             : undefined,
         }}
