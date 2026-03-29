@@ -37,11 +37,11 @@ export default function Hero({ onRequestQuote }: HeroProps) {
           <source src="https://res.cloudinary.com/dltxzncyt/video/upload/v1774794052/hf_20260329_140651_0456da02-d646-4789-adda-8144d93e8ed8_jx2ciz.mp4" type="video/mp4" />
         </video>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-obsidian/30 via-obsidian/20 to-obsidian/50" />
-        <div className="absolute inset-0 bg-gradient-to-r from-obsidian/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-obsidian/50 via-obsidian/30 to-obsidian/60" />
+        <div className="absolute inset-0 bg-obsidian/20" />
       </motion.div>
 
-      <motion.div style={{ opacity }} className="relative z-10 container-wide section-padding w-full pt-20">
+      <motion.div style={{ opacity }} className="relative z-10 container-wide section-padding w-full flex flex-col items-center text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -52,9 +52,10 @@ export default function Hero({ onRequestQuote }: HeroProps) {
           <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">
             Est. 2014 · Vienna · Dubai · Monaco
           </span>
+          <div className="w-8 h-px bg-gold" />
         </motion.div>
 
-        <div className="max-w-4xl">
+        <div className="max-w-5xl">
           <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-none mb-2">
             {words.map((word, i) => (
               <motion.span
@@ -86,7 +87,7 @@ export default function Hero({ onRequestQuote }: HeroProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.3 }}
-            className="text-lg md:text-xl text-slate-300 font-light tracking-wide mb-12 max-w-xl"
+            className="text-lg md:text-xl text-slate-300 font-light tracking-wide mb-12 max-w-xl mx-auto"
           >
             Design, build, and furnish — all in one place.
           </motion.p>
@@ -95,7 +96,7 @@ export default function Hero({ onRequestQuote }: HeroProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.5 }}
-            className="flex flex-wrap items-center gap-4"
+            className="flex flex-wrap items-center justify-center gap-4"
           >
             <DirectionalButton
               onClick={scrollToProjects}

@@ -35,13 +35,15 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'bg-obsidian/95 backdrop-blur-md border-b border-white/5 py-4'
-            : 'bg-transparent py-6'
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-5 px-4"
       >
-        <div className="container-wide section-padding flex items-center justify-between">
+        <div
+          className={`w-full max-w-6xl flex items-center justify-between px-6 lg:px-10 transition-all duration-500 ${
+            scrolled
+              ? 'bg-obsidian/80 backdrop-blur-md border border-white/10 rounded-full py-3 shadow-lg shadow-black/20'
+              : 'bg-white/5 backdrop-blur-sm border border-white/10 rounded-full py-4'
+          }`}
+        >
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
@@ -84,6 +86,7 @@ export default function Navbar() {
           </button>
         </div>
       </motion.nav>
+
 
       <AnimatePresence>
         {mobileOpen && (
