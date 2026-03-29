@@ -73,12 +73,17 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
             Request a Consultation <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </DirectionalButton>
 
-          <a
-            href="mailto:hello@arkon-build.com"
-            className="text-sm text-slate-400 hover:text-gold transition-colors tracking-wider border-b border-slate-700 hover:border-gold pb-1"
+          <div
+            className="rounded-2xl border border-white/10 backdrop-blur-sm px-5 py-3"
+            style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)' }}
           >
-            or email us directly
-          </a>
+            <a
+              href="mailto:hello@arkon-build.com"
+              className="text-sm text-slate-400 hover:text-gold transition-colors tracking-wider border-b border-slate-700 hover:border-gold pb-1"
+            >
+              or email us directly
+            </a>
+          </div>
         </motion.div>
 
         <motion.div
