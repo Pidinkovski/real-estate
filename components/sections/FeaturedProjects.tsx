@@ -40,20 +40,18 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
 
       <div className="container-wide section-padding">
-        <SectionWrapper className="mb-16">
-          <div className="flex items-center gap-3 mb-4">
+        <SectionWrapper className="mb-16 text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-8 h-px bg-gold" />
             <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">Our Work</span>
+            <div className="w-8 h-px bg-gold" />
           </div>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-xl leading-tight">
-              Selected<br />
-              <span className="italic text-gold">Projects</span>
-            </h2>
-            <p className="text-slate-400 max-w-sm text-sm leading-relaxed">
-              From private residences in Monaco to commercial towers in Vienna — each project reflects our commitment to precision and permanence.
-            </p>
-          </div>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+            Selected <span className="italic text-gold">Projects</span>
+          </h2>
+          <p className="text-slate-400 max-w-xl mx-auto text-sm leading-relaxed">
+            From private residences in Monaco to commercial towers in Vienna — each project reflects our commitment to precision and permanence.
+          </p>
         </SectionWrapper>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3 auto-rows-[200px]">
