@@ -70,6 +70,7 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
         >
           <DirectionalButton
             onClick={onRequestConsultation}
+            hoverColor="#374151"
             className="flex items-center gap-3 px-10 py-5 font-semibold text-sm tracking-widest uppercase group whitespace-nowrap"
           >
             Request a Consultation <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />

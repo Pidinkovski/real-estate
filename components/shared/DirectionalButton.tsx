@@ -10,6 +10,7 @@ interface DirectionalButtonProps {
   type?: 'button' | 'submit';
   disabled?: boolean;
   variant?: 'primary' | 'outline';
+  hoverColor?: string;
 }
 
 export default function DirectionalButton({
@@ -19,6 +20,7 @@ export default function DirectionalButton({
   type = 'button',
   disabled = false,
   variant = 'primary',
+  hoverColor,
 }: DirectionalButtonProps) {
   const [hoverOrigin, setHoverOrigin] = useState({ x: 50, y: 50 });
   const [isHovered, setIsHovered] = useState(false);
@@ -55,7 +57,7 @@ export default function DirectionalButton({
     >
       {/* Directional fill layer */}
       <motion.span
-        className={`absolute aspect-square ${variant === 'primary' ? 'bg-gold-light' : 'bg-gold'}`}
+        className={`absolute aspect-square ${hoverColor ? '' : variant === 'primary' ? 'bg-gold-light' : 'bg-gold'}`}
         initial={false}
         animate={{
           scale: isHovered ? 3 : 0,
@@ -71,11 +73,12 @@ export default function DirectionalButton({
           height: '100%',
           transform: 'translate(-50%, -50%)',
           borderRadius: '50%',
+          ...(hoverColor ? { backgroundColor: hoverColor } : {}),
         }}
       />
 
       {/* Text layer */}
-      <span className={`relative z-10 flex items-center gap-3 whitespace-nowrap ${variant === 'outline' && isHovered ? 'text-obsidian' : ''} transition-colors duration-300`}>
+      <span className={`relative z-10 flex items-center gap-3 whitespace-nowrap ${variant === 'outline' && isHovered ? 'text-obsidian' : ''} ${hoverColor && isHovered ? 'text-white' : ''} transition-colors duration-300`}>
         {children}
       </span>
     </button>
