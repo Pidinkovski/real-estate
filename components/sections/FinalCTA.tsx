@@ -48,7 +48,7 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="mb-12 rounded-3xl border border-white/10 backdrop-blur-sm px-8 py-6 max-w-lg text-center"
+          className="mb-12 rounded-3xl border border-white/10 backdrop-blur-sm px-6 py-4 max-w-sm text-center"
           style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)' }}
         >
           <p className="text-xl md:text-2xl font-display font-light text-slate-200 mb-3">
