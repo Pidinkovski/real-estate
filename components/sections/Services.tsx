@@ -45,20 +45,19 @@ export default function Services() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
 
       <div className="container-wide section-padding">
-        <SectionWrapper className="mb-16">
-          <div className="flex items-center gap-3 mb-4">
+        <SectionWrapper className="mb-16 text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-8 h-px bg-gold" />
             <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">What We Do</span>
+            <div className="w-8 h-px bg-gold" />
           </div>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-xl leading-tight">
-              Every Discipline.<br />
-              <span className="italic text-gold">One Team.</span>
-            </h2>
-            <p className="text-slate-400 max-w-sm text-sm leading-relaxed">
-              We eliminate the friction of managing multiple vendors. Design, construction, and furnishing — all coordinated under a single contract.
-            </p>
-          </div>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+            Every Discipline.<br />
+            <span className="italic text-gold">One Team.</span>
+          </h2>
+          <p className="text-slate-400 max-w-xl mx-auto text-sm leading-relaxed">
+            We eliminate the friction of managing multiple vendors. Design, construction, and furnishing — all coordinated under a single contract.
+          </p>
         </SectionWrapper>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5">
