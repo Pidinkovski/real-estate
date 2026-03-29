@@ -44,23 +44,20 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
           <span className="italic text-gold">in mind?</span>
         </motion.h2>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="text-xl md:text-2xl font-display font-light text-slate-300 mb-4"
+          className="mb-12 rounded-3xl border border-white/10 backdrop-blur-md px-8 py-6 max-w-lg text-center"
+          style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)' }}
         >
-          Let&apos;s build it together.
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="text-sm text-slate-400 max-w-md mb-12"
-        >
-          From a private villa in the South of France to a commercial complex in Dubai — we work on projects across Europe and the Gulf. Every engagement starts with a confidential consultation.
-        </motion.p>
+          <p className="text-xl md:text-2xl font-display font-light text-slate-200 mb-3">
+            Let&apos;s build it together.
+          </p>
+          <p className="text-sm text-slate-400 leading-relaxed">
+            From a private villa in the South of France to a commercial complex in Dubai — we work on projects across Europe and the Gulf. Every engagement starts with a confidential consultation.
+          </p>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
