@@ -97,11 +97,11 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
           ].map((item) => (
             <div
               key={item.value}
-              className="text-center px-6 py-5 rounded-xl border border-white/10 backdrop-blur-md"
+              className="text-center px-4 py-3 rounded-lg border border-white/10 backdrop-blur-md"
               style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)' }}
             >
-              <div className="text-lg font-display font-bold text-gold mb-1">{item.value}</div>
-              <div className="text-xs text-slate-400 leading-relaxed">{item.label}</div>
+              <div className="text-sm font-display font-bold text-gold mb-0.5">{item.value}</div>
+              <div className="text-[11px] text-slate-400 leading-snug">{item.label}</div>
             </div>
           ))}
         </motion.div>
