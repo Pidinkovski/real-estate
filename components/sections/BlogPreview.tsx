@@ -25,21 +25,20 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
 
       <div className="container-wide section-padding">
-        <SectionWrapper className="mb-16">
-          <div className="flex items-center gap-3 mb-4">
+        <SectionWrapper className="mb-16 text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-8 h-px bg-gold" />
             <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">Editorial</span>
+            <div className="w-8 h-px bg-gold" />
           </div>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-xl leading-tight">
-              Insights &amp;<br />
-              <span className="italic text-gold">Perspectives</span>
-            </h2>
-            <button className="flex items-center gap-2 text-xs tracking-widest uppercase text-slate-400 hover:text-gold transition-colors self-start md:self-auto group">
-              All Articles
-              <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </button>
-          </div>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+            Insights &amp;<br />
+            <span className="italic text-gold">Perspectives</span>
+          </h2>
+          <button className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-slate-400 hover:text-gold transition-colors group">
+            All Articles
+            <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </button>
         </SectionWrapper>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">

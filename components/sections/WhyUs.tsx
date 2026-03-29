@@ -44,20 +44,21 @@ export default function WhyUs() {
 
       <div className="container-wide section-padding">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <SectionWrapper direction="left">
-            <div className="flex items-center gap-3 mb-4">
+          <SectionWrapper direction="left" className="text-center lg:text-left">
+            <div className="flex items-center justify-center lg:justify-start gap-3 mb-4">
               <div className="w-8 h-px bg-gold" />
               <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">Why ARKON</span>
+              <div className="w-8 h-px bg-gold lg:hidden" />
             </div>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
               Built on<br />
               <span className="italic text-gold">Four Pillars</span>
             </h2>
-            <p className="text-slate-400 text-sm leading-relaxed mb-10 max-w-sm">
+            <p className="text-slate-400 text-sm leading-relaxed mb-10 max-w-sm mx-auto lg:mx-0">
               We have spent a decade earning the trust of discerning clients across Europe and the Gulf. These principles are non-negotiable in every project we take on.
             </p>
 
-            <div className="flex flex-wrap items-center gap-6">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-6">
               {[
                 { value: '98%', label: 'On-Time Delivery' },
                 { value: '4.9', label: 'Client Satisfaction' },
