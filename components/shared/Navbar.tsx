@@ -71,7 +71,7 @@ export default function Navbar() {
             <DirectionalButton
               onClick={() => handleNavClick('#contact')}
               variant="primary"
-              className="px-6 py-2.5 text-sm font-medium tracking-widest uppercase"
+              className="px-6 py-2.5 text-sm font-bold tracking-widest uppercase"
             >
               Request a Quote
             </DirectionalButton>
