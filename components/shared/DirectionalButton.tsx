@@ -9,7 +9,7 @@ interface DirectionalButtonProps {
   className?: string;
   type?: 'button' | 'submit';
   disabled?: boolean;
-  variant?: 'primary' | 'outline';
+  variant?: 'primary' | 'outline' | 'outline-gold';
   hoverColor?: string;
 }
 
@@ -43,6 +43,8 @@ export default function DirectionalButton({
 
   const baseClasses = variant === 'primary'
     ? 'bg-gold text-obsidian'
+    : variant === 'outline-gold'
+    ? 'border border-gold text-gold'
     : 'border border-white/15 text-slate-400';
 
   return (
@@ -78,7 +80,7 @@ export default function DirectionalButton({
       />
 
       {/* Text layer */}
-      <span className={`relative z-10 flex items-center gap-3 whitespace-nowrap ${variant === 'outline' && isHovered ? 'text-obsidian' : ''} ${hoverColor && isHovered ? 'text-white' : ''} transition-colors duration-300`}>
+      <span className={`relative z-10 flex items-center gap-3 whitespace-nowrap ${variant === 'outline' && isHovered && !hoverColor ? 'text-obsidian' : ''} ${hoverColor && isHovered ? 'text-white' : ''} transition-colors duration-300`}>
         {children}
       </span>
     </button>
