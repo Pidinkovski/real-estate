@@ -22,18 +22,17 @@ export default function DirectionalButton({
   variant = 'primary',
   hoverColor,
 }: DirectionalButtonProps) {
-  const [hoverOrigin, setHoverOrigin] = useState({ x: 50, y: 50 });
+  const [hoverOrigin, setHoverOrigin] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleMouseEnter = (e: MouseEvent<HTMLButtonElement>) => {
     if (!buttonRef.current) return;
-
     const rect = buttonRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    setHoverOrigin({ x, y });
+    setHoverOrigin({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
     setIsHovered(true);
   };
 
@@ -47,6 +46,14 @@ export default function DirectionalButton({
     ? 'border border-gold text-gold'
     : 'border border-white/15 text-slate-400';
 
+  const fillColor = hoverColor
+    ? hoverColor
+    : variant === 'primary'
+    ? '#d4b06a'
+    : '#C9A84C';
+
+  const diameter = 300;
+
   return (
     <button
       ref={buttonRef}
@@ -57,30 +64,37 @@ export default function DirectionalButton({
       onMouseLeave={handleMouseLeave}
       className={`relative overflow-hidden rounded-full ${baseClasses} ${className}`}
     >
-      {/* Directional fill layer */}
       <motion.span
-        className={`absolute aspect-square ${hoverColor ? '' : variant === 'primary' ? 'bg-gold-light' : 'bg-gold'}`}
-        initial={false}
         animate={{
-          scale: isHovered ? 3 : 0,
+          scale: isHovered ? 6 : 0,
+          opacity: isHovered ? 1 : 0,
         }}
-        transition={{
-          duration: 0.6,
-          ease: [0.25, 0.1, 0.25, 1],
-        }}
+        initial={{ scale: 0, opacity: 0 }}
+        transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
         style={{
-          left: hoverOrigin.x,
-          top: hoverOrigin.y,
-          width: '100%',
-          height: '100%',
-          transform: 'translate(-50%, -50%)',
+          position: 'absolute',
+          left: hoverOrigin.x - diameter / 2,
+          top: hoverOrigin.y - diameter / 2,
+          width: diameter,
+          height: diameter,
           borderRadius: '50%',
-          ...(hoverColor ? { backgroundColor: hoverColor } : {}),
+          backgroundColor: fillColor,
+          pointerEvents: 'none',
         }}
       />
 
-      {/* Text layer */}
-      <span className={`relative z-10 flex items-center gap-3 whitespace-nowrap ${variant === 'outline' && isHovered && !hoverColor ? 'text-obsidian' : ''} ${hoverColor && isHovered ? (variant === 'outline-gold' ? 'text-obsidian' : 'text-white') : ''} transition-colors duration-300`}>
+      <span
+        className="relative z-10 flex items-center gap-3 whitespace-nowrap transition-colors duration-300"
+        style={{
+          color: isHovered
+            ? variant === 'outline-gold'
+              ? '#0f1923'
+              : variant === 'outline'
+              ? '#0f1923'
+              : undefined
+            : undefined,
+        }}
+      >
         {children}
       </span>
     </button>
