@@ -19,20 +19,20 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
 
   const gridLayout = [
     'md:col-span-2 md:row-span-2',
-    'md:col-span-1 md:row-span-1',
-    'md:col-span-1 md:row-span-1',
-    'md:col-span-1 md:row-span-1',
-    'md:col-span-1 md:row-span-1',
-    'md:col-span-2 md:row-span-1',
+    'md:col-span-1',
+    'md:col-span-1',
+    'md:col-span-1',
+    'md:col-span-1',
+    'md:col-span-2',
   ];
 
   const heights = [
-    'h-[400px] md:h-full',
-    'h-[280px]',
-    'h-[280px]',
-    'h-[280px]',
-    'h-[280px]',
-    'h-[280px]',
+    'h-[300px] md:h-auto',
+    'h-[240px]',
+    'h-[240px]',
+    'h-[240px]',
+    'h-[240px]',
+    'h-[240px]',
   ];
 
   return (
@@ -54,7 +54,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           </p>
         </SectionWrapper>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-7 auto-rows-[220px]">
+        <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-[240px_240px] gap-6 md:gap-7">
           {displayed.map((project, i) => (
             <motion.div
               key={project.id}
