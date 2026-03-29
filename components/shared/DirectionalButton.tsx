@@ -28,8 +28,8 @@ export default function DirectionalButton({
     if (!buttonRef.current) return;
 
     const rect = buttonRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
     setHoverOrigin({ x, y });
     setIsHovered(true);
@@ -55,25 +55,25 @@ export default function DirectionalButton({
     >
       {/* Directional fill layer */}
       <motion.span
-        className={`absolute inset-0 ${variant === 'primary' ? 'bg-gold-light' : 'bg-gold'}`}
-        initial={{ scale: 0 }}
+        className={`absolute w-full h-full ${variant === 'primary' ? 'bg-gold-light' : 'bg-gold'}`}
+        initial={false}
         animate={{
-          scale: isHovered ? 3 : 0,
+          scale: isHovered ? 2.5 : 0,
         }}
         transition={{
           duration: 0.6,
           ease: [0.25, 0.1, 0.25, 1],
         }}
         style={{
-          left: `${hoverOrigin.x}%`,
-          top: `${hoverOrigin.y}%`,
-          transformOrigin: 'center',
+          left: hoverOrigin.x,
+          top: hoverOrigin.y,
+          transform: 'translate(-50%, -50%)',
           borderRadius: '50%',
         }}
       />
 
       {/* Text layer */}
-      <span className={`relative z-10 flex items-center justify-center gap-2 ${variant === 'outline' && isHovered ? 'text-obsidian' : ''} transition-colors duration-300`}>
+      <span className={`relative z-10 ${variant === 'outline' && isHovered ? 'text-obsidian' : ''} transition-colors duration-300`}>
         {children}
       </span>
     </button>
