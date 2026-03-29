@@ -58,7 +58,7 @@ export default function BeforeAfter() {
         >
           <div
             ref={containerRef}
-            className="relative h-[400px] md:h-[560px] overflow-hidden select-none cursor-col-resize"
+            className="relative h-[400px] md:h-[560px] overflow-hidden rounded-2xl select-none cursor-col-resize"
             onMouseDown={onMouseDown}
             onMouseUp={onMouseUp}
             onMouseLeave={onMouseUp}
