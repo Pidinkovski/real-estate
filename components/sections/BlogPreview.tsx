@@ -1,0 +1,120 @@
+'use client';
+
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { ArrowUpRight, Clock } from 'lucide-react';
+import type { BlogPost } from '@/lib/supabase';
+import SectionWrapper from '@/components/shared/SectionWrapper';
+
+interface BlogPreviewProps {
+  posts: BlogPost[];
+}
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+export default function BlogPreview({ posts }: BlogPreviewProps) {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-100px' });
+
+  const [featured, ...rest] = posts;
+
+  return (
+    <section id="blog" ref={ref} className="py-28 md:py-36 bg-obsidian relative overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
+
+      <div className="container-wide section-padding">
+        <SectionWrapper className="mb-16">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-px bg-gold" />
+            <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">Editorial</span>
+          </div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-xl leading-tight">
+              Insights &amp;<br />
+              <span className="italic text-gold">Perspectives</span>
+            </h2>
+            <button className="flex items-center gap-2 text-xs tracking-widest uppercase text-slate-400 hover:text-gold transition-colors self-start md:self-auto group">
+              All Articles
+              <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </button>
+          </div>
+        </SectionWrapper>
+
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+          {featured && (
+            <motion.article
+              initial={{ opacity: 0, y: 40 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="lg:col-span-3 group cursor-pointer"
+            >
+              <div className="relative h-[320px] md:h-[440px] overflow-hidden mb-6">
+                <div
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                  style={{ backgroundImage: `url(${featured.image_url})` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 to-transparent" />
+                <div className="absolute top-4 left-4">
+                  <span className="text-xs px-3 py-1.5 bg-gold text-obsidian font-semibold tracking-widest uppercase">
+                    {featured.category}
+                  </span>
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <Clock size={12} className="text-slate-500" />
+                  <span className="text-xs text-slate-500">{featured.read_time} min read</span>
+                  <span className="text-slate-700">·</span>
+                  <span className="text-xs text-slate-500">{formatDate(featured.published_at)}</span>
+                </div>
+                <h3 className="font-display text-2xl md:text-3xl font-semibold text-white leading-snug group-hover:text-gold transition-colors duration-300 mb-3">
+                  {featured.title}
+                </h3>
+                <p className="text-sm text-slate-500 leading-relaxed line-clamp-2">{featured.excerpt}</p>
+                <div className="mt-4 flex items-center gap-1.5 text-xs text-gold">
+                  Read article
+                  <ArrowUpRight size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </div>
+              </div>
+            </motion.article>
+          )}
+
+          <div className="lg:col-span-2 flex flex-col gap-4">
+            {rest.map((post, i) => (
+              <motion.article
+                key={post.id}
+                initial={{ opacity: 0, x: 30 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.2 + i * 0.15 }}
+                className="group cursor-pointer border border-white/5 hover:border-white/10 transition-all duration-300 flex gap-0 overflow-hidden"
+              >
+                <div className="relative w-32 md:w-40 shrink-0 h-full min-h-[140px] overflow-hidden">
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                    style={{ backgroundImage: `url(${post.image_url})` }}
+                  />
+                </div>
+                <div className="p-5 flex flex-col justify-between">
+                  <div>
+                    <span className="text-xs text-gold tracking-widest uppercase">{post.category}</span>
+                    <h3 className="font-display text-base font-semibold text-white leading-snug mt-2 group-hover:text-gold transition-colors duration-300 line-clamp-3">
+                      {post.title}
+                    </h3>
+                  </div>
+                  <div className="flex items-center gap-2 mt-3">
+                    <Clock size={11} className="text-slate-500" />
+                    <span className="text-xs text-slate-500">{post.read_time} min</span>
+                    <span className="text-slate-700">·</span>
+                    <span className="text-xs text-slate-500">{formatDate(post.published_at)}</span>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
