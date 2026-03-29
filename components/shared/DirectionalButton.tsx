@@ -80,7 +80,7 @@ export default function DirectionalButton({
       />
 
       {/* Text layer */}
-      <span className={`relative z-10 flex items-center gap-3 whitespace-nowrap ${variant === 'outline' && isHovered && !hoverColor ? 'text-obsidian' : ''} ${hoverColor && isHovered ? 'text-white' : ''} transition-colors duration-300`}>
+      <span className={`relative z-10 flex items-center gap-3 whitespace-nowrap ${variant === 'outline' && isHovered && !hoverColor ? 'text-obsidian' : ''} ${hoverColor && isHovered ? (variant === 'outline-gold' ? 'text-obsidian' : 'text-white') : ''} transition-colors duration-300`}>
         {children}
       </span>
     </button>
