@@ -85,19 +85,23 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.7 }}
-          className="mt-20 grid grid-cols-3 gap-8 md:gap-16 border-t border-white/5 pt-10"
+          className="mt-20 grid grid-cols-3 gap-4 md:gap-6"
         >
           {[
             { value: 'EU', label: 'Licensed in Austria, Germany, France, Croatia' },
             { value: 'UAE', label: 'RERA & Dubai Municipality Registered' },
             { value: 'MC', label: 'Monaco Principality Certified' },
           ].map((item) => (
-            <div key={item.value} className="text-center">
+            <div
+              key={item.value}
+              className="text-center px-6 py-5 rounded-xl border border-white/10 backdrop-blur-md"
+              style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)' }}
+            >
               <div className="text-lg font-display font-bold text-gold mb-1">{item.value}</div>
-              <div className="text-xs text-slate-600">{item.label}</div>
+              <div className="text-xs text-slate-400 leading-relaxed">{item.label}</div>
             </div>
           ))}
         </motion.div>
