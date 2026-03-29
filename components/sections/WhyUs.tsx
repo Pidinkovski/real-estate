@@ -79,7 +79,7 @@ export default function WhyUs() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-                className="p-6 border border-white/5 bg-obsidian-light hover:border-gold/20 transition-all duration-500 group text-center"
+                className="p-6 border border-white/5 rounded-2xl bg-obsidian-light hover:border-gold/20 transition-all duration-500 group text-center"
               >
                 <div className="mb-4 flex justify-center">
                   <Icon size={24} className="text-gold/70 group-hover:text-gold transition-colors duration-300" />

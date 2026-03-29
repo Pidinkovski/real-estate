@@ -49,7 +49,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="lg:col-span-3 group cursor-pointer"
             >
-              <div className="relative h-[320px] md:h-[440px] overflow-hidden mb-6">
+              <div className="relative h-[320px] md:h-[440px] overflow-hidden rounded-2xl mb-6">
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                   style={{ backgroundImage: `url(${featured.image_url})` }}
@@ -87,7 +87,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                 initial={{ opacity: 0, x: 30 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.2 + i * 0.15 }}
-                className="group cursor-pointer border border-white/5 hover:border-white/10 transition-all duration-300 flex gap-0 overflow-hidden"
+                className="group cursor-pointer border border-white/5 rounded-2xl hover:border-white/10 transition-all duration-300 flex gap-0 overflow-hidden"
               >
                 <div className="relative w-32 md:w-40 shrink-0 h-full min-h-[140px] overflow-hidden">
                   <div
