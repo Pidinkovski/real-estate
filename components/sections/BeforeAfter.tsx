@@ -160,7 +160,7 @@ export default function BeforeAfter() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative max-w-5xl mx-auto"
         >
-          <div className="relative overflow-hidden">
+          <div className="relative overflow-hidden rounded-2xl">
             <AnimatePresence custom={direction} mode="wait">
               <motion.div
                 key={current}
@@ -174,6 +174,21 @@ export default function BeforeAfter() {
                 <BeforeAfterSlider before={project.before} after={project.after} />
               </motion.div>
             </AnimatePresence>
+
+            <button
+              onClick={prev}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-obsidian/70 border border-white/15 backdrop-blur-sm flex items-center justify-center text-slate-300 hover:border-gold hover:text-gold transition-colors"
+              aria-label="Previous"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              onClick={next}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-obsidian/70 border border-white/15 backdrop-blur-sm flex items-center justify-center text-slate-300 hover:border-gold hover:text-gold transition-colors"
+              aria-label="Next"
+            >
+              <ChevronRight size={20} />
+            </button>
           </div>
 
           <div className="mt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-t border-white/5 pt-6">
@@ -215,7 +230,7 @@ export default function BeforeAfter() {
             </div>
           </div>
 
-          <div className="mt-8 flex items-center justify-between">
+          <div className="mt-6 flex flex-col items-center gap-3">
             <div className="flex items-center gap-2">
               {projects.map((_, i) => (
                 <button
@@ -230,26 +245,9 @@ export default function BeforeAfter() {
                 />
               ))}
             </div>
-
-            <div className="flex items-center gap-3">
-              <button
-                onClick={prev}
-                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:border-gold hover:text-gold transition-colors"
-                aria-label="Previous"
-              >
-                <ChevronLeft size={18} />
-              </button>
-              <span className="text-xs text-slate-500 tabular-nums">
-                {current + 1} / {projects.length}
-              </span>
-              <button
-                onClick={next}
-                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:border-gold hover:text-gold transition-colors"
-                aria-label="Next"
-              >
-                <ChevronRight size={18} />
-              </button>
-            </div>
+            <span className="text-xs text-slate-500 tabular-nums">
+              {current + 1} / {projects.length}
+            </span>
           </div>
         </motion.div>
       </div>
