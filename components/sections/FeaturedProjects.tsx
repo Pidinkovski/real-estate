@@ -35,16 +35,9 @@ function ProjectCard({ project, index, total, autoReveal }: ProjectCardProps) {
 
       <motion.div
         className="absolute inset-0 bg-[#080E1C]"
-        initial={{ clipPath: 'inset(0% 50% 0% 0%)' }}
-        animate={revealed ? { clipPath: 'inset(0% 100% 0% 0%)' } : { clipPath: 'inset(0% 50% 0% 0%)' }}
-        transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
-      />
-
-      <motion.div
-        className="absolute inset-0 bg-[#080E1C]"
-        initial={{ clipPath: 'inset(0% 0% 0% 50%)' }}
-        animate={revealed ? { clipPath: 'inset(0% 0% 0% 100%)' } : { clipPath: 'inset(0% 0% 0% 50%)' }}
-        transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
+        initial={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+        animate={revealed ? { clipPath: 'inset(0% 0% 0% 100%)' } : { clipPath: 'inset(0% 0% 0% 0%)' }}
+        transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }}
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-obsidian/20 to-transparent" />
