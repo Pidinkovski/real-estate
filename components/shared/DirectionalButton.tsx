@@ -89,12 +89,12 @@ export default function DirectionalButton({
           color: isHovered
             ? variant === 'outline-gold'
               ? '#0f1923'
-              : variant === 'outline'
-              ? '#ffffff'
-              : variant === 'primary'
-              ? '#ffffff'
-              : undefined
-            : undefined,
+              : '#ffffff'
+            : variant === 'primary'
+            ? '#0f1923'
+            : variant === 'outline-gold'
+            ? '#C9A84C'
+            : '#94a3b8',
         }}
       >
         {children}
