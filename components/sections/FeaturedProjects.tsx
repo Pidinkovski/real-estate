@@ -74,7 +74,7 @@ function ProjectCard({ project, index, total, autoReveal }: ProjectCardProps) {
                   <span className="text-sm text-slate-400">{project.year}</span>
                 </div>
               </div>
-              <div className="w-10 h-10 border border-white/30 flex items-center justify-center shrink-0 ml-6 hover:border-gold hover:bg-gold/10 transition-all duration-300 cursor-pointer">
+              <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center shrink-0 ml-6 hover:border-gold hover:bg-gold/10 transition-all duration-300 cursor-pointer">
                 <ArrowUpRight size={16} className="text-white" />
               </div>
             </div>
@@ -148,17 +148,17 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           <button
             onClick={goPrev}
             disabled={current === 0}
-            className={`shrink-0 w-12 h-12 md:w-14 md:h-14 border flex items-center justify-center transition-all duration-300 z-10 ${
+            className={`shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-300 z-10 ${
               current === 0
-                ? 'border-white/10 text-white/20 cursor-not-allowed'
-                : 'border-gold/40 text-gold hover:bg-gold/10 hover:border-gold cursor-pointer'
+                ? 'text-white/20 cursor-not-allowed bg-white/5'
+                : 'text-gold hover:bg-gold/10 cursor-pointer bg-white/5'
             }`}
             aria-label="Previous project"
           >
             <ChevronLeft size={20} />
           </button>
 
-          <div className="relative w-full max-w-3xl overflow-hidden" style={{ height: '520px' }}>
+          <div className="relative w-full max-w-3xl overflow-hidden rounded-2xl" style={{ height: '520px' }}>
             <AnimatePresence mode="wait">
               <motion.div
                 key={project.id}
@@ -181,10 +181,10 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           <button
             onClick={goNext}
             disabled={current === displayed.length - 1}
-            className={`shrink-0 w-12 h-12 md:w-14 md:h-14 border flex items-center justify-center transition-all duration-300 z-10 ${
+            className={`shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-300 z-10 ${
               current === displayed.length - 1
-                ? 'border-white/10 text-white/20 cursor-not-allowed'
-                : 'border-gold/40 text-gold hover:bg-gold/10 hover:border-gold cursor-pointer'
+                ? 'text-white/20 cursor-not-allowed bg-white/5'
+                : 'text-gold hover:bg-gold/10 cursor-pointer bg-white/5'
             }`}
             aria-label="Next project"
           >
