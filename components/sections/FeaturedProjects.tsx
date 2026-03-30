@@ -12,9 +12,10 @@ interface ProjectCardProps {
   index: number;
   total: number;
   autoReveal: boolean;
+  direction: 'next' | 'prev';
 }
 
-function ProjectCard({ project, index, total, autoReveal }: ProjectCardProps) {
+function ProjectCard({ project, index, total, autoReveal, direction }: ProjectCardProps) {
   const [revealed, setRevealed] = useState(false);
   const [infoVisible, setInfoVisible] = useState(false);
 
@@ -26,6 +27,9 @@ function ProjectCard({ project, index, total, autoReveal }: ProjectCardProps) {
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [project.id, autoReveal]);
 
+  const hiddenClip = direction === 'next' ? 'inset(0% 0% 0% 0%)' : 'inset(0% 0% 0% 0%)';
+  const revealedClip = direction === 'next' ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)';
+
   return (
     <div className="absolute inset-0">
       <div
@@ -35,8 +39,8 @@ function ProjectCard({ project, index, total, autoReveal }: ProjectCardProps) {
 
       <motion.div
         className="absolute inset-0 bg-[#080E1C]"
-        initial={{ clipPath: 'inset(0% 0% 0% 0%)' }}
-        animate={revealed ? { clipPath: 'inset(0% 0% 0% 100%)' } : { clipPath: 'inset(0% 0% 0% 0%)' }}
+        initial={{ clipPath: hiddenClip }}
+        animate={revealed ? { clipPath: revealedClip } : { clipPath: hiddenClip }}
         transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }}
       />
 
@@ -99,6 +103,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   const displayed = projects.slice(0, 6);
   const [current, setCurrent] = useState(0);
   const [canAutoReveal, setCanAutoReveal] = useState(false);
+  const [direction, setDirection] = useState<'next' | 'prev'>('next');
 
   useEffect(() => {
     if (inView && !hasAutoRevealed.current) {
@@ -107,13 +112,14 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
     }
   }, [inView]);
 
-  const navigateTo = (index: number) => {
+  const navigateTo = (index: number, dir: 'next' | 'prev') => {
     if (index === current) return;
+    setDirection(dir);
     setCurrent(index);
   };
 
-  const goNext = () => { if (current < displayed.length - 1) navigateTo(current + 1); };
-  const goPrev = () => { if (current > 0) navigateTo(current - 1); };
+  const goNext = () => { if (current < displayed.length - 1) navigateTo(current + 1, 'next'); };
+  const goPrev = () => { if (current > 0) navigateTo(current - 1, 'prev'); };
 
   const project = displayed[current];
   if (!project) return null;
@@ -166,6 +172,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                   index={current}
                   total={displayed.length}
                   autoReveal={canAutoReveal && current === 0}
+                  direction={direction}
                 />
               </motion.div>
             </AnimatePresence>
@@ -189,7 +196,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           {displayed.map((_, i) => (
             <button
               key={i}
-              onClick={() => navigateTo(i)}
+              onClick={() => navigateTo(i, i > current ? 'next' : 'prev')}
               className={`transition-all duration-300 ${
                 i === current ? 'w-6 h-1.5 bg-gold' : 'w-2 h-1.5 bg-white/20 hover:bg-white/40'
               }`}
