@@ -39,7 +39,7 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-5 px-4"
       >
         <div
-          className={`w-4/5 max-w-5xl flex items-center justify-between px-5 lg:px-8 transition-all duration-500 ${
+          className={`w-4/5 max-w-5xl flex items-center justify-between px-4 lg:px-6 transition-all duration-500 ${
             scrolled
               ? 'bg-obsidian/80 backdrop-blur-md border border-white/10 rounded-full py-2 shadow-lg shadow-black/20'
               : 'bg-white/5 backdrop-blur-sm border border-white/10 rounded-full py-3'
@@ -50,18 +50,18 @@ export default function Navbar() {
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="flex items-center gap-2 group"
           >
-            <span className="text-2xl font-display font-bold tracking-wider text-white">
+            <span className="text-xl font-display font-bold tracking-wider text-white">
               ARK<span className="text-gold">ON</span>
             </span>
           </a>
 
-          <ul className="hidden lg:flex items-center gap-10">
+          <ul className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <li key={link.href} className="group">
                 <AnimatedNavLink
                   label={link.label}
                   onClick={() => handleNavClick(link.href)}
-                  className="text-sm font-medium tracking-widest uppercase text-slate-300 hover:text-gold transition-colors duration-300"
+                  className="text-xs font-medium tracking-wider uppercase text-slate-300 hover:text-gold transition-colors duration-300"
                 />
               </li>
             ))}
@@ -72,7 +72,7 @@ export default function Navbar() {
               onClick={() => handleNavClick('#contact')}
               variant="primary"
               hoverColor="#374151"
-              className="px-6 py-2.5 text-sm font-bold tracking-widest uppercase"
+              className="px-4 py-2 text-xs font-bold tracking-wider uppercase"
             >
               Request a Quote
             </DirectionalButton>
