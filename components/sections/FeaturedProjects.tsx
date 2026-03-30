@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { ArrowUpRight, MapPin } from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Project } from '@/lib/supabase';
 import SectionWrapper from '@/components/shared/SectionWrapper';
 import DirectionalButton from '@/components/shared/DirectionalButton';
@@ -12,31 +12,55 @@ interface FeaturedProjectsProps {
 }
 
 export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
-  const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-100px' });
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { once: true, margin: '-120px' });
 
   const displayed = projects.slice(0, 6);
+  const [current, setCurrent] = useState(0);
+  const [revealed, setRevealed] = useState(false);
+  const [infoVisible, setInfoVisible] = useState(false);
+  const [direction, setDirection] = useState<'next' | 'prev'>('next');
 
-  const gridLayout = [
-    'md:col-span-2 md:row-span-2',
-    'md:col-span-1',
-    'md:col-span-1',
-    'md:col-span-1',
-    'md:col-span-1',
-    'md:col-span-2',
-  ];
+  useEffect(() => {
+    if (inView && !revealed) {
+      const t1 = setTimeout(() => setRevealed(true), 300);
+      const t2 = setTimeout(() => setInfoVisible(true), 1100);
+      return () => { clearTimeout(t1); clearTimeout(t2); };
+    }
+  }, [inView, revealed]);
 
-  const heights = [
-    'h-[300px] md:h-auto',
-    'h-[240px]',
-    'h-[240px]',
-    'h-[240px]',
-    'h-[240px]',
-    'h-[240px]',
-  ];
+  const goNext = () => {
+    if (current < displayed.length - 1) {
+      setDirection('next');
+      setInfoVisible(false);
+      setRevealed(false);
+      setTimeout(() => {
+        setCurrent((c) => c + 1);
+        setRevealed(true);
+        setTimeout(() => setInfoVisible(true), 800);
+      }, 200);
+    }
+  };
+
+  const goPrev = () => {
+    if (current > 0) {
+      setDirection('prev');
+      setInfoVisible(false);
+      setRevealed(false);
+      setTimeout(() => {
+        setCurrent((c) => c - 1);
+        setRevealed(true);
+        setTimeout(() => setInfoVisible(true), 800);
+      }, 200);
+    }
+  };
+
+  const project = displayed[current];
+
+  if (!project) return null;
 
   return (
-    <section id="projects" ref={ref} className="py-28 md:py-36 bg-[#080E1C] relative">
+    <section id="projects" ref={sectionRef} className="py-28 md:py-36 bg-[#080E1C] relative">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
 
       <div className="container-wide section-padding">
@@ -54,44 +78,142 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           </p>
         </SectionWrapper>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-[240px_240px] gap-6 md:gap-7">
-          {displayed.map((project, i) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-              className={`relative overflow-hidden group cursor-pointer ${gridLayout[i] ?? ''} ${heights[i] ?? 'h-[280px]'}`}
-            >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                style={{ backgroundImage: `url(${project.image_url})` }}
-              />
-              <div className="absolute inset-0 bg-obsidian/40 group-hover:bg-obsidian/20 transition-all duration-500" />
-              <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="relative flex items-center justify-center gap-6 md:gap-10">
+          <button
+            onClick={goPrev}
+            disabled={current === 0}
+            className={`
+              shrink-0 w-12 h-12 md:w-14 md:h-14 border flex items-center justify-center
+              transition-all duration-300 z-10
+              ${current === 0
+                ? 'border-white/10 text-white/20 cursor-not-allowed'
+                : 'border-gold/40 text-gold hover:bg-gold/10 hover:border-gold cursor-pointer'}
+            `}
+            aria-label="Previous project"
+          >
+            <ChevronLeft size={20} />
+          </button>
 
-              <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <div className="text-xs tracking-widest uppercase text-gold mb-1">{project.category}</div>
-                    <h3 className="font-display text-xl font-semibold text-white">{project.name}</h3>
-                    <div className="flex items-center gap-1.5 mt-1">
-                      <MapPin size={11} className="text-slate-400" />
-                      <span className="text-xs text-slate-400">{project.location}</span>
-                      <span className="text-slate-600 mx-1">·</span>
-                      <span className="text-xs text-slate-400">{project.sqm.toLocaleString()} m²</span>
-                    </div>
-                  </div>
-                  <div className="w-8 h-8 border border-white/30 flex items-center justify-center shrink-0">
-                    <ArrowUpRight size={14} className="text-white" />
-                  </div>
-                </div>
-              </div>
+          <div className="relative w-full max-w-3xl overflow-hidden" style={{ height: '520px' }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="absolute inset-0"
+              >
+                <div
+                  className="absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${project.image_url})` }}
+                />
 
-              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="text-xs text-slate-300 tracking-widest">{project.year}</span>
-              </div>
-            </motion.div>
+                <motion.div
+                  className="absolute inset-0 bg-[#080E1C]"
+                  initial={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+                  animate={
+                    revealed
+                      ? { clipPath: 'inset(0% 0% 0% 100%)' }
+                      : { clipPath: 'inset(0% 0% 0% 0%)' }
+                  }
+                  transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
+                />
+
+                <motion.div
+                  className="absolute inset-0 bg-[#080E1C]"
+                  initial={{ clipPath: 'inset(0% 100% 0% 0%)' }}
+                  animate={
+                    revealed
+                      ? { clipPath: 'inset(0% 0% 0% 0%)' }
+                      : { clipPath: 'inset(0% 100% 0% 0%)' }
+                  }
+                  transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-obsidian/90 via-obsidian/20 to-transparent" />
+
+                <AnimatePresence>
+                  {infoVisible && (
+                    <motion.div
+                      key="info"
+                      initial={{ opacity: 0, y: 18 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+                      className="absolute bottom-0 left-0 right-0 p-8 md:p-10"
+                    >
+                      <div className="flex items-end justify-between">
+                        <div>
+                          <div className="text-xs tracking-widest uppercase text-gold mb-2">{project.category}</div>
+                          <h3 className="font-display text-2xl md:text-3xl font-semibold text-white mb-2">
+                            {project.name}
+                          </h3>
+                          <div className="flex items-center gap-2">
+                            <MapPin size={12} className="text-slate-400" />
+                            <span className="text-sm text-slate-400">{project.location}</span>
+                            <span className="text-slate-600 mx-1">·</span>
+                            <span className="text-sm text-slate-400">{project.sqm.toLocaleString()} m²</span>
+                            <span className="text-slate-600 mx-1">·</span>
+                            <span className="text-sm text-slate-400">{project.year}</span>
+                          </div>
+                        </div>
+                        <div className="w-10 h-10 border border-white/30 flex items-center justify-center shrink-0 ml-6 hover:border-gold hover:bg-gold/10 transition-all duration-300 cursor-pointer">
+                          <ArrowUpRight size={16} className="text-white" />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={infoVisible ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="absolute top-6 right-6 text-xs text-slate-400 tracking-widest"
+                >
+                  {String(current + 1).padStart(2, '0')} / {String(displayed.length).padStart(2, '0')}
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <button
+            onClick={goNext}
+            disabled={current === displayed.length - 1}
+            className={`
+              shrink-0 w-12 h-12 md:w-14 md:h-14 border flex items-center justify-center
+              transition-all duration-300 z-10
+              ${current === displayed.length - 1
+                ? 'border-white/10 text-white/20 cursor-not-allowed'
+                : 'border-gold/40 text-gold hover:bg-gold/10 hover:border-gold cursor-pointer'}
+            `}
+            aria-label="Next project"
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+
+        <div className="flex justify-center gap-2 mt-8">
+          {displayed.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                if (i === current) return;
+                setDirection(i > current ? 'next' : 'prev');
+                setInfoVisible(false);
+                setRevealed(false);
+                setTimeout(() => {
+                  setCurrent(i);
+                  setRevealed(true);
+                  setTimeout(() => setInfoVisible(true), 800);
+                }, 200);
+              }}
+              className={`transition-all duration-300 ${
+                i === current ? 'w-6 h-1.5 bg-gold' : 'w-2 h-1.5 bg-white/20 hover:bg-white/40'
+              }`}
+              aria-label={`Go to project ${i + 1}`}
+            />
           ))}
         </div>
 
