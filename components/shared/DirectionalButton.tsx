@@ -11,6 +11,7 @@ interface DirectionalButtonProps {
   disabled?: boolean;
   variant?: 'primary' | 'outline' | 'outline-gold';
   hoverColor?: string;
+  textOnlyHover?: boolean;
 }
 
 export default function DirectionalButton({
@@ -21,6 +22,7 @@ export default function DirectionalButton({
   disabled = false,
   variant = 'primary',
   hoverColor,
+  textOnlyHover = false,
 }: DirectionalButtonProps) {
   const [hoverOrigin, setHoverOrigin] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -64,24 +66,26 @@ export default function DirectionalButton({
       onMouseLeave={handleMouseLeave}
       className={`relative overflow-hidden rounded-full ${baseClasses} ${className}`}
     >
-      <motion.span
-        animate={{
-          scale: isHovered ? 6 : 0,
-          opacity: isHovered ? 1 : 0,
-        }}
-        initial={{ scale: 0, opacity: 0 }}
-        transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
-        style={{
-          position: 'absolute',
-          left: hoverOrigin.x - diameter / 2,
-          top: hoverOrigin.y - diameter / 2,
-          width: diameter,
-          height: diameter,
-          borderRadius: '50%',
-          backgroundColor: fillColor,
-          pointerEvents: 'none',
-        }}
-      />
+      {!textOnlyHover && (
+        <motion.span
+          animate={{
+            scale: isHovered ? 6 : 0,
+            opacity: isHovered ? 1 : 0,
+          }}
+          initial={{ scale: 0, opacity: 0 }}
+          transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
+          style={{
+            position: 'absolute',
+            left: hoverOrigin.x - diameter / 2,
+            top: hoverOrigin.y - diameter / 2,
+            width: diameter,
+            height: diameter,
+            borderRadius: '50%',
+            backgroundColor: fillColor,
+            pointerEvents: 'none',
+          }}
+        />
+      )}
 
       <span
         className="relative z-10 flex items-center gap-3 whitespace-nowrap transition-colors duration-300"

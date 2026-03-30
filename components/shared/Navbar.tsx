@@ -71,7 +71,7 @@ export default function Navbar() {
             <DirectionalButton
               onClick={() => handleNavClick('#contact')}
               variant="primary"
-              hoverColor="#374151"
+              textOnlyHover
               className="px-4 py-2 text-xs font-bold tracking-wider uppercase"
             >
               Request a Quote
