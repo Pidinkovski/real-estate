@@ -66,7 +66,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.96 }}
             transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-            className="bg-obsidian-light border border-white/10 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+            className="bg-obsidian-light border border-white/10 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
           >
             <div className="flex items-center justify-between p-8 border-b border-white/10">
               <div>
@@ -102,7 +102,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       value={form.name}
                       onChange={handleChange}
                       required
-                      className="w-full bg-white/5 border border-white/10 text-white placeholder-slate-600 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors"
+                      className="w-full bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-600 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors"
                       placeholder="Alexander Schmidt"
                     />
                   </div>
@@ -114,7 +114,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       value={form.email}
                       onChange={handleChange}
                       required
-                      className="w-full bg-white/5 border border-white/10 text-white placeholder-slate-600 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors"
+                      className="w-full bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-600 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors"
                       placeholder="hello@example.com"
                     />
                   </div>
@@ -127,7 +127,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       name="phone"
                       value={form.phone}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 text-white placeholder-slate-600 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors"
+                      className="w-full bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-600 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors"
                       placeholder="+43 1 234 567"
                     />
                   </div>
@@ -137,7 +137,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       name="project_type"
                       value={form.project_type}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 text-white px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors appearance-none"
+                      className="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors appearance-none"
                     >
                       {projectTypes.map((t) => <option key={t} value={t} className="bg-obsidian">{t}</option>)}
                     </select>
@@ -150,7 +150,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     name="budget_range"
                     value={form.budget_range}
                     onChange={handleChange}
-                    className="w-full bg-white/5 border border-white/10 text-white px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors appearance-none"
+                    className="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors appearance-none"
                   >
                     <option value="" className="bg-obsidian">Select a range</option>
                     {budgetRanges.map((b) => <option key={b} value={b} className="bg-obsidian">{b}</option>)}
@@ -164,7 +164,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     value={form.message}
                     onChange={handleChange}
                     rows={4}
-                    className="w-full bg-white/5 border border-white/10 text-white placeholder-slate-600 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors resize-none"
+                    className="w-full bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-600 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors resize-none"
                     placeholder="Tell us about your project — location, scale, timeline, any specific requirements..."
                   />
                 </div>
@@ -176,7 +176,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   disabled={loading}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
-                  className="w-full py-4 bg-gold text-obsidian font-semibold text-sm tracking-widest uppercase hover:bg-gold-light transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+                  className="w-full py-4 bg-gold rounded-lg text-obsidian font-semibold text-sm tracking-widest uppercase hover:bg-gold-light transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
                 >
                   {loading ? <><Loader2 size={16} className="animate-spin" /> Sending...</> : 'Send Inquiry'}
                 </motion.button>
