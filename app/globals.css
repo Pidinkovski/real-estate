@@ -114,6 +114,38 @@
   background: #C6A35A80;
 }
 
+.reveal-top {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 50%;
+  background: black;
+  z-index: 9999;
+  animation: slideUp 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.reveal-bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50%;
+  background: black;
+  z-index: 9999;
+  animation: slideDown 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+@keyframes slideUp {
+  0%   { transform: translateY(0%); }
+  100% { transform: translateY(-100%); }
+}
+
+@keyframes slideDown {
+  0%   { transform: translateY(0%); }
+  100% { transform: translateY(100%); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

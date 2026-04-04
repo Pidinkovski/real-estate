@@ -79,39 +79,6 @@ export default function IntroScreen({ onComplete, onIrisStart }: IntroScreenProp
         </>
       )}
 
-      <style jsx global>{`
-        .reveal-top {
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          height: 50%;
-          background: black;
-          transform-origin: top center;
-          animation: slideUp 1.1s cubic-bezier(0.76, 0, 0.24, 1) forwards;
-        }
-
-        .reveal-bottom {
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          height: 50%;
-          background: black;
-          transform-origin: bottom center;
-          animation: slideDown 1.1s cubic-bezier(0.76, 0, 0.24, 1) forwards;
-        }
-
-        @keyframes slideUp {
-          0%   { transform: translateY(0%); }
-          100% { transform: translateY(-100%); }
-        }
-
-        @keyframes slideDown {
-          0%   { transform: translateY(0%); }
-          100% { transform: translateY(100%); }
-        }
-      `}</style>
-    </>
+</>
   );
 }
