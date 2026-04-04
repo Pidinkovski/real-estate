@@ -21,10 +21,13 @@ export type Project = {
 export type BlogPost = {
   id: string;
   title: string;
+  title_bg?: string;
   category: string;
+  category_bg?: string;
   image_url: string;
   read_time: number;
   excerpt: string;
+  excerpt_bg?: string;
   slug: string;
   published_at: string;
   created_at: string;
