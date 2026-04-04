@@ -4,37 +4,15 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Globe as Globe2, Gem, UserCheck, ChartLine as LineChart } from 'lucide-react';
 import SectionWrapper from '@/components/shared/SectionWrapper';
+import { useLang } from '@/lib/i18n';
 
-const pillars = [
-  {
-    icon: Globe2,
-    title: 'International Standards',
-    description:
-      'We build to Eurocode, Dubai Green Building Regulations, and ISO 9001 quality frameworks. Whether in Vienna, Monaco, or Dubai — the standard never changes.',
-  },
-  {
-    icon: Gem,
-    title: 'Premium Materials Only',
-    description:
-      'Every specification is reviewed by our materials team. We source Italian stone, German engineering components, and certified sustainable timber — nothing less.',
-  },
-  {
-    icon: UserCheck,
-    title: 'One Point of Contact',
-    description:
-      'A dedicated senior project director as your single interface. No chasing multiple contractors. No miscommunication. One call answers everything.',
-  },
-  {
-    icon: LineChart,
-    title: 'Full Transparency',
-    description:
-      'Real-time project dashboards, weekly photo reports, and open-book cost tracking. You always know where your project and budget stand.',
-  },
-];
+const pillarIcons = [Globe2, Gem, UserCheck, LineChart];
 
 export default function WhyUs() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
+  const { t } = useLang();
+  const pillars = t.whyUs.pillars.map((p, i) => ({ ...p, icon: pillarIcons[i] }));
 
   return (
     <section id="why-us" ref={ref} className="py-28 md:py-36 bg-obsidian relative overflow-hidden">
@@ -45,22 +23,22 @@ export default function WhyUs() {
         <SectionWrapper direction="up" className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-8 h-px bg-gold" />
-            <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">Why ARKON</span>
+            <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">{t.whyUs.label}</span>
             <div className="w-8 h-px bg-gold" />
           </div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            Built on{' '}
-            <span className="italic text-gold">Four Pillars</span>
+            {t.whyUs.title1}{' '}
+            <span className="italic text-gold">{t.whyUs.title2}</span>
           </h2>
           <p className="text-slate-400 text-sm leading-relaxed max-w-xl mx-auto mb-10">
-            We have spent a decade earning the trust of discerning clients across Europe and the Gulf. These principles are non-negotiable in every project we take on.
+            {t.whyUs.description}
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-10">
             {[
-              { value: '98%', label: 'On-Time Delivery' },
-              { value: '4.9', label: 'Client Satisfaction' },
-              { value: '0', label: 'Legal Disputes' },
+              { value: '98%', label: t.whyUs.onTimeDelivery },
+              { value: '4.9', label: t.whyUs.clientSatisfaction },
+              { value: '0', label: t.whyUs.legalDisputes },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="text-3xl font-display font-bold text-gold">{stat.value}</div>

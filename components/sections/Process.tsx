@@ -4,49 +4,16 @@ import { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { MessageSquare, ClipboardCheck, Lightbulb, Calculator, HardHat, Key } from 'lucide-react';
 import SectionWrapper from '@/components/shared/SectionWrapper';
+import { useLang } from '@/lib/i18n';
 
-const steps = [
-  {
-    icon: MessageSquare,
-    number: '01',
-    title: 'Inquiry',
-    description: 'Share your vision, timeline, and requirements with our team.',
-  },
-  {
-    icon: ClipboardCheck,
-    number: '02',
-    title: 'Site Inspection',
-    description: 'We visit the property and conduct a full feasibility assessment.',
-  },
-  {
-    icon: Lightbulb,
-    number: '03',
-    title: 'Concept Design',
-    description: 'Architects develop a tailored concept with 3D renders and material boards.',
-  },
-  {
-    icon: Calculator,
-    number: '04',
-    title: 'Budget & Contract',
-    description: 'Detailed cost breakdown and fixed-price contract for full transparency.',
-  },
-  {
-    icon: HardHat,
-    number: '05',
-    title: 'Execution',
-    description: 'Our teams build on schedule with weekly client reports and site access.',
-  },
-  {
-    icon: Key,
-    number: '06',
-    title: 'Delivery',
-    description: 'Final walkthrough, snag list completion, and handover of keys.',
-  },
-];
+const stepIcons = [MessageSquare, ClipboardCheck, Lightbulb, Calculator, HardHat, Key];
+const stepNumbers = ['01', '02', '03', '04', '05', '06'];
 
 export default function Process() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
+  const { t } = useLang();
+  const steps = t.process.steps.map((s, i) => ({ ...s, icon: stepIcons[i], number: stepNumbers[i] }));
 
   return (
     <section id="process" ref={ref} className="py-28 md:py-36 bg-[#080E1C] relative overflow-hidden">
@@ -64,12 +31,12 @@ export default function Process() {
         <SectionWrapper className="mb-20 text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-8 h-px bg-gold" />
-            <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">How We Work</span>
+            <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">{t.process.label}</span>
             <div className="w-8 h-px bg-gold" />
           </div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-            From Inquiry to<br />
-            <span className="italic text-gold">Key Handover</span>
+            {t.process.title1}<br />
+            <span className="italic text-gold">{t.process.title2}</span>
           </h2>
         </SectionWrapper>
 
@@ -116,17 +83,17 @@ export default function Process() {
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
             <div>
               <h3 className="font-display text-2xl font-semibold text-white mb-2">
-                Typical project timeline: <span className="text-gold">12–36 weeks</span>
+                {t.process.timelineTitle} <span className="text-gold">{t.process.timelineRange}</span>
               </h3>
               <p className="text-slate-400 text-sm max-w-xl">
-                From first meeting to key handover — we provide fixed timelines in every contract. No ambiguity, no delays without notice.
+                {t.process.timelineDescription}
               </p>
             </div>
             <div className="flex items-center gap-6 shrink-0">
               {[
-                { label: 'Design Phase', value: '2–6 wks' },
-                { label: 'Permits', value: '4–8 wks' },
-                { label: 'Build', value: '8–24 wks' },
+                { label: t.process.designPhase, value: '2–6 wks' },
+                { label: t.process.permits, value: '4–8 wks' },
+                { label: t.process.build, value: '8–24 wks' },
               ].map((phase) => (
                 <div key={phase.label} className="text-center">
                   <div className="text-xl font-display font-bold text-gold">{phase.value}</div>

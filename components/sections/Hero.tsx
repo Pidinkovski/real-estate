@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import DirectionalButton from '@/components/shared/DirectionalButton';
+import { useLang } from '@/lib/i18n';
 
 interface HeroProps {
   onRequestQuote: () => void;
@@ -13,9 +14,10 @@ export default function Hero({ onRequestQuote }: HeroProps) {
   const { scrollY } = useScroll();
   const yParallax = useTransform(scrollY, [0, 600], [0, 150]);
   const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+  const { t } = useLang();
 
-  const words = ['Turnkey', 'Construction.'];
-  const subWords = ['From', 'Concept', 'to', 'Completion.'];
+  const words = [t.hero.headline1, t.hero.headline2];
+  const subWords = [t.hero.sub1, t.hero.sub2, t.hero.sub3, t.hero.sub4];
 
   const scrollToProjects = () => {
     const el = document.querySelector('#projects');
@@ -50,7 +52,7 @@ export default function Hero({ onRequestQuote }: HeroProps) {
         >
           <div className="w-8 h-px bg-gold" />
           <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">
-            Est. 2014 · Vienna · Dubai · Monaco
+            {t.hero.tagline}
           </span>
           <div className="w-8 h-px bg-gold" />
         </motion.div>
@@ -76,7 +78,7 @@ export default function Hero({ onRequestQuote }: HeroProps) {
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 + i * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
-                className={`inline-block mr-4 ${word === 'Completion.' ? 'text-gold' : 'text-white'}`}
+                className={`inline-block mr-4 ${i === subWords.length - 1 ? 'text-gold' : 'text-white'}`}
               >
                 {word}
               </motion.span>
@@ -89,7 +91,7 @@ export default function Hero({ onRequestQuote }: HeroProps) {
             transition={{ duration: 0.7, delay: 1.3 }}
             className="text-lg md:text-xl text-slate-300 font-light tracking-wide mb-12 max-w-xl mx-auto"
           >
-            Design, build, and furnish — all in one place.
+            {t.hero.description}
           </motion.p>
 
           <motion.div
@@ -103,7 +105,7 @@ export default function Hero({ onRequestQuote }: HeroProps) {
               variant="primary"
               className="px-8 py-4 font-semibold text-sm tracking-widest uppercase"
             >
-              View Projects
+              {t.hero.viewProjects}
             </DirectionalButton>
 
             <DirectionalButton
@@ -111,7 +113,7 @@ export default function Hero({ onRequestQuote }: HeroProps) {
               variant="outline"
               className="px-8 py-4 font-medium text-sm tracking-widest uppercase backdrop-blur-sm"
             >
-              Request a Quote
+              {t.hero.requestQuote}
             </DirectionalButton>
           </motion.div>
         </div>

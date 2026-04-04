@@ -5,6 +5,7 @@ import { motion, useInView } from 'framer-motion';
 import { ArrowUpRight, Clock } from 'lucide-react';
 import type { BlogPost } from '@/lib/supabase';
 import SectionWrapper from '@/components/shared/SectionWrapper';
+import { useLang } from '@/lib/i18n';
 
 interface BlogPreviewProps {
   posts: BlogPost[];
@@ -17,6 +18,7 @@ function formatDate(dateStr: string) {
 export default function BlogPreview({ posts }: BlogPreviewProps) {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
+  const { t } = useLang();
 
   const [featured, ...rest] = posts;
 
@@ -28,15 +30,15 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
         <SectionWrapper className="mb-16 text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-8 h-px bg-gold" />
-            <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">Editorial</span>
+            <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">{t.blog.label}</span>
             <div className="w-8 h-px bg-gold" />
           </div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            Insights &amp;<br />
-            <span className="italic text-gold">Perspectives</span>
+            {t.blog.title1}<br />
+            <span className="italic text-gold">{t.blog.title2}</span>
           </h2>
           <button className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-slate-400 hover:text-gold transition-colors group">
-            All Articles
+            {t.blog.allArticles}
             <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </button>
         </SectionWrapper>
@@ -64,7 +66,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
               <div>
                 <div className="flex items-center gap-3 mb-3">
                   <Clock size={12} className="text-slate-500" />
-                  <span className="text-xs text-slate-500">{featured.read_time} min read</span>
+                  <span className="text-xs text-slate-500">{featured.read_time} {t.blog.minRead}</span>
                   <span className="text-slate-700">·</span>
                   <span className="text-xs text-slate-500">{formatDate(featured.published_at)}</span>
                 </div>
@@ -73,7 +75,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                 </h3>
                 <p className="text-sm text-slate-500 leading-relaxed line-clamp-2">{featured.excerpt}</p>
                 <div className="mt-4 flex items-center gap-1.5 text-xs text-gold">
-                  Read article
+                  {t.blog.readArticle}
                   <ArrowUpRight size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
               </div>
@@ -104,7 +106,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                   </div>
                   <div className="flex items-center gap-2 mt-3">
                     <Clock size={11} className="text-slate-500" />
-                    <span className="text-xs text-slate-500">{post.read_time} min</span>
+                    <span className="text-xs text-slate-500">{post.read_time} {t.blog.min}</span>
                     <span className="text-slate-700">·</span>
                     <span className="text-xs text-slate-500">{formatDate(post.published_at)}</span>
                   </div>

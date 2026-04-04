@@ -6,6 +6,7 @@ import { ArrowUpRight, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Project } from '@/lib/supabase';
 import SectionWrapper from '@/components/shared/SectionWrapper';
 import DirectionalButton from '@/components/shared/DirectionalButton';
+import { useLang } from '@/lib/i18n';
 
 interface ProjectCardProps {
   project: Project;
@@ -99,6 +100,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: '-120px' });
   const hasAutoRevealed = useRef(false);
+  const { t } = useLang();
 
   const displayed = projects.slice(0, 6);
   const [current, setCurrent] = useState(0);
@@ -132,14 +134,14 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
         <SectionWrapper className="mb-16 text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-8 h-px bg-gold" />
-            <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">Our Work</span>
+            <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">{t.projects.label}</span>
             <div className="w-8 h-px bg-gold" />
           </div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            Selected <span className="italic text-gold">Projects</span>
+            {t.projects.title1} <span className="italic text-gold">{t.projects.title2}</span>
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-sm leading-relaxed">
-            From private residences in Monaco to commercial towers in Vienna — each project reflects our commitment to precision and permanence.
+            {t.projects.description}
           </p>
         </SectionWrapper>
 
@@ -210,7 +212,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
             variant="outline"
             className="px-10 py-3.5 text-xs tracking-widest uppercase"
           >
-            View All Projects
+            {t.projects.viewAll}
           </DirectionalButton>
         </SectionWrapper>
       </div>

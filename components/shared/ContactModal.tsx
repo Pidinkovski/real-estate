@@ -4,16 +4,17 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CircleCheck as CheckCircle, Loader as Loader2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { useLang } from '@/lib/i18n';
 
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const projectTypes = ['Residential', 'Commercial', 'Hospitality', 'Renovation', 'Architectural Design', 'Other'];
 const budgetRanges = ['€100k – €500k', '€500k – €1M', '€1M – €5M', '€5M – €10M', '€10M+', 'To be discussed'];
 
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
+  const { t } = useLang();
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -70,8 +71,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           >
             <div className="flex items-center justify-between p-8 border-b border-white/10">
               <div>
-                <h2 className="text-2xl font-display font-semibold text-white">Request a Consultation</h2>
-                <p className="text-slate-400 text-sm mt-1">We respond within 24 hours</p>
+                <h2 className="text-2xl font-display font-semibold text-white">{t.modal.title}</h2>
+                <p className="text-slate-400 text-sm mt-1">{t.modal.subtitle}</p>
               </div>
               <button onClick={handleClose} className="text-slate-400 hover:text-white transition-colors p-1">
                 <X size={22} />
@@ -81,33 +82,33 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             {success ? (
               <div className="p-12 flex flex-col items-center gap-4 text-center">
                 <CheckCircle size={48} className="text-gold" />
-                <h3 className="text-2xl font-display font-semibold text-white">Thank you</h3>
+                <h3 className="text-2xl font-display font-semibold text-white">{t.modal.successTitle}</h3>
                 <p className="text-slate-400 max-w-sm">
-                  Your inquiry has been received. A member of our team will be in touch within 24 hours.
+                  {t.modal.successMessage}
                 </p>
                 <button
                   onClick={handleClose}
                   className="mt-4 px-8 py-3 bg-gold text-obsidian text-sm font-semibold tracking-widest uppercase hover:bg-gold-light transition-colors"
                 >
-                  Close
+                  {t.modal.close}
                 </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="p-8 space-y-5">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label className="text-xs tracking-widest uppercase text-slate-400 block mb-2">Full Name *</label>
+                    <label className="text-xs tracking-widest uppercase text-slate-400 block mb-2">{t.modal.fullName} *</label>
                     <input
                       name="name"
                       value={form.name}
                       onChange={handleChange}
                       required
                       className="w-full bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-600 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors"
-                      placeholder="Alexander Schmidt"
+                      placeholder={t.modal.placeholder.name}
                     />
                   </div>
                   <div>
-                    <label className="text-xs tracking-widest uppercase text-slate-400 block mb-2">Email *</label>
+                    <label className="text-xs tracking-widest uppercase text-slate-400 block mb-2">{t.modal.email} *</label>
                     <input
                       name="email"
                       type="email"
@@ -115,61 +116,61 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       onChange={handleChange}
                       required
                       className="w-full bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-600 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors"
-                      placeholder="hello@example.com"
+                      placeholder={t.modal.placeholder.email}
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label className="text-xs tracking-widest uppercase text-slate-400 block mb-2">Phone</label>
+                    <label className="text-xs tracking-widest uppercase text-slate-400 block mb-2">{t.modal.phone}</label>
                     <input
                       name="phone"
                       value={form.phone}
                       onChange={handleChange}
                       className="w-full bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-600 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors"
-                      placeholder="+43 1 234 567"
+                      placeholder={t.modal.placeholder.phone}
                     />
                   </div>
                   <div>
-                    <label className="text-xs tracking-widest uppercase text-slate-400 block mb-2">Project Type</label>
+                    <label className="text-xs tracking-widest uppercase text-slate-400 block mb-2">{t.modal.projectType}</label>
                     <select
                       name="project_type"
                       value={form.project_type}
                       onChange={handleChange}
                       className="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors appearance-none"
                     >
-                      {projectTypes.map((t) => <option key={t} value={t} className="bg-obsidian">{t}</option>)}
+                      {t.modal.projectTypes.map((pt) => <option key={pt} value={pt} className="bg-obsidian">{pt}</option>)}
                     </select>
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-xs tracking-widest uppercase text-slate-400 block mb-2">Estimated Budget</label>
+                  <label className="text-xs tracking-widest uppercase text-slate-400 block mb-2">{t.modal.budget}</label>
                   <select
                     name="budget_range"
                     value={form.budget_range}
                     onChange={handleChange}
                     className="w-full bg-white/5 border border-white/10 rounded-lg text-white px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors appearance-none"
                   >
-                    <option value="" className="bg-obsidian">Select a range</option>
+                    <option value="" className="bg-obsidian">{t.modal.selectRange}</option>
                     {budgetRanges.map((b) => <option key={b} value={b} className="bg-obsidian">{b}</option>)}
                   </select>
                 </div>
 
                 <div>
-                  <label className="text-xs tracking-widest uppercase text-slate-400 block mb-2">Project Description</label>
+                  <label className="text-xs tracking-widest uppercase text-slate-400 block mb-2">{t.modal.description}</label>
                   <textarea
                     name="message"
                     value={form.message}
                     onChange={handleChange}
                     rows={4}
                     className="w-full bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-600 px-4 py-3 text-sm focus:outline-none focus:border-gold transition-colors resize-none"
-                    placeholder="Tell us about your project — location, scale, timeline, any specific requirements..."
+                    placeholder={t.modal.placeholder.description}
                   />
                 </div>
 
-                {error && <p className="text-red-400 text-sm">{error}</p>}
+                {error && <p className="text-red-400 text-sm">{t.modal.error}</p>}
 
                 <motion.button
                   type="submit"
@@ -178,7 +179,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   whileTap={{ scale: 0.99 }}
                   className="w-full py-4 bg-gold rounded-lg text-obsidian font-semibold text-sm tracking-widest uppercase hover:bg-gold-light transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
                 >
-                  {loading ? <><Loader2 size={16} className="animate-spin" /> Sending...</> : 'Send Inquiry'}
+                  {loading ? <><Loader2 size={16} className="animate-spin" /> {t.modal.sending}</> : t.modal.send}
                 </motion.button>
               </form>
             )}

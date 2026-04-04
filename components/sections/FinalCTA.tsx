@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import DirectionalButton from '@/components/shared/DirectionalButton';
+import { useLang } from '@/lib/i18n';
 
 interface FinalCTAProps {
   onRequestConsultation: () => void;
@@ -12,6 +13,7 @@ interface FinalCTAProps {
 export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
+  const { t } = useLang();
 
   return (
     <section id="contact" ref={ref} className="relative overflow-hidden">
@@ -30,7 +32,7 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
           className="flex items-center gap-3 mb-6"
         >
           <div className="w-8 h-px bg-gold" />
-          <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">Start Your Project</span>
+          <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">{t.cta.label}</span>
           <div className="w-8 h-px bg-gold" />
         </motion.div>
 
@@ -40,8 +42,8 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
           transition={{ duration: 0.8, delay: 0.15 }}
           className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4"
         >
-          Have a project<br />
-          <span className="italic text-gold">in mind?</span>
+          {t.cta.title1}<br />
+          <span className="italic text-gold">{t.cta.title2}</span>
         </motion.h2>
 
         <motion.div
@@ -52,10 +54,10 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
           style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)' }}
         >
           <p className="text-xl md:text-2xl font-display font-light text-slate-200 mb-3">
-            Let&apos;s build it together.
+            {t.cta.subtitle}
           </p>
           <p className="text-sm text-black leading-relaxed font-bold">
-            From a private villa in the South of France to a commercial complex in Dubai — we work on projects across Europe and the Gulf. Every engagement starts with a confidential consultation.
+            {t.cta.description}
           </p>
         </motion.div>
 
@@ -70,7 +72,7 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
             hoverColor="#374151"
             className="flex items-center gap-3 px-10 py-5 font-semibold text-sm tracking-widest uppercase group whitespace-nowrap"
           >
-            Request a Consultation <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            {t.cta.requestConsultation} <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </DirectionalButton>
 
           <div
@@ -81,7 +83,7 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
               href="mailto:hello@arkon-build.com"
               className="text-sm text-slate-400 hover:text-gold transition-colors tracking-wider border-b border-slate-700 hover:border-gold pb-1"
             >
-              or email us directly
+              {t.cta.emailUs}
             </a>
           </div>
         </motion.div>
@@ -93,9 +95,9 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
           className="mt-20 grid grid-cols-3 gap-4 md:gap-6"
         >
           {[
-            { value: 'EU', label: 'Licensed in Austria, Germany, France, Croatia' },
-            { value: 'UAE', label: 'RERA & Dubai Municipality Registered' },
-            { value: 'MC', label: 'Monaco Principality Certified' },
+            { value: 'EU', label: t.cta.euLabel },
+            { value: 'UAE', label: t.cta.uaeLabel },
+            { value: 'MC', label: t.cta.mcLabel },
           ].map((item) => (
             <div
               key={item.value}

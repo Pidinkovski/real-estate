@@ -2,26 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { useLang } from '@/lib/i18n';
 
-const services = [
-  'Turnkey Construction',
-  'Architectural Design',
-  'Interior & Furnishing',
-  'Project Management',
-  'Structural Engineering',
-  'Renovation Works',
-];
-
-const quickLinks = [
-  { label: 'Projects', href: '#projects' },
-  { label: 'Services', href: '#services' },
-  { label: 'Our Process', href: '#process' },
-  { label: 'Why Us', href: '#why-us' },
-  { label: 'Blog', href: '#blog' },
-  { label: 'Contact', href: '#contact' },
-];
+const quickLinkHrefs = ['#projects', '#services', '#process', '#why-us', '#blog', '#contact'];
 
 export default function Footer() {
+  const { t } = useLang();
   const handleNav = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -36,7 +22,7 @@ export default function Footer() {
               ARK<span className="text-gold">ON</span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-xs">
-              Premium turnkey construction and architectural design. From first concept to final key — across Europe and the Middle East.
+              {t.footer.description}
             </p>
             <div className="flex items-center gap-4">
               {[Linkedin, Instagram, Facebook].map((Icon, i) => (
@@ -53,15 +39,15 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">Quick Links</h4>
+            <h4 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">{t.footer.quickLinks}</h4>
             <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.href}>
+              {t.footer.links.map((label, i) => (
+                <li key={quickLinkHrefs[i]}>
                   <button
-                    onClick={() => handleNav(link.href)}
+                    onClick={() => handleNav(quickLinkHrefs[i])}
                     className="text-sm text-slate-400 hover:text-white transition-colors duration-200"
                   >
-                    {link.label}
+                    {label}
                   </button>
                 </li>
               ))}
@@ -69,20 +55,20 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">Services</h4>
+            <h4 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">{t.footer.services}</h4>
             <ul className="space-y-3">
-              {services.map((s) => (
+              {t.footer.servicesList.map((s) => (
                 <li key={s} className="text-sm text-slate-400">{s}</li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">Contact</h4>
+            <h4 className="text-xs font-semibold tracking-widest uppercase text-gold mb-6">{t.footer.contact}</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin size={15} className="text-gold mt-0.5 shrink-0" />
-                <span className="text-sm text-slate-400">Vienna, Austria<br />Dubai, UAE<br />Monaco</span>
+                <span className="text-sm text-slate-400" style={{ whiteSpace: 'pre-line' }}>{t.footer.address}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={15} className="text-gold shrink-0" />
@@ -100,12 +86,12 @@ export default function Footer() {
       <div className="border-t border-white/5">
         <div className="container-wide section-padding py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-600">
-            © {new Date().getFullYear()} ARKON Construction Group. All rights reserved.
+            © {new Date().getFullYear()} {t.footer.copyright}
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-xs text-slate-600 hover:text-slate-400 transition-colors">Privacy Policy</a>
-            <a href="#" className="text-xs text-slate-600 hover:text-slate-400 transition-colors">Terms of Service</a>
-            <a href="#" className="text-xs text-slate-600 hover:text-slate-400 transition-colors">Imprint</a>
+            <a href="#" className="text-xs text-slate-600 hover:text-slate-400 transition-colors">{t.footer.privacy}</a>
+            <a href="#" className="text-xs text-slate-600 hover:text-slate-400 transition-colors">{t.footer.terms}</a>
+            <a href="#" className="text-xs text-slate-600 hover:text-slate-400 transition-colors">{t.footer.imprint}</a>
           </div>
         </div>
       </div>

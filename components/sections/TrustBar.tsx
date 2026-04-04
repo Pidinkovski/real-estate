@@ -3,17 +3,17 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Building2, Clock, Globe, Layers } from 'lucide-react';
+import { useLang } from '@/lib/i18n';
 
-const stats = [
-  { icon: Building2, value: '120+', label: 'Projects Delivered' },
-  { icon: Clock, value: '10+', label: 'Years Experience' },
-  { icon: Globe, value: '3', label: 'Cities of Operation' },
-  { icon: Layers, value: 'End-to-end', label: 'Services Provided' },
-];
+const icons = [Building2, Clock, Globe, Layers];
+const values = ['120+', '10+', '3', 'End-to-end'];
 
 export default function TrustBar() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-50px' });
+  const { t } = useLang();
+  const labels = [t.trust.projectsDelivered, t.trust.yearsExperience, t.trust.citiesOfOperation, t.trust.servicesProvided];
+  const stats = icons.map((icon, i) => ({ icon, value: values[i], label: labels[i] }));
 
   return (
     <section ref={ref} className="relative bg-obsidian-light border-y border-white/5">

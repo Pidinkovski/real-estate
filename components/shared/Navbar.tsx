@@ -5,18 +5,61 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import AnimatedNavLink from './AnimatedNavLink';
 import DirectionalButton from './DirectionalButton';
+import { useLang } from '@/lib/i18n';
 
-const navLinks = [
-  { label: 'Projects', href: '#projects' },
-  { label: 'Services', href: '#services' },
-  { label: 'Process', href: '#process' },
-  { label: 'About', href: '#why-us' },
-  { label: 'Blog', href: '#blog' },
-];
+function BulgarianFlag({ size = 28 }: { size?: number }) {
+  const h = Math.round(size * 0.625);
+  return (
+    <svg width={size} height={h} viewBox="0 0 8 5" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="8" height="1.667" fill="#FFFFFF" />
+      <rect x="0" y="1.667" width="8" height="1.667" fill="#00966E" />
+      <rect x="0" y="3.333" width="8" height="1.667" fill="#D62612" />
+    </svg>
+  );
+}
+
+function UKFlag({ size = 28 }: { size?: number }) {
+  const h = Math.round(size * 0.5);
+  return (
+    <svg width={size} height={h} viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+      <rect width="60" height="30" fill="#012169" />
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6" />
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" strokeWidth="4" />
+      <path d="M30,0 V30 M0,15 H60" stroke="#fff" strokeWidth="10" />
+      <path d="M30,0 V30 M0,15 H60" stroke="#C8102E" strokeWidth="6" />
+    </svg>
+  );
+}
+
+function LangButton({ langCode, current, onClick, title, children }: {
+  langCode: string; current: string; onClick: () => void; title: string; children: React.ReactNode;
+}) {
+  const active = langCode === current;
+  return (
+    <button
+      onClick={onClick}
+      title={title}
+      className={`rounded overflow-hidden transition-all duration-300 flex items-center ${
+        active ? 'ring-2 ring-gold opacity-100 scale-110' : 'opacity-45 hover:opacity-75 hover:scale-105'
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { lang, setLang, t } = useLang();
+
+  const navLinks = [
+    { label: t.nav.projects, href: '#projects' },
+    { label: t.nav.services, href: '#services' },
+    { label: t.nav.process, href: '#process' },
+    { label: t.nav.about, href: '#why-us' },
+    { label: t.nav.blog, href: '#blog' },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -67,14 +110,22 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <LangButton langCode="bg" current={lang} onClick={() => setLang('bg')} title="Български">
+                <BulgarianFlag size={28} />
+              </LangButton>
+              <LangButton langCode="en" current={lang} onClick={() => setLang('en')} title="English">
+                <UKFlag size={28} />
+              </LangButton>
+            </div>
             <DirectionalButton
               onClick={() => handleNavClick('#contact')}
               variant="primary"
               textOnlyHover
               className="px-4 py-2 text-xs font-bold tracking-wider uppercase"
             >
-              Request a Quote
+              {t.nav.requestQuote}
             </DirectionalButton>
           </div>
 
@@ -88,7 +139,6 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -98,6 +148,15 @@ export default function Navbar() {
             transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             className="fixed inset-0 z-40 bg-obsidian flex flex-col justify-center px-10"
           >
+            <div className="absolute top-8 right-8 flex items-center gap-3">
+              <LangButton langCode="bg" current={lang} onClick={() => setLang('bg')} title="Български">
+                <BulgarianFlag size={32} />
+              </LangButton>
+              <LangButton langCode="en" current={lang} onClick={() => setLang('en')} title="English">
+                <UKFlag size={32} />
+              </LangButton>
+            </div>
+
             <ul className="flex flex-col gap-8">
               {navLinks.map((link, i) => (
                 <motion.li
@@ -122,7 +181,7 @@ export default function Navbar() {
               onClick={() => handleNavClick('#contact')}
               className="mt-12 px-8 py-4 border border-gold text-gold text-sm font-medium tracking-widest uppercase self-start hover:bg-gold hover:text-obsidian transition-all duration-300"
             >
-              Request a Quote
+              {t.nav.requestQuote}
             </motion.button>
           </motion.div>
         )}

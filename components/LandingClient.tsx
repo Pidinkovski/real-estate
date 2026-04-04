@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { LanguageProvider } from '@/lib/i18n';
 import Navbar from '@/components/shared/Navbar';
 import Footer from '@/components/shared/Footer';
 import ContactModal from '@/components/shared/ContactModal';
@@ -24,19 +25,21 @@ export default function LandingClient({ projects, posts }: LandingClientProps) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <main className="bg-obsidian">
-      <Navbar />
-      <Hero onRequestQuote={() => setModalOpen(true)} />
-      <TrustBar />
-      <FeaturedProjects projects={projects} />
-      <Services />
-      <BeforeAfter />
-      <Process />
-      <WhyUs />
-      <BlogPreview posts={posts} />
-      <FinalCTA onRequestConsultation={() => setModalOpen(true)} />
-      <Footer />
-      <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-    </main>
+    <LanguageProvider>
+      <main className="bg-obsidian">
+        <Navbar />
+        <Hero onRequestQuote={() => setModalOpen(true)} />
+        <TrustBar />
+        <FeaturedProjects projects={projects} />
+        <Services />
+        <BeforeAfter />
+        <Process />
+        <WhyUs />
+        <BlogPreview posts={posts} />
+        <FinalCTA onRequestConsultation={() => setModalOpen(true)} />
+        <Footer />
+        <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      </main>
+    </LanguageProvider>
   );
 }

@@ -4,6 +4,7 @@ import { useState, useRef, useCallback } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { GripVertical, X, Eye } from 'lucide-react';
 import SectionWrapper from '@/components/shared/SectionWrapper';
+import { useLang } from '@/lib/i18n';
 
 const projects = [
   {
@@ -98,17 +99,26 @@ function BeforeAfterSlider({ before, after }: { before: string; after: string })
           <GripVertical size={18} className="text-obsidian" />
         </div>
       </div>
+      <BeforeAfterLabels />
+    </div>
+  );
+}
+
+function BeforeAfterLabels() {
+  const { t } = useLang();
+  return (
+    <>
       <div className="absolute top-4 left-4 z-20 pointer-events-none">
         <span className="text-xs font-semibold tracking-widest uppercase px-3 py-1.5 bg-obsidian/80 text-slate-300 border border-white/10 rounded-sm">
-          Before
+          {t.beforeAfter.before}
         </span>
       </div>
       <div className="absolute top-4 right-4 z-20 pointer-events-none">
         <span className="text-xs font-semibold tracking-widest uppercase px-3 py-1.5 bg-gold text-obsidian rounded-sm">
-          After
+          {t.beforeAfter.after}
         </span>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -121,6 +131,7 @@ interface CardProps {
 
 function ProjectCard({ project, position, onClick, onView }: CardProps) {
   const [hovered, setHovered] = useState(false);
+  const { t } = useLang();
 
   const cardVariants = {
     left: {
@@ -208,7 +219,7 @@ function ProjectCard({ project, position, onClick, onView }: CardProps) {
                   className="flex items-center gap-2 px-6 py-3 bg-gold text-obsidian text-sm font-semibold tracking-wider uppercase rounded-full hover:bg-gold/90 transition-colors shadow-lg"
                 >
                   <Eye size={15} />
-                  View
+                  {t.beforeAfter.view}
                 </button>
                 <div className="w-16 h-px bg-gold/60" />
               </div>
@@ -223,7 +234,7 @@ function ProjectCard({ project, position, onClick, onView }: CardProps) {
               className="flex items-center gap-2 px-6 py-3 bg-gold/90 hover:bg-gold text-obsidian text-sm font-semibold tracking-wider uppercase rounded-full transition-colors shadow-xl backdrop-blur-sm"
             >
               <Eye size={15} />
-              View Transformation
+              {t.beforeAfter.viewTransformation}
             </button>
           </div>
         )}
@@ -238,6 +249,7 @@ export default function BeforeAfter() {
   const [modalProject, setModalProject] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: '-100px' });
+  const { t } = useLang();
 
   const total = projects.length;
 
@@ -267,14 +279,14 @@ export default function BeforeAfter() {
         <SectionWrapper className="mb-20 text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="w-8 h-px bg-gold" />
-            <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">The Transformation</span>
+            <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">{t.beforeAfter.label}</span>
             <div className="w-8 h-px bg-gold" />
           </div>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
-            Before &amp; After
+            {t.beforeAfter.title}
           </h2>
           <p className="text-slate-400 text-sm leading-relaxed max-w-lg mx-auto">
-            Browse our transformations. Hover a card and click View to reveal the full before &amp; after.
+            {t.beforeAfter.description}
           </p>
         </SectionWrapper>
 
