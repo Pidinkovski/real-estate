@@ -15,10 +15,10 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'ARKON — Turnkey Construction & Architecture',
+  title: 'Virtus Decora — Turnkey Construction & Architecture',
   description: 'Premium turnkey construction, architectural design, and interior furnishing. From concept to completion — across Europe and the Middle East.',
   openGraph: {
-    title: 'ARKON — Turnkey Construction & Architecture',
+    title: 'Virtus Decora — Turnkey Construction & Architecture',
     description: 'Premium turnkey construction, architectural design, and interior furnishing.',
     images: [{ url: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg' }],
   },

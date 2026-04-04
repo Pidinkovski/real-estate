@@ -18,8 +18,17 @@ export default function Footer() {
       <div className="container-wide section-padding py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="lg:col-span-1">
-            <div className="text-3xl font-display font-bold tracking-wider text-white mb-4">
-              ARK<span className="text-gold">ON</span>
+            <div className="relative text-3xl font-display font-bold tracking-wider text-white mb-4 overflow-hidden inline-block">
+              Virtus{' '}
+              <span className="relative inline-block">
+                <span className="text-gold">Decora</span>
+                <motion.span
+                  initial={{ x: '-100%' }}
+                  animate={{ x: '200%' }}
+                  transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 5, ease: 'easeInOut' }}
+                  className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 pointer-events-none"
+                />
+              </span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-6 max-w-xs">
               {t.footer.description}

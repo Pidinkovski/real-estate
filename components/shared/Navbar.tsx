@@ -94,8 +94,17 @@ export default function Navbar() {
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="flex items-center gap-2 group"
             >
-              <span className="text-xl font-display font-bold tracking-wider text-white">
-                ARK<span className="text-gold">ON</span>
+              <span className="relative text-xl font-display font-bold tracking-wider text-white overflow-hidden">
+                Virtus{' '}
+                <span className="relative inline-block">
+                  <span className="text-gold">Decora</span>
+                  <motion.span
+                    initial={{ x: '-100%' }}
+                    animate={{ x: '200%' }}
+                    transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 4, ease: 'easeInOut' }}
+                    className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 pointer-events-none"
+                  />
+                </span>
               </span>
             </a>
 
