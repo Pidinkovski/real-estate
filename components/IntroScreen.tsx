@@ -59,8 +59,8 @@ export default function IntroScreen({ onComplete, onIrisStart }: IntroScreenProp
 
   return (
     <>
-      <div className="fixed inset-0 z-[9999] bg-black flex items-center justify-center">
-        {phase === 'video' && (
+      {phase === 'video' && (
+        <div className="fixed inset-0 z-[9999] bg-black flex items-center justify-center">
           <video
             ref={videoRef}
             src="https://res.cloudinary.com/dltxzncyt/video/upload/hf_20260404_182008_b1969f2a-ab1e-4d1f-9a12-9f52f8892518_dlyqp6.mp4"
@@ -69,15 +69,15 @@ export default function IntroScreen({ onComplete, onIrisStart }: IntroScreenProp
             preload="auto"
             style={{ width: '75%', height: '75%', objectFit: 'contain' }}
           />
-        )}
+        </div>
+      )}
 
-        {phase === 'iris' && (
-          <>
-            <div className="reveal-top" />
-            <div className="reveal-bottom" />
-          </>
-        )}
-      </div>
+      {phase === 'iris' && (
+        <>
+          <div className="reveal-top" />
+          <div className="reveal-bottom" />
+        </>
+      )}
 
       <style jsx global>{`
         .reveal-top {
