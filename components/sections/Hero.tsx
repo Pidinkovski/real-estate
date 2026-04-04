@@ -39,8 +39,8 @@ export default function Hero({ onRequestQuote }: HeroProps) {
           <source src="https://res.cloudinary.com/dltxzncyt/video/upload/hf_20260404_175225_abc4564d-ec71-472b-86a6-4c1c08301b8e_jkwtdd.mp4" type="video/mp4" />
         </video>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-obsidian/60 via-obsidian/40 to-obsidian/70" />
-        <div className="absolute inset-0 bg-obsidian/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-obsidian/45 via-obsidian/25 to-obsidian/55" />
+        <div className="absolute inset-0 bg-obsidian/15" />
       </motion.div>
 
       <motion.div style={{ opacity }} className="relative z-10 container-wide section-padding w-full flex flex-col items-center text-center">
