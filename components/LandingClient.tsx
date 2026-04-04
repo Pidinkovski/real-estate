@@ -14,6 +14,7 @@ import Process from '@/components/sections/Process';
 import WhyUs from '@/components/sections/WhyUs';
 import BlogPreview from '@/components/sections/BlogPreview';
 import FinalCTA from '@/components/sections/FinalCTA';
+import IntroWrapper from '@/components/IntroWrapper';
 import type { Project, BlogPost } from '@/lib/supabase';
 
 interface LandingClientProps {
@@ -26,20 +27,22 @@ export default function LandingClient({ projects, posts }: LandingClientProps) {
 
   return (
     <LanguageProvider>
-      <main className="bg-obsidian">
-        <Navbar />
-        <Hero onRequestQuote={() => setModalOpen(true)} />
-        <TrustBar />
-        <FeaturedProjects projects={projects} />
-        <Services />
-        <BeforeAfter />
-        <Process />
-        <WhyUs />
-        <BlogPreview posts={posts} />
-        <FinalCTA onRequestConsultation={() => setModalOpen(true)} />
-        <Footer />
-        <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-      </main>
+      <IntroWrapper>
+        <main className="bg-obsidian">
+          <Navbar />
+          <Hero onRequestQuote={() => setModalOpen(true)} />
+          <TrustBar />
+          <FeaturedProjects projects={projects} />
+          <Services />
+          <BeforeAfter />
+          <Process />
+          <WhyUs />
+          <BlogPreview posts={posts} />
+          <FinalCTA onRequestConsultation={() => setModalOpen(true)} />
+          <Footer />
+          <ContactModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+        </main>
+      </IntroWrapper>
     </LanguageProvider>
   );
 }
