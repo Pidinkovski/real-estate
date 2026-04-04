@@ -101,7 +101,7 @@ export default function Navbar() {
                   <motion.span
                     initial={{ x: '-100%' }}
                     animate={{ x: '200%' }}
-                    transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 4, ease: 'easeInOut' }}
+                    transition={{ duration: 3.8, repeat: Infinity, repeatDelay: 1.2, ease: 'easeInOut' }}
                     className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 pointer-events-none"
                   />
                 </span>
