@@ -131,7 +131,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div className="hidden lg:flex items-center gap-2 absolute -right-16 top-1/2 -translate-y-1/2">
+          <div className="hidden lg:flex items-center gap-2 absolute -right-24 top-1/2 -translate-y-1/2">
             <LangButton langCode="bg" current={lang} onClick={() => setLang('bg')} title="Български">
               <BulgarianFlag size={28} />
             </LangButton>
