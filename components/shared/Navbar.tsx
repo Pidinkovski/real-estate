@@ -94,9 +94,9 @@ export default function Navbar() {
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="flex items-center gap-2 group"
             >
-              <span className="relative text-xl font-display font-bold tracking-wider text-white overflow-hidden">
+              <span className="relative text-xl font-display font-bold tracking-wider text-white">
                 Virtus{' '}
-                <span className="relative inline-block">
+                <span className="relative inline-block overflow-hidden">
                   <span className="text-gold">Decora</span>
                   <motion.span
                     initial={{ x: '-100%' }}

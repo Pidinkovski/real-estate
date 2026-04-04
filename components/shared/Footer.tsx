@@ -18,9 +18,9 @@ export default function Footer() {
       <div className="container-wide section-padding py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="lg:col-span-1">
-            <div className="relative text-3xl font-display font-bold tracking-wider text-white mb-4 overflow-hidden inline-block">
+            <div className="relative text-3xl font-display font-bold tracking-wider text-white mb-4 inline-block">
               Virtus{' '}
-              <span className="relative inline-block">
+              <span className="relative inline-block overflow-hidden">
                 <span className="text-gold">Decora</span>
                 <motion.span
                   initial={{ x: '-100%' }}
