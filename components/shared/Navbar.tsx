@@ -96,8 +96,8 @@ export default function Navbar() {
             >
               <span className="relative text-xl font-display font-bold tracking-wider text-white">
                 Virtus{' '}
-                <span className="relative inline-block overflow-hidden align-baseline">
-                  <span className="text-gold">Decora</span>
+                <span className="relative text-gold" style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom' }}>
+                  Decora
                   <motion.span
                     initial={{ x: '-100%' }}
                     animate={{ x: '200%' }}

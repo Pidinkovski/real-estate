@@ -20,8 +20,8 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="relative text-3xl font-display font-bold tracking-wider text-white mb-4 inline-block">
               Virtus{' '}
-              <span className="relative inline-block overflow-hidden align-baseline">
-                <span className="text-gold">Decora</span>
+              <span className="relative text-gold" style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom' }}>
+                Decora
                 <motion.span
                   initial={{ x: '-100%' }}
                   animate={{ x: '200%' }}
