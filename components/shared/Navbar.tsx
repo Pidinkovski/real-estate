@@ -81,61 +81,64 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-5 px-4"
       >
-        <div
-          className={`w-4/5 max-w-5xl flex items-center justify-between px-4 lg:px-6 transition-all duration-500 ${
-            scrolled
-              ? 'bg-obsidian/80 backdrop-blur-md border border-white/10 rounded-full py-2 shadow-lg shadow-black/20'
-              : 'bg-white/5 backdrop-blur-sm border border-white/10 rounded-full py-3'
-          }`}
-        >
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="flex items-center gap-2 group"
+        <div className="w-4/5 max-w-5xl relative flex items-center justify-center">
+          <div
+            className={`w-full flex items-center justify-between px-4 lg:px-6 transition-all duration-500 ${
+              scrolled
+                ? 'bg-obsidian/80 backdrop-blur-md border border-white/10 rounded-full py-2 shadow-lg shadow-black/20'
+                : 'bg-white/5 backdrop-blur-sm border border-white/10 rounded-full py-3'
+            }`}
           >
-            <span className="text-xl font-display font-bold tracking-wider text-white">
-              ARK<span className="text-gold">ON</span>
-            </span>
-          </a>
-
-          <ul className="hidden lg:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <li key={link.href} className="group">
-                <AnimatedNavLink
-                  label={link.label}
-                  onClick={() => handleNavClick(link.href)}
-                  className="text-xs font-medium tracking-wider uppercase text-slate-300 hover:text-gold transition-colors duration-300"
-                />
-              </li>
-            ))}
-          </ul>
-
-          <div className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <LangButton langCode="bg" current={lang} onClick={() => setLang('bg')} title="Български">
-                <BulgarianFlag size={28} />
-              </LangButton>
-              <LangButton langCode="en" current={lang} onClick={() => setLang('en')} title="English">
-                <UKFlag size={28} />
-              </LangButton>
-            </div>
-            <DirectionalButton
-              onClick={() => handleNavClick('#contact')}
-              variant="primary"
-              textOnlyHover
-              className="px-4 py-2 text-xs font-bold tracking-wider uppercase"
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="flex items-center gap-2 group"
             >
-              {t.nav.requestQuote}
-            </DirectionalButton>
+              <span className="text-xl font-display font-bold tracking-wider text-white">
+                ARK<span className="text-gold">ON</span>
+              </span>
+            </a>
+
+            <ul className="hidden lg:flex items-center gap-6">
+              {navLinks.map((link) => (
+                <li key={link.href} className="group">
+                  <AnimatedNavLink
+                    label={link.label}
+                    onClick={() => handleNavClick(link.href)}
+                    className="text-xs font-medium tracking-wider uppercase text-slate-300 hover:text-gold transition-colors duration-300"
+                  />
+                </li>
+              ))}
+            </ul>
+
+            <div className="hidden lg:flex items-center gap-4">
+              <DirectionalButton
+                onClick={() => handleNavClick('#contact')}
+                variant="primary"
+                textOnlyHover
+                className="px-4 py-2 text-xs font-bold tracking-wider uppercase"
+              >
+                {t.nav.requestQuote}
+              </DirectionalButton>
+            </div>
+
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="lg:hidden text-white p-2"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
 
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden text-white p-2"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="hidden lg:flex items-center gap-2 absolute -right-16 top-1/2 -translate-y-1/2">
+            <LangButton langCode="bg" current={lang} onClick={() => setLang('bg')} title="Български">
+              <BulgarianFlag size={28} />
+            </LangButton>
+            <LangButton langCode="en" current={lang} onClick={() => setLang('en')} title="English">
+              <UKFlag size={28} />
+            </LangButton>
+          </div>
         </div>
       </motion.nav>
 
