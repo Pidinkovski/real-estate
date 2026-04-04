@@ -91,9 +91,9 @@ export default function Process() {
             </div>
             <div className="flex items-center gap-6 shrink-0">
               {[
-                { label: t.process.designPhase, value: '2–6 wks' },
-                { label: t.process.permits, value: '4–8 wks' },
-                { label: t.process.build, value: '8–24 wks' },
+                { label: t.process.designPhase, value: t.process.designPhaseValue },
+                { label: t.process.permits, value: t.process.permitsValue },
+                { label: t.process.build, value: t.process.buildValue },
               ].map((phase) => (
                 <div key={phase.label} className="text-center">
                   <div className="text-xl font-display font-bold text-gold">{phase.value}</div>

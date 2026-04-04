@@ -88,8 +88,11 @@ export const translations = {
       timelineRange: '12–36 weeks',
       timelineDescription: 'From first meeting to key handover — we provide fixed timelines in every contract. No ambiguity, no delays without notice.',
       designPhase: 'Design Phase',
+      designPhaseValue: '2–6 wks',
       permits: 'Permits',
+      permitsValue: '4–8 wks',
       build: 'Build',
+      buildValue: '8–24 wks',
       steps: [
         { title: 'Inquiry', description: 'Share your vision, timeline, and requirements with our team.' },
         { title: 'Site Inspection', description: 'We visit the property and conduct a full feasibility assessment.' },
@@ -268,8 +271,11 @@ export const translations = {
       timelineRange: '12–36 седмици',
       timelineDescription: 'От първата среща до предаване на ключовете — предоставяме фиксирани срокове във всеки договор. Без неяснота, без закъснения без предизвестие.',
       designPhase: 'Фаза дизайн',
+      designPhaseValue: '2–6 сед.',
       permits: 'Разрешения',
+      permitsValue: '4–8 сед.',
       build: 'Строеж',
+      buildValue: '8–24 сед.',
       steps: [
         { title: 'Запитване', description: 'Споделете вашата визия, срокове и изисквания с нашия екип.' },
         { title: 'Оглед на обекта', description: 'Посещаваме имота и извършваме пълна оценка за осъществимост.' },
