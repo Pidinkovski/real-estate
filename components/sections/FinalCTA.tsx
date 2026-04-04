@@ -54,7 +54,7 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
           <p className="text-xl md:text-2xl font-display font-light text-slate-200 mb-3">
             Let&apos;s build it together.
           </p>
-          <p className="text-sm text-black leading-relaxed">
+          <p className="text-sm text-black leading-relaxed font-bold">
             From a private villa in the South of France to a commercial complex in Dubai — we work on projects across Europe and the Gulf. Every engagement starts with a confidential consultation.
           </p>
         </motion.div>
