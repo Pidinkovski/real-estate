@@ -30,10 +30,17 @@ interface IntroWrapperProps {
 
 export default function IntroWrapper({ children }: IntroWrapperProps) {
   const [showIntro, setShowIntro] = useState<boolean | null>(null);
+  const [siteVisible, setSiteVisible] = useState(false);
 
   useEffect(() => {
-    setShowIntro(shouldShowIntro());
+    const needs = shouldShowIntro();
+    setShowIntro(needs);
+    if (!needs) setSiteVisible(true);
   }, []);
+
+  const handleIrisStart = () => {
+    setSiteVisible(true);
+  };
 
   const handleComplete = () => {
     markIntroShown();
@@ -46,12 +53,13 @@ export default function IntroWrapper({ children }: IntroWrapperProps) {
 
   return (
     <>
-      {showIntro && <IntroScreen onComplete={handleComplete} />}
+      {showIntro && (
+        <IntroScreen onComplete={handleComplete} onIrisStart={handleIrisStart} />
+      )}
       <div
         style={{
-          visibility: showIntro ? 'hidden' : 'visible',
-          opacity: showIntro ? 0 : 1,
-          transition: showIntro ? 'none' : 'opacity 0.3s ease',
+          visibility: siteVisible ? 'visible' : 'hidden',
+          opacity: siteVisible ? 1 : 0,
         }}
       >
         {children}
