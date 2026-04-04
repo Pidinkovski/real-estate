@@ -2,6 +2,8 @@ import { supabase } from '@/lib/supabase';
 import type { Project, BlogPost } from '@/lib/supabase';
 import LandingClient from '@/components/LandingClient';
 
+export const dynamic = 'force-dynamic';
+
 async function getProjects(): Promise<Project[]> {
   const { data } = await supabase
     .from('projects')

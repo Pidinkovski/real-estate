@@ -11,16 +11,53 @@ interface BlogPreviewProps {
   posts: BlogPost[];
 }
 
+const FALLBACK_POSTS: BlogPost[] = [
+  {
+    id: '1',
+    title: 'The New Language of Luxury: How Material Honesty Is Redefining Premium Interiors',
+    category: 'Interior Design',
+    image_url: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    read_time: 6,
+    excerpt: 'Stone, timber, and raw concrete are no longer reserved for industrial spaces. We explore how today\'s most sought-after interiors celebrate material truth over surface decoration.',
+    slug: 'new-language-of-luxury-material-honesty',
+    published_at: '2026-03-24T10:40:52.521787+00:00',
+    created_at: '2026-03-29T10:40:52.521787+00:00',
+  },
+  {
+    id: '2',
+    title: 'Building in Europe vs. the Gulf: Navigating Standards, Climate, and Expectation',
+    category: 'Architecture',
+    image_url: 'https://images.pexels.com/photos/2119713/pexels-photo-2119713.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    read_time: 8,
+    excerpt: 'From Eurocode structural requirements to Dubai\'s Green Building Regulations, our technical directors compare the realities of high-end construction across two very different regulatory environments.',
+    slug: 'building-europe-vs-gulf-standards',
+    published_at: '2026-03-15T10:40:52.521787+00:00',
+    created_at: '2026-03-29T10:40:52.521787+00:00',
+  },
+  {
+    id: '3',
+    title: 'Turnkey or Traditional? Why More Developers Are Choosing the Single-Partner Model',
+    category: 'Industry Insights',
+    image_url: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    read_time: 5,
+    excerpt: 'Coordinating architects, contractors, and interior teams used to mean months of friction. Here\'s why end-to-end delivery is rapidly becoming the preferred model for discerning clients.',
+    slug: 'turnkey-vs-traditional-single-partner-model',
+    published_at: '2026-03-08T10:40:52.521787+00:00',
+    created_at: '2026-03-29T10:40:52.521787+00:00',
+  },
+];
+
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
 export default function BlogPreview({ posts }: BlogPreviewProps) {
+  const activePosts = posts.length > 0 ? posts : FALLBACK_POSTS;
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
   const { t } = useLang();
 
-  const [featured, ...rest] = posts;
+  const [featured, ...rest] = activePosts;
 
   return (
     <section id="blog" ref={ref} className="py-28 md:py-36 bg-obsidian relative overflow-hidden">
