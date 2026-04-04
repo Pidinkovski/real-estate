@@ -6,12 +6,12 @@ import { Building2, Clock, Globe, Layers } from 'lucide-react';
 import { useLang } from '@/lib/i18n';
 
 const icons = [Building2, Clock, Globe, Layers];
-const values = ['120+', '10+', '3', 'End-to-end'];
 
 export default function TrustBar() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-50px' });
   const { t } = useLang();
+  const values = ['120+', '10+', '3', t.trust.endToEnd];
   const labels = [t.trust.projectsDelivered, t.trust.yearsExperience, t.trust.citiesOfOperation, t.trust.servicesProvided];
   const stats = icons.map((icon, i) => ({ icon, value: values[i], label: labels[i] }));
 

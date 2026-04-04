@@ -31,6 +31,7 @@ export const translations = {
       yearsExperience: 'Years Experience',
       citiesOfOperation: 'Cities of Operation',
       servicesProvided: 'Services Provided',
+      endToEnd: 'End-to-end',
     },
     projects: {
       label: 'Our Work',
@@ -214,6 +215,7 @@ export const translations = {
       yearsExperience: 'Години опит',
       citiesOfOperation: 'Градове на дейност',
       servicesProvided: 'Предоставени услуги',
+      endToEnd: 'Край-до-край',
     },
     projects: {
       label: 'Нашата работа',
