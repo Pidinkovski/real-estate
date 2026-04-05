@@ -192,6 +192,15 @@ function ProjectCard({ project, position, onClick, onView }: CardProps) {
 
         <div className="absolute inset-0 bg-gradient-to-t from-obsidian/80 via-transparent to-transparent" />
 
+        {!isCenter && (
+          <motion.div
+            initial={false}
+            animate={hovered ? { opacity: 0 } : { opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 backdrop-blur-md bg-white/5 pointer-events-none"
+          />
+        )}
+
         <div className="absolute bottom-0 left-0 right-0 p-6">
           <p className="text-xs text-gold tracking-wider uppercase mb-1">{project.subtitle}</p>
           <h3 className="font-display text-xl font-bold text-white">{project.title}</h3>
