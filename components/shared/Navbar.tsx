@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 import AnimatedNavLink from './AnimatedNavLink';
 import DirectionalButton from './DirectionalButton';
 import { useLang } from '@/lib/i18n';
@@ -94,6 +95,15 @@ export default function Navbar() {
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="flex items-center gap-2 group"
             >
+              <div className="relative w-8 h-8 rounded-full overflow-hidden ring-1 ring-gold/40 flex-shrink-0">
+                <Image
+                  src="/Virtus_Decora.jpg"
+                  alt="Virtus Decora Logo"
+                  fill
+                  className="object-cover object-center scale-150"
+                  sizes="32px"
+                />
+              </div>
               <span className="relative text-xl font-display font-bold tracking-wider text-white">
                 Virtus{' '}
                 <span className="relative text-gold" style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom' }}>
