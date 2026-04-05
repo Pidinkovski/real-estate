@@ -95,12 +95,12 @@ export default function Navbar() {
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="flex items-center gap-2 group"
             >
-              <div className="relative w-10 h-10 flex-shrink-0">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                 <Image
                   src="/favicon.png"
                   alt="Virtus Decora Logo"
                   fill
-                  className="object-contain"
+                  className="object-cover"
                   sizes="40px"
                 />
               </div>
