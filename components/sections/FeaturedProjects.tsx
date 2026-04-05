@@ -102,13 +102,12 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   const hasAutoRevealed = useRef(false);
   const { t } = useLang();
 
-  const displayed = projects.slice(0, 6);
+  const displayed = projects.slice(0, 3);
   const [current, setCurrent] = useState(0);
   const [canAutoReveal, setCanAutoReveal] = useState(false);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
   const [showAllModal, setShowAllModal] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   useEffect(() => {
     if (inView && !hasAutoRevealed.current) {
@@ -228,7 +227,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md"
-            onClick={() => !selectedProject && setShowAllModal(false)}
+            onClick={() => setShowAllModal(false)}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -238,10 +237,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
               onClick={(e) => e.stopPropagation()}
             >
               <button
-                onClick={() => {
-                  setSelectedProject(null);
-                  setShowAllModal(false);
-                }}
+                onClick={() => setShowAllModal(false)}
                 className="fixed top-6 right-6 w-12 h-12 rounded-full bg-obsidian/90 hover:bg-obsidian border border-white/20 hover:border-gold flex items-center justify-center text-white hover:text-gold transition-all shadow-xl z-[60]"
                 aria-label="Close"
               >
@@ -249,57 +245,15 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
               </button>
 
               <AnimatePresence mode="wait">
-                {selectedProject ? (
-                  <motion.div
-                    key="detail"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="bg-obsidian rounded-2xl overflow-hidden border border-white/10"
-                  >
-                    <div className="relative h-[500px]">
-                      <img
-                        src={selectedProject.image_url}
-                        alt={selectedProject.name}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-8">
-                        <div className="text-xs tracking-widest uppercase text-gold mb-2">
-                          {selectedProject.category}
-                        </div>
-                        <h3 className="font-display text-3xl font-bold text-white mb-3">
-                          {selectedProject.name}
-                        </h3>
-                        <div className="flex items-center gap-3 text-sm text-slate-400">
-                          <MapPin size={14} />
-                          <span>{selectedProject.location}</span>
-                          <span>·</span>
-                          <span>{selectedProject.sqm.toLocaleString()} m²</span>
-                          <span>·</span>
-                          <span>{selectedProject.year}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-8 border-t border-white/5">
-                      <button
-                        onClick={() => setSelectedProject(null)}
-                        className="px-6 py-2.5 bg-gold text-obsidian text-sm font-semibold tracking-wider uppercase rounded-full hover:bg-gold/90 transition-colors"
-                      >
-                        ← Back to Gallery
-                      </button>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="carousel"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <h2 className="text-center text-2xl font-display font-bold text-white mb-8">
-                      All Projects
-                    </h2>
+                <motion.div
+                  key="carousel"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <h2 className="text-center text-2xl font-display font-bold text-white mb-8">
+                    All Projects
+                  </h2>
 
                     <div className="relative" style={{ perspective: '2000px', height: '520px' }}>
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -372,11 +326,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                                 transformStyle: 'preserve-3d',
                               }}
                               onClick={() => {
-                                if (position === 0) {
-                                  setSelectedProject(proj);
-                                } else {
-                                  setCarouselIndex(idx);
-                                }
+                                setCarouselIndex(idx);
                               }}
                             >
                               <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl">
@@ -395,18 +345,6 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                                   </h3>
                                   <p className="text-xs text-slate-400 mt-1">{proj.location}</p>
                                 </div>
-                                {position === 0 && (
-                                  <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.3 }}
-                                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                                  >
-                                    <div className="px-6 py-3 bg-gold text-obsidian text-sm font-semibold tracking-wider uppercase rounded-full">
-                                      View Details
-                                    </div>
-                                  </motion.div>
-                                )}
                               </div>
                             </motion.div>
                           );
@@ -439,7 +377,6 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                       ))}
                     </div>
                   </motion.div>
-                )}
               </AnimatePresence>
             </motion.div>
           </motion.div>
