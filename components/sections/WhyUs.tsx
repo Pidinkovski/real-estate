@@ -34,15 +34,15 @@ export default function WhyUs() {
             {t.whyUs.description}
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-10">
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
             {[
               { value: '98%', label: t.whyUs.onTimeDelivery },
               { value: '4.9', label: t.whyUs.clientSatisfaction },
               { value: '0', label: t.whyUs.legalDisputes },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-3xl font-display font-bold text-gold">{stat.value}</div>
-                <div className="text-xs text-slate-500 uppercase tracking-wider">{stat.label}</div>
+                <div className="text-2xl md:text-3xl font-display font-bold text-gold">{stat.value}</div>
+                <div className="text-[10px] md:text-xs text-slate-500 uppercase tracking-wider">{stat.label}</div>
               </div>
             ))}
           </div>

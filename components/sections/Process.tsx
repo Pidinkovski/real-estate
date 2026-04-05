@@ -79,17 +79,17 @@ export default function Process() {
           </div>
         </div>
 
-        <SectionWrapper className="mt-20 border border-white/5 rounded-2xl p-8 md:p-12 bg-obsidian-light" delay={0.4}>
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <SectionWrapper className="mt-20 border border-white/5 rounded-2xl p-6 md:p-8 lg:p-12 bg-obsidian-light" delay={0.4}>
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-8">
             <div>
-              <h3 className="font-display text-2xl font-semibold text-white mb-2">
+              <h3 className="font-display text-xl md:text-2xl font-semibold text-white mb-2">
                 {t.process.timelineTitle} <span className="text-gold">{t.process.timelineRange}</span>
               </h3>
               <p className="text-slate-400 text-sm max-w-xl">
                 {t.process.timelineDescription}
               </p>
             </div>
-            <div className="flex items-center gap-6 shrink-0">
+            <div className="flex items-center gap-4 md:gap-6 shrink-0">
               {[
                 { label: t.process.designPhase, value: t.process.designPhaseValue },
                 { label: t.process.permits, value: t.process.permitsValue },

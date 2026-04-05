@@ -25,7 +25,7 @@ export default function Hero({ onRequestQuote }: HeroProps) {
   };
 
   return (
-    <section className="relative h-screen min-h-[700px] overflow-hidden flex items-center">
+    <section className="relative h-screen min-h-[600px] md:min-h-[700px] overflow-hidden flex items-center">
       <motion.div style={{ y: yParallax }} className="absolute inset-0 z-0">
         <video
           autoPlay
@@ -48,13 +48,13 @@ export default function Hero({ onRequestQuote }: HeroProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex items-center gap-3 mb-8"
+          className="flex items-center gap-2 md:gap-3 mb-6 md:mb-8"
         >
-          <div className="w-8 h-px bg-gold" />
-          <span className="text-xs font-medium tracking-[0.25em] uppercase text-gold">
+          <div className="w-6 md:w-8 h-px bg-gold" />
+          <span className="text-[10px] md:text-xs font-medium tracking-[0.2em] md:tracking-[0.25em] uppercase text-gold">
             {t.hero.tagline}
           </span>
-          <div className="w-8 h-px bg-gold" />
+          <div className="w-6 md:w-8 h-px bg-gold" />
         </motion.div>
 
         <div className="max-w-4xl">
@@ -89,7 +89,7 @@ export default function Hero({ onRequestQuote }: HeroProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.3 }}
-            className="text-lg md:text-xl text-slate-300 font-light tracking-wide mb-12 max-w-xl mx-auto"
+            className="text-base md:text-lg lg:text-xl text-slate-300 font-light tracking-wide mb-8 md:mb-12 max-w-xl mx-auto px-4 md:px-0"
           >
             {t.hero.description}
           </motion.p>
@@ -98,12 +98,12 @@ export default function Hero({ onRequestQuote }: HeroProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.5 }}
-            className="flex flex-wrap items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 w-full sm:w-auto px-4 sm:px-0"
           >
             <DirectionalButton
               onClick={scrollToProjects}
               variant="primary"
-              className="px-8 py-4 font-semibold text-sm tracking-widest uppercase"
+              className="px-6 md:px-8 py-3 md:py-4 font-semibold text-xs md:text-sm tracking-widest uppercase w-full sm:w-auto"
             >
               {t.hero.viewProjects}
             </DirectionalButton>
@@ -111,7 +111,7 @@ export default function Hero({ onRequestQuote }: HeroProps) {
             <DirectionalButton
               onClick={onRequestQuote}
               variant="outline"
-              className="px-8 py-4 font-medium text-sm tracking-widest uppercase backdrop-blur-sm"
+              className="px-6 md:px-8 py-3 md:py-4 font-medium text-xs md:text-sm tracking-widest uppercase backdrop-blur-sm w-full sm:w-auto"
             >
               {t.hero.requestQuote}
             </DirectionalButton>

@@ -68,6 +68,17 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
+
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
     const el = document.querySelector(href);
@@ -82,12 +93,12 @@ export default function Navbar() {
         transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-5 px-4"
       >
-        <div className="w-4/5 max-w-5xl relative flex items-center justify-center">
+        <div className="w-[92%] md:w-4/5 max-w-5xl relative flex items-center justify-center">
           <div
-            className={`w-full flex items-center justify-between px-4 lg:px-6 transition-all duration-500 ${
+            className={`w-full flex items-center justify-between px-3 md:px-4 lg:px-6 transition-all duration-500 ${
               scrolled
                 ? 'bg-obsidian/80 backdrop-blur-md border border-white/10 rounded-full py-2 shadow-lg shadow-black/20'
-                : 'bg-white/5 backdrop-blur-sm border border-white/10 rounded-full py-3'
+                : 'bg-white/5 backdrop-blur-sm border border-white/10 rounded-full py-2.5 md:py-3'
             }`}
           >
             <a
@@ -95,7 +106,7 @@ export default function Navbar() {
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
               className="flex items-center gap-2 group"
             >
-              <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+              <div className="relative w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden flex-shrink-0">
                 <Image
                   src="/favicon.png"
                   alt="Virtus Decora Logo"
@@ -104,7 +115,7 @@ export default function Navbar() {
                   sizes="40px"
                 />
               </div>
-              <span className="relative text-xl font-display font-bold tracking-wider text-white">
+              <span className="relative text-base md:text-xl font-display font-bold tracking-wider text-white">
                 Virtus{' '}
                 <span className="relative text-gold" style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom' }}>
                   Decora
@@ -179,7 +190,7 @@ export default function Navbar() {
               </LangButton>
             </div>
 
-            <ul className="flex flex-col gap-8">
+            <ul className="flex flex-col gap-6 md:gap-8">
               {navLinks.map((link, i) => (
                 <motion.li
                   key={link.href}
@@ -189,7 +200,7 @@ export default function Navbar() {
                 >
                   <button
                     onClick={() => handleNavClick(link.href)}
-                    className="text-4xl font-display font-medium text-white hover:text-gold transition-colors duration-300"
+                    className="text-3xl md:text-4xl font-display font-medium text-white hover:text-gold transition-colors duration-300 py-2"
                   >
                     {link.label}
                   </button>
@@ -201,7 +212,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
               onClick={() => handleNavClick('#contact')}
-              className="mt-12 px-8 py-4 border border-gold text-gold text-sm font-medium tracking-widest uppercase self-start hover:bg-gold hover:text-obsidian transition-all duration-300"
+              className="mt-10 md:mt-12 px-6 md:px-8 py-3 md:py-4 border border-gold text-gold text-xs md:text-sm font-medium tracking-widest uppercase self-start hover:bg-gold hover:text-obsidian transition-all duration-300 rounded-lg"
             >
               {t.nav.requestQuote}
             </motion.button>

@@ -108,7 +108,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                 transition={{ duration: 0.8, delay: 0.1 }}
                 className="lg:col-span-3 group cursor-pointer"
               >
-                <div className="relative h-[320px] md:h-[440px] overflow-hidden rounded-2xl mb-6">
+                <div className="relative h-[280px] md:h-[360px] lg:h-[440px] overflow-hidden rounded-2xl mb-6">
                   <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                     style={{ backgroundImage: `url(${featured.image_url})` }}
@@ -127,10 +127,10 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                     <span className="text-slate-700">·</span>
                     <span className="text-xs text-slate-500">{formatDate(featured.published_at)}</span>
                   </div>
-                  <h3 className="font-display text-2xl md:text-3xl font-semibold text-white leading-snug group-hover:text-gold transition-colors duration-300 mb-3">
+                  <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-semibold text-white leading-snug group-hover:text-gold transition-colors duration-300 mb-3">
                     {title}
                   </h3>
-                  <p className="text-sm text-slate-500 leading-relaxed line-clamp-2">{excerpt}</p>
+                  <p className="text-xs md:text-sm text-slate-500 leading-relaxed line-clamp-2">{excerpt}</p>
                   <div className="mt-4 flex items-center gap-1.5 text-xs text-gold">
                     {t.blog.readArticle}
                     <ArrowUpRight size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -151,20 +151,20 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                   transition={{ duration: 0.7, delay: 0.2 + i * 0.15 }}
                   className="group cursor-pointer border border-white/5 rounded-2xl hover:border-white/10 transition-all duration-300 flex gap-0 overflow-hidden"
                 >
-                  <div className="relative w-32 md:w-40 shrink-0 h-full min-h-[140px] overflow-hidden">
+                  <div className="relative w-28 md:w-32 lg:w-40 shrink-0 h-full min-h-[120px] md:min-h-[140px] overflow-hidden">
                     <div
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                       style={{ backgroundImage: `url(${post.image_url})` }}
                     />
                   </div>
-                  <div className="p-5 flex flex-col justify-between">
+                  <div className="p-4 md:p-5 flex flex-col justify-between">
                     <div>
-                      <span className="text-xs text-gold tracking-widest uppercase">{category}</span>
-                      <h3 className="font-display text-base font-semibold text-white leading-snug mt-2 group-hover:text-gold transition-colors duration-300 line-clamp-3">
+                      <span className="text-[10px] md:text-xs text-gold tracking-widest uppercase">{category}</span>
+                      <h3 className="font-display text-sm md:text-base font-semibold text-white leading-snug mt-2 group-hover:text-gold transition-colors duration-300 line-clamp-3">
                         {title}
                       </h3>
                     </div>
-                    <div className="flex items-center gap-2 mt-3">
+                    <div className="flex items-center gap-1.5 md:gap-2 mt-3">
                       <Clock size={11} className="text-slate-500" />
                       <span className="text-xs text-slate-500">{post.read_time} {t.blog.min}</span>
                       <span className="text-slate-700">·</span>

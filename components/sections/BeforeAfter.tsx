@@ -92,11 +92,11 @@ function BeforeAfterSlider({ before, after }: { before: string; after: string })
       />
       <div className="absolute top-0 bottom-0 w-px bg-gold z-10 pointer-events-none" style={{ left: `${position}%` }}>
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-gold flex items-center justify-center cursor-col-resize shadow-lg"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-gold flex items-center justify-center cursor-col-resize shadow-lg touch-none"
           onMouseDown={onMouseDown}
           onTouchStart={() => setDragging(true)}
         >
-          <GripVertical size={18} className="text-obsidian" />
+          <GripVertical size={16} className="md:w-[18px] md:h-[18px] text-obsidian" />
         </div>
       </div>
       <BeforeAfterLabels />
@@ -201,10 +201,10 @@ function ProjectCard({ project, position, onClick, onView }: CardProps) {
           />
         )}
 
-        <div className="absolute bottom-0 left-0 right-0 p-6">
-          <p className="text-xs text-gold tracking-wider uppercase mb-1">{project.subtitle}</p>
-          <h3 className="font-display text-xl font-bold text-white">{project.title}</h3>
-          <p className="text-xs text-slate-400 mt-1">{project.location}</p>
+        <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+          <p className="text-[10px] md:text-xs text-gold tracking-wider uppercase mb-1">{project.subtitle}</p>
+          <h3 className="font-display text-base md:text-xl font-bold text-white">{project.title}</h3>
+          <p className="text-[10px] md:text-xs text-slate-400 mt-1">{project.location}</p>
         </div>
 
         {!isCenter && (
@@ -227,8 +227,9 @@ function ProjectCard({ project, position, onClick, onView }: CardProps) {
                   onClick={(e) => { e.stopPropagation(); onView(); }}
                   className="flex items-center gap-2 px-6 py-3 bg-gold text-obsidian text-sm font-semibold tracking-wider uppercase rounded-full hover:bg-gold/90 transition-colors shadow-lg"
                 >
-                  <Eye size={15} />
-                  {t.beforeAfter.view}
+                  <Eye size={14} className="md:w-[15px] md:h-[15px]" />
+                  <span className="hidden sm:inline">{t.beforeAfter.view}</span>
+                  <span className="sm:hidden">View</span>
                 </button>
                 <div className="w-16 h-px bg-gold/60" />
               </div>
@@ -240,10 +241,11 @@ function ProjectCard({ project, position, onClick, onView }: CardProps) {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
             <button
               onClick={onView}
-              className="flex items-center gap-2 px-6 py-3 bg-gold/90 hover:bg-gold text-obsidian text-sm font-semibold tracking-wider uppercase rounded-full transition-colors shadow-xl backdrop-blur-sm"
+              className="flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-gold/90 hover:bg-gold text-obsidian text-xs md:text-sm font-semibold tracking-wider uppercase rounded-full transition-colors shadow-xl backdrop-blur-sm"
             >
-              <Eye size={15} />
-              {t.beforeAfter.viewTransformation}
+              <Eye size={14} className="md:w-[15px] md:h-[15px]" />
+              <span className="hidden sm:inline">{t.beforeAfter.viewTransformation}</span>
+              <span className="sm:hidden">View</span>
             </button>
           </div>
         )}
@@ -305,8 +307,8 @@ export default function BeforeAfter() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <div
-            className="relative mx-auto"
-            style={{ width: '100%', maxWidth: 860, height: 480, perspective: '1200px' }}
+            className="relative mx-auto h-[360px] md:h-[420px] lg:h-[480px]"
+            style={{ width: '100%', maxWidth: 860, perspective: '1200px' }}
           >
             {projects.map((project, i) => (
               <ProjectCard
@@ -320,17 +322,17 @@ export default function BeforeAfter() {
 
             <button
               onClick={prev}
-              className="absolute -left-6 md:-left-14 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full border border-white/15 bg-obsidian/80 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:border-gold hover:text-gold transition-colors"
+              className="absolute left-2 md:-left-6 lg:-left-14 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 rounded-full border border-white/15 bg-obsidian/80 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:border-gold hover:text-gold transition-colors"
               aria-label="Previous"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6"/></svg>
+              <svg width="16" height="16" className="md:w-[18px] md:h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6"/></svg>
             </button>
             <button
               onClick={next}
-              className="absolute -right-6 md:-right-14 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full border border-white/15 bg-obsidian/80 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:border-gold hover:text-gold transition-colors"
+              className="absolute right-2 md:-right-6 lg:-right-14 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-11 md:h-11 rounded-full border border-white/15 bg-obsidian/80 backdrop-blur-sm flex items-center justify-center text-slate-400 hover:border-gold hover:text-gold transition-colors"
               aria-label="Next"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
+              <svg width="16" height="16" className="md:w-[18px] md:h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
           </div>
 
@@ -378,24 +380,24 @@ export default function BeforeAfter() {
                 <X size={16} />
               </button>
 
-              <div className="h-[420px] md:h-[520px]">
+              <div className="h-[300px] md:h-[420px] lg:h-[520px]">
                 <BeforeAfterSlider before={mp.before} after={mp.after} />
               </div>
 
-              <div className="px-6 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-t border-white/5">
+              <div className="px-4 md:px-6 py-4 md:py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-t border-white/5">
                 <div>
-                  <h3 className="font-display text-lg font-semibold text-white">
+                  <h3 className="font-display text-base md:text-lg font-semibold text-white">
                     {mp.title} — {mp.subtitle}
                   </h3>
                   <p className="text-xs text-slate-500 mt-1">{mp.location}</p>
                 </div>
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-4 md:gap-6 overflow-x-auto">
                   {mp.stats.map((stat, i) => (
-                    <div key={stat.label} className="flex items-center gap-6">
-                      {i > 0 && <div className="w-px h-8 bg-white/10" />}
+                    <div key={stat.label} className="flex items-center gap-4 md:gap-6">
+                      {i > 0 && <div className="w-px h-6 md:h-8 bg-white/10" />}
                       <div className="text-center">
-                        <div className="text-xl font-display font-bold text-gold">{stat.value}</div>
-                        <div className="text-xs text-slate-500 uppercase tracking-wider">{stat.label}</div>
+                        <div className="text-lg md:text-xl font-display font-bold text-gold whitespace-nowrap">{stat.value}</div>
+                        <div className="text-[10px] md:text-xs text-slate-500 uppercase tracking-wider whitespace-nowrap">{stat.label}</div>
                       </div>
                     </div>
                   ))}

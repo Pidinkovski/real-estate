@@ -15,10 +15,10 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#080E1C] border-t border-white/5">
-      <div className="container-wide section-padding py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="container-wide section-padding py-12 md:py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12">
           <div className="lg:col-span-1">
-            <div className="relative text-3xl font-display font-bold tracking-wider text-white mb-4 inline-block">
+            <div className="relative text-2xl md:text-3xl font-display font-bold tracking-wider text-white mb-4 inline-block">
               Virtus{' '}
               <span className="relative text-gold" style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom' }}>
                 Decora
@@ -93,11 +93,11 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/5">
-        <div className="container-wide section-padding py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-slate-600">
+        <div className="container-wide section-padding py-5 md:py-6 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">
+          <p className="text-xs text-slate-600 text-center md:text-left">
             © {new Date().getFullYear()} {t.footer.copyright}
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 md:gap-6 flex-wrap justify-center">
             <a href="#" className="text-xs text-slate-600 hover:text-slate-400 transition-colors">{t.footer.privacy}</a>
             <a href="#" className="text-xs text-slate-600 hover:text-slate-400 transition-colors">{t.footer.terms}</a>
             <a href="#" className="text-xs text-slate-600 hover:text-slate-400 transition-colors">{t.footer.imprint}</a>

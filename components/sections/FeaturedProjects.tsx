@@ -148,21 +148,21 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           </p>
         </SectionWrapper>
 
-        <div className="relative flex items-center justify-center gap-6 md:gap-10">
+        <div className="relative flex items-center justify-center gap-3 md:gap-6 lg:gap-10">
           <button
             onClick={goPrev}
             disabled={current === 0}
-            className={`shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-300 z-10 ${
+            className={`shrink-0 w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center transition-all duration-300 z-10 ${
               current === 0
                 ? 'text-white/20 cursor-not-allowed bg-white/5'
                 : 'text-gold hover:bg-gold/10 cursor-pointer bg-white/5'
             }`}
             aria-label="Previous project"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={18} className="md:w-5 md:h-5" />
           </button>
 
-          <div className="relative w-full max-w-3xl overflow-hidden rounded-2xl" style={{ height: '520px' }}>
+          <div className="relative w-full max-w-3xl overflow-hidden rounded-2xl h-[420px] md:h-[520px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={project.id}
@@ -186,14 +186,14 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           <button
             onClick={goNext}
             disabled={current === displayed.length - 1}
-            className={`shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-300 z-10 ${
+            className={`shrink-0 w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center transition-all duration-300 z-10 ${
               current === displayed.length - 1
                 ? 'text-white/20 cursor-not-allowed bg-white/5'
                 : 'text-gold hover:bg-gold/10 cursor-pointer bg-white/5'
             }`}
             aria-label="Next project"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={18} className="md:w-5 md:h-5" />
           </button>
         </div>
 
@@ -301,7 +301,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                       All Projects
                     </h2>
 
-                    <div className="relative" style={{ perspective: '2000px', height: '520px' }}>
+                    <div className="relative h-[380px] md:h-[520px]" style={{ perspective: '2000px' }}>
                       <div className="absolute inset-0 flex items-center justify-center">
                         {projects.map((proj, idx) => {
                           const position = (idx - carouselIndex + projects.length) % projects.length;
@@ -322,32 +322,32 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                             opacity = 1;
                             zIndex = 10;
                           } else if (position === 1 || (position === total - 1 && total === 2)) {
-                            x = 420;
+                            x = 320;
                             z = -250;
                             rotateY = -35;
-                            scale = 0.75;
-                            opacity = 0.6;
+                            scale = 0.7;
+                            opacity = 0.5;
                             zIndex = 5;
                           } else if (position === total - 1) {
-                            x = -420;
+                            x = -320;
                             z = -250;
                             rotateY = 35;
-                            scale = 0.75;
-                            opacity = 0.6;
+                            scale = 0.7;
+                            opacity = 0.5;
                             zIndex = 5;
                           } else if (position === 2) {
-                            x = 600;
+                            x = 500;
                             z = -400;
                             rotateY = -45;
-                            scale = 0.6;
-                            opacity = 0.3;
+                            scale = 0.55;
+                            opacity = 0.2;
                             zIndex = 2;
                           } else if (position === total - 2) {
-                            x = -600;
+                            x = -500;
                             z = -400;
                             rotateY = 45;
-                            scale = 0.6;
-                            opacity = 0.3;
+                            scale = 0.55;
+                            opacity = 0.2;
                             zIndex = 2;
                           }
 
@@ -367,7 +367,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                                 duration: 0.7,
                                 ease: [0.25, 0.1, 0.25, 1],
                               }}
-                              className="absolute w-[480px] h-[400px] cursor-pointer"
+                              className="absolute w-[280px] h-[240px] md:w-[380px] md:h-[320px] lg:w-[480px] lg:h-[400px] cursor-pointer"
                               style={{
                                 transformStyle: 'preserve-3d',
                               }}
@@ -415,15 +415,15 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
 
                       <button
                         onClick={() => setCarouselIndex((carouselIndex - 1 + projects.length) % projects.length)}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
                       >
-                        <ChevronLeft size={20} />
+                        <ChevronLeft size={18} className="md:w-5 md:h-5" />
                       </button>
                       <button
                         onClick={() => setCarouselIndex((carouselIndex + 1) % projects.length)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
                       >
-                        <ChevronRight size={20} />
+                        <ChevronRight size={18} className="md:w-5 md:h-5" />
                       </button>
                     </div>
 
