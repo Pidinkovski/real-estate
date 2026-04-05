@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   title: 'Virtus Decora — Turnkey Construction & Architecture',
   description: 'Premium turnkey construction, architectural design, and interior furnishing. From concept to completion — across Europe and the Middle East.',
   icons: {
-    icon: '/Virtus_Decora.jpg',
-    apple: '/Virtus_Decora.jpg',
+    icon: '/favicon.png',
+    apple: '/favicon.png',
   },
   openGraph: {
     title: 'Virtus Decora — Turnkey Construction & Architecture',

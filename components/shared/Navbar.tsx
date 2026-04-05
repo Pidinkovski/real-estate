@@ -97,10 +97,10 @@ export default function Navbar() {
             >
               <div className="relative w-8 h-8 rounded-full overflow-hidden ring-1 ring-gold/40 flex-shrink-0">
                 <Image
-                  src="/Virtus_Decora.jpg"
+                  src="/favicon.png"
                   alt="Virtus Decora Logo"
                   fill
-                  className="object-cover object-center scale-150"
+                  className="object-contain"
                   sizes="32px"
                 />
               </div>
