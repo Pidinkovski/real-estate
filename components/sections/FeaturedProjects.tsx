@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, MapPin, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import type { Project } from '@/lib/supabase';
 import SectionWrapper from '@/components/shared/SectionWrapper';
 import DirectionalButton from '@/components/shared/DirectionalButton';
@@ -242,9 +242,10 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
                   setSelectedProject(null);
                   setShowAllModal(false);
                 }}
-                className="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors z-50"
+                className="fixed top-6 right-6 w-12 h-12 rounded-full bg-obsidian/90 hover:bg-obsidian border border-white/20 hover:border-gold flex items-center justify-center text-white hover:text-gold transition-all shadow-xl z-[60]"
+                aria-label="Close"
               >
-                ✕
+                <X size={20} />
               </button>
 
               <AnimatePresence mode="wait">
