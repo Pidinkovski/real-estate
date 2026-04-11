@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import DirectionalButton from '@/components/shared/DirectionalButton';
 import { useLang } from '@/lib/i18n';
+import { SITE_CONTACT_EMAIL } from '@/lib/site';
 
 interface FinalCTAProps {
   onRequestConsultation: () => void;
@@ -56,7 +57,7 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
           <p className="text-lg md:text-xl lg:text-2xl font-display font-light text-slate-200 mb-2 md:mb-3">
             {t.cta.subtitle}
           </p>
-          <p className="text-xs md:text-sm text-black leading-relaxed font-bold">
+          <p className="whitespace-pre-line text-xs md:text-sm text-black leading-relaxed font-bold">
             {t.cta.description}
           </p>
         </motion.div>
@@ -80,7 +81,7 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
             style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)' }}
           >
             <a
-              href="mailto:hello@arkon-build.com"
+              href={`mailto:${SITE_CONTACT_EMAIL}`}
               className="text-xs md:text-sm text-slate-400 hover:text-gold transition-colors tracking-wider border-b border-slate-700 hover:border-gold pb-1"
             >
               {t.cta.emailUs}

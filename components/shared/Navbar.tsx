@@ -179,9 +179,9 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-            className="fixed inset-0 z-40 bg-obsidian flex flex-col justify-center px-10"
+            className="fixed inset-0 z-40 bg-obsidian flex flex-col px-10 pb-8 pt-24 sm:pt-28"
           >
-            <div className="absolute top-8 right-8 flex items-center gap-3">
+            <div className="flex shrink-0 justify-end items-center gap-3">
               <LangButton langCode="bg" current={lang} onClick={() => setLang('bg')} title="Български">
                 <BulgarianFlag size={32} />
               </LangButton>
@@ -190,32 +190,34 @@ export default function Navbar() {
               </LangButton>
             </div>
 
-            <ul className="flex flex-col gap-6 md:gap-8">
-              {navLinks.map((link, i) => (
-                <motion.li
-                  key={link.href}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + i * 0.07 }}
-                >
-                  <button
-                    onClick={() => handleNavClick(link.href)}
-                    className="text-3xl md:text-4xl font-display font-medium text-white hover:text-gold transition-colors duration-300 py-2"
+            <div className="flex min-h-0 flex-1 flex-col justify-center">
+              <ul className="flex flex-col gap-6 md:gap-8">
+                {navLinks.map((link, i) => (
+                  <motion.li
+                    key={link.href}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + i * 0.07 }}
                   >
-                    {link.label}
-                  </button>
-                </motion.li>
-              ))}
-            </ul>
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              onClick={() => handleNavClick('#contact')}
-              className="mt-10 md:mt-12 px-6 md:px-8 py-3 md:py-4 border border-gold text-gold text-xs md:text-sm font-medium tracking-widest uppercase self-start hover:bg-gold hover:text-obsidian transition-all duration-300 rounded-lg"
-            >
-              {t.nav.requestQuote}
-            </motion.button>
+                    <button
+                      onClick={() => handleNavClick(link.href)}
+                      className="text-3xl md:text-4xl font-display font-medium text-white hover:text-gold transition-colors duration-300 py-2"
+                    >
+                      {link.label}
+                    </button>
+                  </motion.li>
+                ))}
+              </ul>
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                onClick={() => handleNavClick('#contact')}
+                className="mt-10 md:mt-12 px-6 md:px-8 py-3 md:py-4 border border-gold text-gold text-xs md:text-sm font-medium tracking-widest uppercase self-start hover:bg-gold hover:text-obsidian transition-all duration-300 rounded-lg"
+              >
+                {t.nav.requestQuote}
+              </motion.button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -11,8 +11,13 @@ export default function TrustBar() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-50px' });
   const { t } = useLang();
-  const values = ['120+', '10+', '3', t.trust.endToEnd];
-  const labels = [t.trust.projectsDelivered, t.trust.yearsExperience, t.trust.citiesOfOperation, t.trust.servicesProvided];
+  const values = ['20+', t.trust.processControl, '3', t.trust.endToEnd];
+  const labels = [
+    t.trust.projectsDelivered,
+    t.trust.processControlSub,
+    t.trust.citiesOfOperation,
+    t.trust.servicesProvided,
+  ];
   const stats = icons.map((icon, i) => ({ icon, value: values[i], label: labels[i] }));
 
   return (
@@ -24,7 +29,7 @@ export default function TrustBar() {
             const Icon = stat.icon;
             return (
               <motion.div
-                key={stat.label}
+                key={['projects', 'process', 'cities', 'services'][i]}
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
@@ -38,9 +43,11 @@ export default function TrustBar() {
                   <div className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-white tracking-tight">
                     {stat.value}
                   </div>
-                  <div className="text-[10px] md:text-xs tracking-widest uppercase text-slate-500 mt-1">
-                    {stat.label}
-                  </div>
+                  {stat.label ? (
+                    <div className="text-[10px] md:text-xs tracking-widest text-slate-500 mt-1">
+                      {stat.label}
+                    </div>
+                  ) : null}
                 </div>
               </motion.div>
             );

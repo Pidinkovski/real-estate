@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CircleCheck as CheckCircle, Loader as Loader2 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
 import { useLang } from '@/lib/i18n';
 
 interface ContactModalProps {
@@ -14,7 +13,7 @@ interface ContactModalProps {
 const budgetRanges = ['€100k – €500k', '€500k – €1M', '€1M – €5M', '€5M – €10M', '€10M+', 'To be discussed'];
 
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -36,13 +35,21 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setLoading(true);
     setError('');
 
-    const { error: supaErr } = await supabase.from('contact_requests').insert([form]);
-
-    setLoading(false);
-    if (supaErr) {
-      setError('Something went wrong. Please try again.');
-    } else {
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, lang }),
+      });
+      setLoading(false);
+      if (!res.ok) {
+        setError(t.modal.error);
+        return;
+      }
       setSuccess(true);
+    } catch {
+      setLoading(false);
+      setError(t.modal.error);
     }
   };
 

@@ -50,11 +50,6 @@ export default function Hero({ onRequestQuote }: HeroProps) {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex items-center gap-2 md:gap-3 mb-6 md:mb-8"
         >
-          <div className="w-6 md:w-8 h-px bg-gold" />
-          <span className="text-[10px] md:text-xs font-medium tracking-[0.2em] md:tracking-[0.25em] uppercase text-gold">
-            {t.hero.tagline}
-          </span>
-          <div className="w-6 md:w-8 h-px bg-gold" />
         </motion.div>
 
         <div className="max-w-4xl">

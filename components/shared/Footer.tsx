@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Linkedin, Instagram, Facebook } from 'lucide-react';
 import { useLang } from '@/lib/i18n';
+import { SITE_CONTACT_EMAIL } from '@/lib/site';
 
 const quickLinkHrefs = ['#projects', '#services', '#process', '#why-us', '#blog', '#contact'];
 
@@ -81,11 +82,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={15} className="text-gold shrink-0" />
-                <span className="text-sm text-slate-400">+43 1 234 567 890</span>
+                <span className="text-sm text-slate-400">+359 894626097</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={15} className="text-gold shrink-0" />
-                <span className="text-sm text-slate-400">hello@arkon-build.com</span>
+                <span className="text-sm text-slate-400">{SITE_CONTACT_EMAIL}</span>
               </li>
             </ul>
           </div>

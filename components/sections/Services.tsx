@@ -57,18 +57,6 @@ export default function Services() {
                 <p className="text-sm text-slate-500 leading-relaxed mb-6 group-hover:text-slate-400 transition-colors duration-300">
                   {service.description}
                 </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {service.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs px-2 py-1 border border-white/5 rounded-full text-slate-600 group-hover:border-gold/20 group-hover:text-slate-500 transition-all duration-300"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
                 <div className="mt-8 w-0 h-px bg-gold group-hover:w-full transition-all duration-500" />
               </motion.div>
             );

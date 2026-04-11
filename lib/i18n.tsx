@@ -28,7 +28,8 @@ export const translations = {
     },
     trust: {
       projectsDelivered: 'Projects Delivered',
-      yearsExperience: 'Years Experience',
+      processControl: 'Process control',
+      processControlSub: 'Precision in every detail',
       citiesOfOperation: 'Cities of Operation',
       servicesProvided: 'Services Provided',
       endToEnd: 'End-to-end',
@@ -107,26 +108,28 @@ export const translations = {
       label: 'Why Virtus Decora',
       title1: 'Built on',
       title2: 'Four Pillars',
-      description: 'We have spent a decade earning the trust of discerning clients across Europe and the Gulf. These principles are non-negotiable in every project we take on.',
-      onTimeDelivery: 'On-Time Delivery',
-      clientSatisfaction: 'Client Satisfaction',
-      legalDisputes: 'Legal Disputes',
+      description:
+        'Although we are a new company, we work with partners, craftspeople, and suppliers with many years of practical experience. For us, every project is built on clear communication, quality execution, careful material selection, and full transparency.',
       pillars: [
         {
-          title: 'International Standards',
-          description: 'We build to Eurocode, Dubai Green Building Regulations, and ISO 9001 quality frameworks. Whether in Vienna, Monaco, or Dubai — the standard never changes.',
+          title: 'Experienced partners and craftspeople',
+          description:
+            'We work with proven contractors and specialists with long-term experience across many types of projects. That lets us pair a fresh, client-first approach with real expertise on site.',
         },
         {
-          title: 'Premium Materials Only',
-          description: 'Every specification is reviewed by our materials team. We source Italian stone, German engineering components, and certified sustainable timber — nothing less.',
+          title: 'Curated materials',
+          description:
+            'Every material and every detail is chosen with care to match the concept, budget, and durability our clients expect.',
         },
         {
-          title: 'One Point of Contact',
-          description: 'A dedicated senior project director as your single interface. No chasing multiple contractors. No miscommunication. One call answers everything.',
+          title: 'One clear point of contact',
+          description:
+            'Communication stays organized, clear, and on time. Clients always know whom to reach and get fast, concrete feedback.',
         },
         {
           title: 'Full Transparency',
-          description: 'Real-time project dashboards, weekly photo reports, and open-book cost tracking. You always know where your project and budget stand.',
+          description:
+            'We work with clearly defined phases, budgets, and timelines so the whole process stays calm, traceable, and built on trust.',
         },
       ],
     },
@@ -144,7 +147,8 @@ export const translations = {
       title1: 'Have a project',
       title2: 'in mind?',
       subtitle: "Let's build it together.",
-      description: 'From a private villa in the South of France to a commercial complex in Dubai — we work on projects across Europe and the Gulf. Every engagement starts with a confidential consultation.',
+      description:
+        "A good project starts with the right conversation.\nSend an inquiry and let's turn your idea into a real plan together.",
       requestConsultation: 'Request a Consultation',
       emailUs: 'or email us directly',
       euLabel: 'Licensed in Austria, Germany, France, Croatia',
@@ -184,7 +188,7 @@ export const translations = {
       placeholder: {
         name: 'Alexander Schmidt',
         email: 'hello@example.com',
-        phone: '+43 1 234 567',
+        phone: 'Include country code',
         description: 'Tell us about your project — location, scale, timeline, any specific requirements...',
       },
     },
@@ -212,7 +216,8 @@ export const translations = {
     },
     trust: {
       projectsDelivered: 'Завършени проекта',
-      yearsExperience: 'Години опит',
+      processControl: 'Контрол на процеса',
+      processControlSub: 'Прецизност във всеки детайл',
       citiesOfOperation: 'Градове на дейност',
       servicesProvided: 'Предоставени услуги',
       endToEnd: 'Край-до-край',
@@ -291,26 +296,28 @@ export const translations = {
       label: 'Защо Virtus Decora',
       title1: 'Изградени върху',
       title2: 'Четири стълба',
-      description: 'Прекарахме десетилетие в спечелване на доверието на взискателни клиенти в Европа и Персийския залив. Тези принципи са неотменими за всеки проект.',
-      onTimeDelivery: 'В срок',
-      clientSatisfaction: 'Удовлетвореност',
-      legalDisputes: 'Правни спорове',
+      description:
+        'Макар да сме нова компания, работим с партньори, майстори и доставчици с дългогодишен практически опит. За нас всеки проект се гради върху ясна комуникация, качествено изпълнение, внимателен подбор на материали и пълна прозрачност.',
       pillars: [
         {
-          title: 'Международни стандарти',
-          description: 'Строим по Еврокод, Дубайски зелени строителни наредби и рамката за качество ISO 9001. Независимо дали е Виена, Монако или Дубай — стандартът никога не се променя.',
+          title: 'Опитни партньори и майстори',
+          description:
+            'Работим с доказани изпълнители и специалисти с дългосрочен опит в различни типове проекти. Така съчетаваме ново отношение към клиента с реална експертиза на терен.',
         },
         {
-          title: 'Само премиум материали',
-          description: 'Всяка спецификация се преглежда от нашия екип по материали. Набавяме италиански камък, германски инженерни компоненти и сертифицирана устойчива дървесина.',
+          title: 'Подбрани материали',
+          description:
+            'Всеки материал и всеки детайл се избират внимателно според концепцията, бюджета и дълготрайността, която клиентът очаква.',
         },
         {
-          title: 'Един контакт',
-          description: 'Посветен старши ръководител на проекта като ваш единствен интерфейс. Без преследване на множество изпълнители. Без недоразумения. Един разговор отговаря на всичко.',
+          title: 'Един ясен контакт',
+          description:
+            'Комуникацията е организирана, ясна и навременна. Клиентът знае към кого да се обърне и получава бърза и конкретна обратна връзка.',
         },
         {
           title: 'Пълна прозрачност',
-          description: 'Табла за проекти в реално време, ежеседмични фотодоклади и открито проследяване на разходите. Винаги знаете къде стои проектът и бюджетът ви.',
+          description:
+            'Работим с ясно разписани етапи, бюджет и срокове, така че през целия процес да има спокойствие, проследимост и доверие.',
         },
       ],
     },
@@ -328,7 +335,8 @@ export const translations = {
       title1: 'Имате проект',
       title2: 'на ум?',
       subtitle: 'Нека го изградим заедно.',
-      description: 'От частна вила на юг на Франция до търговски комплекс в Дубай — работим по проекти из цяла Европа и Персийския залив. Всяко ангажиране започва с поверителна консултация.',
+      description:
+        'Добрият проект започва с точния разговор.\nИзпратете запитване и нека заедно превърнем идеята ви в реален план.',
       requestConsultation: 'Заявете консултация',
       emailUs: 'или ни пишете директно',
       euLabel: 'Лицензиран в Австрия, Германия, Франция, Хърватия',
@@ -368,7 +376,7 @@ export const translations = {
       placeholder: {
         name: 'Александър Иванов',
         email: 'hello@example.com',
-        phone: '+359 2 123 456',
+        phone: 'С код на държавата',
         description: 'Разкажете ни за проекта си — местоположение, мащаб, срокове, специфични изисквания...',
       },
     },
