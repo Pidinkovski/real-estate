@@ -150,7 +150,6 @@ export const translations = {
       description:
         "A good project starts with the right conversation.\nSend an inquiry and let's turn your idea into a real plan together.",
       requestConsultation: 'Request a Consultation',
-      emailUs: 'or email us directly',
       euLabel: 'Licensed in Austria, Germany, France, Croatia',
       uaeLabel: 'RERA & Dubai Municipality Registered',
       mcLabel: 'Monaco Principality Certified',
@@ -338,7 +337,6 @@ export const translations = {
       description:
         'Добрият проект започва с точния разговор.\nИзпратете запитване и нека заедно превърнем идеята ви в реален план.',
       requestConsultation: 'Заявете консултация',
-      emailUs: 'или ни пишете директно',
       euLabel: 'Лицензиран в Австрия, Германия, Франция, Хърватия',
       uaeLabel: 'Регистриран в RERA и Дубайска община',
       mcLabel: 'Сертифициран в Монако',

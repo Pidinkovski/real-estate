@@ -10,6 +10,10 @@ function escapeHtml(s: string) {
     .replace(/"/g, '&quot;');
 }
 
+function escapeAttr(s: string) {
+  return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
 function clamp(s: unknown, max: number): string {
   if (typeof s !== 'string') return '';
   return s.trim().slice(0, max);
@@ -43,9 +47,33 @@ export async function processContactSubmission(body: Record<string, unknown>): P
     return { ok: false, status: 503, error: 'Email not configured' };
   }
 
+  /** Team inbox: `CONTACT_TO_EMAIL` on the server, else same public address (defaults to info@virtusdecora.com). */
   const to = process.env.CONTACT_TO_EMAIL?.trim() || SITE_CONTACT_EMAIL;
   const from =
     process.env.RESEND_FROM_EMAIL?.trim() || 'Virtus Decora <onboarding@resend.dev>';
+
+  const phoneDisplay = phone || '—';
+  const projectTypeDisplay = project_type || '—';
+  const budgetDisplay = budget_range || '—';
+  const messageDisplay = message || '—';
+
+  const mailHref = `mailto:${email}?subject=${encodeURIComponent(`Re: Virtus Decora inquiry — ${name}`)}`;
+  const telHref = phone ? `tel:${phone.replace(/[^\d+]/g, '')}` : '';
+
+  const teamText = [
+    'New consultation request (website form)',
+    '',
+    `Name: ${name}`,
+    `Email: ${email}`,
+    `Phone: ${phoneDisplay}`,
+    `Project type: ${projectTypeDisplay}`,
+    `Budget: ${budgetDisplay}`,
+    '',
+    'Message:',
+    messageDisplay,
+    '',
+    'Reply directly to this email — Reply-To is set to the client address.',
+  ].join('\n');
 
   const resend = new Resend(resendKey);
   const { error: emailError } = await resend.emails.send({
@@ -53,18 +81,26 @@ export async function processContactSubmission(body: Record<string, unknown>): P
     to: [to],
     replyTo: email,
     subject: `Website inquiry — ${name}`,
+    text: teamText,
     html: `
         <h2 style="font-family:system-ui,sans-serif;font-size:18px;">New consultation request</h2>
-        <table style="font-family:system-ui,sans-serif;font-size:14px;line-height:1.5;color:#111;">
-          <tr><td><strong>Name</strong></td><td>${escapeHtml(name)}</td></tr>
-          <tr><td><strong>Email</strong></td><td>${escapeHtml(email)}</td></tr>
-          <tr><td><strong>Phone</strong></td><td>${escapeHtml(phone) || '—'}</td></tr>
-          <tr><td><strong>Project type</strong></td><td>${escapeHtml(project_type) || '—'}</td></tr>
-          <tr><td><strong>Budget</strong></td><td>${escapeHtml(budget_range) || '—'}</td></tr>
+        <p style="font-family:system-ui,sans-serif;font-size:13px;color:#444;margin:0 0 12px;">Sent from the Virtus Decora site contact form. <strong>Reply</strong> uses the client’s email (<code>${escapeHtml(
+          email
+        )}</code>).</p>
+        <table style="font-family:system-ui,sans-serif;font-size:14px;line-height:1.6;color:#111;border-collapse:collapse;">
+          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;"><strong>Name</strong></td><td style="padding:6px 0;">${escapeHtml(name)}</td></tr>
+          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;"><strong>Email</strong></td><td style="padding:6px 0;"><a href="${escapeAttr(mailHref)}">${escapeHtml(email)}</a></td></tr>
+          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;"><strong>Phone</strong></td><td style="padding:6px 0;">${
+            phone && telHref.length > 4
+              ? `<a href="${escapeAttr(telHref)}">${escapeHtml(phone)}</a>`
+              : escapeHtml(phoneDisplay)
+          }</td></tr>
+          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;"><strong>Project type</strong></td><td style="padding:6px 0;">${escapeHtml(projectTypeDisplay)}</td></tr>
+          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;"><strong>Budget</strong></td><td style="padding:6px 0;">${escapeHtml(budgetDisplay)}</td></tr>
         </table>
-        <p style="font-family:system-ui,sans-serif;font-size:14px;margin-top:16px;"><strong>Message</strong></p>
-        <pre style="font-family:system-ui,sans-serif;font-size:14px;white-space:pre-wrap;background:#f4f4f5;padding:12px;border-radius:8px;">${escapeHtml(
-          message || '—'
+        <p style="font-family:system-ui,sans-serif;font-size:14px;margin:16px 0 6px;"><strong>Project description</strong></p>
+        <pre style="font-family:system-ui,sans-serif;font-size:14px;white-space:pre-wrap;background:#f4f4f5;padding:12px;border-radius:8px;margin:0;">${escapeHtml(
+          messageDisplay
         )}</pre>
       `,
   });

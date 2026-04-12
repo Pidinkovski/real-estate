@@ -1,6 +1,13 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+/** When playback reaches this time (seconds), iris transition starts (unless the file ends sooner). */
+const INTRO_MAX_PLAY_SECONDS = 10;
+/** Matches `.reveal-*` animation duration in `globals.css`. */
+const IRIS_TRANSITION_MS = 1200;
+
+const INTRO_VIDEO_SRC = '/videos/virtus-intro.mp4';
 
 interface IntroScreenProps {
   onComplete: () => void;
@@ -11,21 +18,24 @@ export default function IntroScreen({ onComplete, onIrisStart }: IntroScreenProp
   const videoRef = useRef<HTMLVideoElement>(null);
   const [phase, setPhase] = useState<'video' | 'iris' | 'done'>('video');
 
+  const goToIris = useCallback(() => {
+    videoRef.current?.pause();
+    onIrisStart();
+    setPhase('iris');
+  }, [onIrisStart]);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     const handleTimeUpdate = () => {
-      if (video.currentTime >= 4) {
-        video.pause();
-        onIrisStart();
-        setPhase('iris');
+      if (video.currentTime >= INTRO_MAX_PLAY_SECONDS) {
+        goToIris();
       }
     };
 
     const handleEnded = () => {
-      onIrisStart();
-      setPhase('iris');
+      goToIris();
     };
 
     video.addEventListener('timeupdate', handleTimeUpdate);
@@ -34,8 +44,7 @@ export default function IntroScreen({ onComplete, onIrisStart }: IntroScreenProp
     const playPromise = video.play();
     if (playPromise !== undefined) {
       playPromise.catch(() => {
-        onIrisStart();
-        setPhase('iris');
+        goToIris();
       });
     }
 
@@ -43,14 +52,14 @@ export default function IntroScreen({ onComplete, onIrisStart }: IntroScreenProp
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('ended', handleEnded);
     };
-  }, [onIrisStart]);
+  }, [goToIris]);
 
   useEffect(() => {
     if (phase === 'iris') {
       const timer = setTimeout(() => {
         setPhase('done');
         onComplete();
-      }, 1200);
+      }, IRIS_TRANSITION_MS);
       return () => clearTimeout(timer);
     }
   }, [phase, onComplete]);
@@ -60,15 +69,38 @@ export default function IntroScreen({ onComplete, onIrisStart }: IntroScreenProp
   return (
     <>
       {phase === 'video' && (
-        <div className="fixed inset-0 z-[9999] bg-black flex items-center justify-center">
-          <video
-            ref={videoRef}
-            src="https://res.cloudinary.com/dltxzncyt/video/upload/hf_20260404_182008_b1969f2a-ab1e-4d1f-9a12-9f52f8892518_dlyqp6.mp4"
-            muted
-            playsInline
-            preload="auto"
-            style={{ width: '75%', height: '75%', objectFit: 'contain' }}
-          />
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black">
+          <div className="relative h-[75vh] w-[75vw] max-h-[90vh] max-w-[92vw] overflow-hidden bg-black">
+            <video
+              ref={videoRef}
+              src={INTRO_VIDEO_SRC}
+              muted
+              playsInline
+              preload="auto"
+              className="absolute inset-0 h-full w-full bg-black object-contain [transform:translateZ(0)]"
+            />
+            <div
+              className="pointer-events-none absolute inset-0 z-[1]"
+              style={{
+                background:
+                  'radial-gradient(ellipse 96% 96% at 50% 50%, transparent 34%, rgba(0,0,0,0.22) 58%, rgba(0,0,0,0.72) 82%, #000 100%)',
+                boxShadow: [
+                  'inset 0 0 min(42vw, 480px) min(32vh, 340px) rgba(0,0,0,0.38)',
+                  'inset 0 0 min(22vw, 260px) min(16vh, 200px) rgba(0,0,0,0.72)',
+                  'inset 0 0 min(10vw, 140px) min(8vh, 110px) rgba(0,0,0,0.95)',
+                  'inset 0 0 min(4vw, 56px) min(3vh, 44px) #000',
+                ].join(', '),
+              }}
+              aria-hidden
+            />
+          </div>
+          <button
+            type="button"
+            onClick={goToIris}
+            className="absolute bottom-8 left-1/2 z-[2] -translate-x-1/2 text-[10px] font-medium uppercase tracking-[0.28em] text-slate-500 transition-colors hover:text-white"
+          >
+            Skip
+          </button>
         </div>
       )}
 
@@ -79,6 +111,6 @@ export default function IntroScreen({ onComplete, onIrisStart }: IntroScreenProp
         </>
       )}
 
-</>
+    </>
   );
 }

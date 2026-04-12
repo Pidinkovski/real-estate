@@ -29,6 +29,8 @@ export type BlogPost = {
   excerpt: string;
   excerpt_bg?: string;
   slug: string;
+  /** When set (https…), cards open this URL in a new tab. Omitted or empty = no outbound link yet. */
+  external_url?: string | null;
   published_at: string;
   created_at: string;
 };

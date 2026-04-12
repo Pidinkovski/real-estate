@@ -69,6 +69,19 @@ function getPostText(post: BlogPost, lang: string) {
   };
 }
 
+/** Valid https URL for opening in a new tab; otherwise null (card stays non-clickable for outbound). */
+function getExternalHref(post: BlogPost): string | null {
+  const raw = post.external_url?.trim();
+  if (!raw) return null;
+  try {
+    const u = new URL(raw);
+    if (u.protocol === 'https:' || u.protocol === 'http:') return u.href;
+  } catch {
+    return null;
+  }
+  return null;
+}
+
 export default function BlogPreview({ posts }: BlogPreviewProps) {
   const activePosts = posts.length > 0 ? posts : FALLBACK_POSTS;
   const ref = useRef<HTMLElement>(null);
@@ -101,13 +114,17 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
           {featured && (() => {
             const { title, excerpt, category } = getPostText(featured, lang);
-            return (
-              <motion.article
-                initial={{ opacity: 0, y: 40 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.1 }}
-                className="lg:col-span-3 group cursor-pointer"
-              >
+            const href = getExternalHref(featured);
+            const featuredMotion = {
+              initial: { opacity: 0, y: 40 },
+              animate: inView ? { opacity: 1, y: 0 } : {},
+              transition: { duration: 0.8, delay: 0.1 },
+              className:
+                'lg:col-span-3 group block text-left' +
+                (href ? ' cursor-pointer' : ' cursor-default'),
+            };
+            const inner = (
+              <>
                 <div className="relative h-[280px] md:h-[360px] lg:h-[440px] overflow-hidden rounded-2xl mb-6">
                   <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -136,41 +153,72 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
                     <ArrowUpRight size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
                 </div>
-              </motion.article>
+              </>
+            );
+            return href ? (
+              <motion.a
+                {...featuredMotion}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {inner}
+              </motion.a>
+            ) : (
+              <motion.article {...featuredMotion}>{inner}</motion.article>
             );
           })()}
 
           <div className="lg:col-span-2 flex flex-col gap-4">
             {rest.map((post, i) => {
-              const { title, category } = getPostText(post, lang);
-              return (
-                <motion.article
-                  key={post.id}
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.2 + i * 0.15 }}
-                  className="group cursor-pointer border border-white/5 rounded-2xl hover:border-white/10 transition-all duration-300 flex gap-0 overflow-hidden"
-                >
+              const { title, excerpt, category } = getPostText(post, lang);
+              const href = getExternalHref(post);
+              const rowMotion = {
+                initial: { opacity: 0, x: 30 },
+                animate: inView ? { opacity: 1, x: 0 } : {},
+                transition: { duration: 0.7, delay: 0.2 + i * 0.15 },
+                className:
+                  'group border border-white/5 rounded-2xl hover:border-white/10 transition-all duration-300 flex gap-0 overflow-hidden' +
+                  (href ? ' cursor-pointer' : ' cursor-default'),
+              };
+              const rowInner = (
+                <>
                   <div className="relative w-28 md:w-32 lg:w-40 shrink-0 h-full min-h-[120px] md:min-h-[140px] overflow-hidden">
                     <div
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                       style={{ backgroundImage: `url(${post.image_url})` }}
                     />
                   </div>
-                  <div className="p-4 md:p-5 flex flex-col justify-between">
+                  <div className="p-4 md:p-5 flex flex-col justify-between min-w-0 flex-1">
                     <div>
                       <span className="text-[10px] md:text-xs text-gold tracking-widest uppercase">{category}</span>
                       <h3 className="font-display text-sm md:text-base font-semibold text-white leading-snug mt-2 group-hover:text-gold transition-colors duration-300 line-clamp-3">
                         {title}
                       </h3>
+                      <p className="text-[11px] md:text-xs text-slate-500 leading-relaxed line-clamp-2 mt-2">{excerpt}</p>
                     </div>
                     <div className="flex items-center gap-1.5 md:gap-2 mt-3">
-                      <Clock size={11} className="text-slate-500" />
+                      <Clock size={11} className="text-slate-500 shrink-0" />
                       <span className="text-xs text-slate-500">{post.read_time} {t.blog.min}</span>
                       <span className="text-slate-700">·</span>
                       <span className="text-xs text-slate-500">{formatDate(post.published_at)}</span>
                     </div>
                   </div>
+                </>
+              );
+              return href ? (
+                <motion.a
+                  key={post.id}
+                  {...rowMotion}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {rowInner}
+                </motion.a>
+              ) : (
+                <motion.article key={post.id} {...rowMotion}>
+                  {rowInner}
                 </motion.article>
               );
             })}

@@ -5,7 +5,6 @@ import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import DirectionalButton from '@/components/shared/DirectionalButton';
 import { useLang } from '@/lib/i18n';
-import { SITE_CONTACT_EMAIL } from '@/lib/site';
 
 interface FinalCTAProps {
   onRequestConsultation: () => void;
@@ -66,27 +65,16 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="flex flex-col sm:flex-row items-center gap-4"
+          className="flex w-full justify-center"
         >
           <DirectionalButton
             onClick={onRequestConsultation}
             hoverColor="#374151"
-            className="flex items-center gap-2 md:gap-3 px-6 md:px-10 py-3 md:py-5 font-semibold text-xs md:text-sm tracking-widest uppercase group w-full sm:w-auto justify-center"
+            className="flex items-center gap-2 md:gap-3 px-6 md:px-10 py-3 md:py-5 font-semibold text-xs md:text-sm tracking-widest uppercase group justify-center"
           >
-            <span className="whitespace-nowrap">{t.cta.requestConsultation}</span> <ArrowRight size={14} className="md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
+            <span className="whitespace-nowrap">{t.cta.requestConsultation}</span>{' '}
+            <ArrowRight size={14} className="md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
           </DirectionalButton>
-
-          <div
-            className="rounded-2xl border border-white/10 backdrop-blur-sm px-4 md:px-5 py-2.5 md:py-3 w-full sm:w-auto"
-            style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)' }}
-          >
-            <a
-              href={`mailto:${SITE_CONTACT_EMAIL}`}
-              className="text-xs md:text-sm text-slate-400 hover:text-gold transition-colors tracking-wider border-b border-slate-700 hover:border-gold pb-1"
-            >
-              {t.cta.emailUs}
-            </a>
-          </div>
         </motion.div>
 
         <motion.div

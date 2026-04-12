@@ -25,6 +25,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+  /** Server / Resend message when submit fails (helps debug without opening DevTools). */
+  const [errorDetails, setErrorDetails] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -34,6 +36,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setErrorDetails('');
 
     try {
       const res = await fetch('/api/contact', {
@@ -41,21 +44,32 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...form, lang }),
       });
-      setLoading(false);
+      const data = (await res.json().catch(() => null)) as { error?: string; details?: string } | null;
       if (!res.ok) {
         setError(t.modal.error);
+        const hint =
+          (typeof data?.details === 'string' && data.details) ||
+          (typeof data?.error === 'string' && data.error !== t.modal.error ? data.error : '');
+        setErrorDetails(hint);
         return;
       }
       setSuccess(true);
     } catch {
-      setLoading(false);
       setError(t.modal.error);
+      setErrorDetails('');
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleClose = () => {
     onClose();
-    setTimeout(() => { setSuccess(false); setError(''); setForm({ name: '', email: '', phone: '', project_type: 'Residential', budget_range: '', message: '' }); }, 400);
+    setTimeout(() => {
+      setSuccess(false);
+      setError('');
+      setErrorDetails('');
+      setForm({ name: '', email: '', phone: '', project_type: 'Residential', budget_range: '', message: '' });
+    }, 400);
   };
 
   return (
@@ -177,7 +191,14 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   />
                 </div>
 
-                {error && <p className="text-red-400 text-sm">{t.modal.error}</p>}
+                {error && (
+                  <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2">
+                    <p className="text-red-400 text-sm">{error}</p>
+                    {errorDetails ? (
+                      <p className="text-red-300/90 text-xs mt-1.5 leading-snug break-words font-mono">{errorDetails}</p>
+                    ) : null}
+                  </div>
+                )}
 
                 <motion.button
                   type="submit"
