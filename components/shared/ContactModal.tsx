@@ -45,7 +45,15 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, lang }),
+        body: JSON.stringify({
+          lang: lang === 'en' ? 'en' : 'bg',
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          project_type: form.project_type,
+          budget_range: form.budget_range,
+          message: form.message,
+        }),
       });
       const data = (await res.json().catch(() => null)) as {
         error?: string;

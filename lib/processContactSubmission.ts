@@ -30,6 +30,15 @@ function resendErrorMessage(err: unknown): string {
   return String(err);
 }
 
+/** UI may send `en`, `EN`, or `en-GB`; anything else defaults to Bulgarian templates. */
+function resolveContactLang(body: Record<string, unknown>): 'en' | 'bg' {
+  const v = body.lang;
+  if (typeof v !== 'string') return 'bg';
+  const s = v.trim().toLowerCase();
+  if (s === 'en' || s.startsWith('en-')) return 'en';
+  return 'bg';
+}
+
 export async function processContactSubmission(body: Record<string, unknown>): Promise<ContactResult> {
   const name = clamp(body.name, 200);
   const email = clamp(body.email, 200);
@@ -113,29 +122,30 @@ export async function processContactSubmission(body: Record<string, unknown>): P
     return { ok: false, status: 502, error: 'Failed to send email', details };
   }
 
-  const lang = body.lang === 'en' ? 'en' : 'bg';
+  const lang = resolveContactLang(body);
   const autoReply =
     lang === 'en'
       ? {
-          subject: 'Thank you for your request — Virtus Decora',
+          // Neutral subject + plain “receipt” HTML: dark promo-style layouts often score as bulk mail.
+          subject: 'Contact form on virtusdecora.com',
           text: [
             `Hello ${name},`,
             '',
-            'Thank you for contacting Virtus Decora. We have received your request and a member of our team will get back to you within 24 hours.',
+            'This is an automatic message to confirm we received your message via the contact form on virtusdecora.com.',
             '',
-            'Best regards,',
+            'We will reply within 24 hours using the email address you entered on the form.',
+            '',
+            'If you did not fill in our contact form, you can ignore this email.',
+            '',
             'Virtus Decora',
           ].join('\n'),
           html: `
-              <div style="background-color:#0f172a;padding:28px 24px;font-family:system-ui,-apple-system,sans-serif;color:#ffffff;">
-              <p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:#ffffff;">Hello ${escapeHtml(name)},</p>
-              <p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:#ffffff;">
-                Thank you for contacting Virtus Decora. We have received your request and a member of our team will get back to you within <strong style="color:#ffffff;">24 hours</strong>.
-              </p>
-              <p style="margin:0;font-size:15px;line-height:1.6;color:#ffffff;">
-                Best regards,<br />
-                Virtus Decora
-              </p>
+              <div style="margin:0;padding:0;font-family:Georgia,'Times New Roman',Times,serif;font-size:16px;line-height:1.55;color:#111827;background:#ffffff;">
+              <p style="margin:0 0 16px;">Hello ${escapeHtml(name)},</p>
+              <p style="margin:0 0 16px;">This is an automatic message to confirm we received your message via the contact form on <a href="https://virtusdecora.com" style="color:#111827;text-decoration:underline;">virtusdecora.com</a>.</p>
+              <p style="margin:0 0 16px;">We will reply within 24 hours using the email address you entered on the form.</p>
+              <p style="margin:0 0 20px;font-size:14px;line-height:1.5;color:#4b5563;">If you did not fill in our contact form, you can ignore this email.</p>
+              <p style="margin:0;font-size:15px;color:#111827;">Virtus Decora</p>
               </div>
             `,
         }
@@ -163,20 +173,32 @@ export async function processContactSubmission(body: Record<string, unknown>): P
             `,
         };
 
-  const { error: autoReplyError } = await resend.emails.send({
+  const autoReplyResult = await resend.emails.send({
     from,
     to: [email],
     replyTo: to,
     subject: autoReply.subject,
     text: autoReply.text,
     html: autoReply.html,
+    headers: {
+      'Auto-Submitted': 'auto-generated',
+    },
+    tags: [{ name: 'type', value: 'contact-autoreply' }],
   });
 
-  let autoReplySent = true;
+  const autoReplyError = autoReplyResult.error;
+  const autoReplyId =
+    autoReplyResult.data && typeof autoReplyResult.data === 'object' && 'id' in autoReplyResult.data
+      ? String((autoReplyResult.data as { id: unknown }).id)
+      : '';
+
+  let autoReplySent = !autoReplyError && autoReplyId.length > 0;
   if (autoReplyError) {
-    autoReplySent = false;
     const autoDetails = resendErrorMessage(autoReplyError);
     console.error('[contact] Auto-reply Resend:', autoReplyError, autoDetails);
+  } else if (!autoReplyId) {
+    console.error('[contact] Auto-reply: Resend returned no message id', autoReplyResult.data);
+    autoReplySent = false;
   }
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
