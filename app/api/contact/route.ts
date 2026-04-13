@@ -8,7 +8,7 @@ export async function POST(request: Request) {
       typeof body === 'object' && body !== null ? (body as Record<string, unknown>) : {}
     );
     if (result.ok) {
-      return NextResponse.json({ ok: true });
+      return NextResponse.json({ ok: true, autoReplySent: result.autoReplySent });
     }
     return NextResponse.json(
       {

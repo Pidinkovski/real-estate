@@ -20,7 +20,7 @@ function clamp(s: unknown, max: number): string {
 }
 
 export type ContactResult =
-  | { ok: true }
+  | { ok: true; autoReplySent: boolean }
   | { ok: false; status: number; error: string; details?: string };
 
 function resendErrorMessage(err: unknown): string {
@@ -83,25 +83,27 @@ export async function processContactSubmission(body: Record<string, unknown>): P
     subject: `Website inquiry — ${name}`,
     text: teamText,
     html: `
-        <h2 style="font-family:system-ui,sans-serif;font-size:18px;">New consultation request</h2>
-        <p style="font-family:system-ui,sans-serif;font-size:13px;color:#444;margin:0 0 12px;">Sent from the Virtus Decora site contact form. <strong>Reply</strong> uses the client’s email (<code>${escapeHtml(
+        <div style="background-color:#0f172a;padding:28px 24px;font-family:system-ui,-apple-system,sans-serif;color:#ffffff;">
+        <h2 style="margin:0 0 16px;font-size:18px;font-weight:600;color:#ffffff;">New consultation request</h2>
+        <p style="font-size:13px;line-height:1.5;color:#e2e8f0;margin:0 0 16px;">Sent from the Virtus Decora site contact form. <strong style="color:#ffffff;">Reply</strong> uses the client’s email (<code style="background:#1e293b;padding:2px 6px;border-radius:4px;font-size:12px;color:#f8fafc;">${escapeHtml(
           email
         )}</code>).</p>
-        <table style="font-family:system-ui,sans-serif;font-size:14px;line-height:1.6;color:#111;border-collapse:collapse;">
-          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;"><strong>Name</strong></td><td style="padding:6px 0;">${escapeHtml(name)}</td></tr>
-          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;"><strong>Email</strong></td><td style="padding:6px 0;"><a href="${escapeAttr(mailHref)}">${escapeHtml(email)}</a></td></tr>
-          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;"><strong>Phone</strong></td><td style="padding:6px 0;">${
+        <table style="font-size:14px;line-height:1.6;color:#ffffff;border-collapse:collapse;">
+          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;color:#cbd5e1;"><strong style="color:#ffffff;">Name</strong></td><td style="padding:6px 0;color:#ffffff;">${escapeHtml(name)}</td></tr>
+          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;color:#cbd5e1;"><strong style="color:#ffffff;">Email</strong></td><td style="padding:6px 0;"><a href="${escapeAttr(mailHref)}" style="color:#c6a35a;text-decoration:underline;">${escapeHtml(email)}</a></td></tr>
+          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;color:#cbd5e1;"><strong style="color:#ffffff;">Phone</strong></td><td style="padding:6px 0;">${
             phone && telHref.length > 4
-              ? `<a href="${escapeAttr(telHref)}">${escapeHtml(phone)}</a>`
-              : escapeHtml(phoneDisplay)
+              ? `<a href="${escapeAttr(telHref)}" style="color:#c6a35a;text-decoration:underline;">${escapeHtml(phone)}</a>`
+              : `<span style="color:#ffffff;">${escapeHtml(phoneDisplay)}</span>`
           }</td></tr>
-          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;"><strong>Project type</strong></td><td style="padding:6px 0;">${escapeHtml(projectTypeDisplay)}</td></tr>
-          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;"><strong>Budget</strong></td><td style="padding:6px 0;">${escapeHtml(budgetDisplay)}</td></tr>
+          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;color:#cbd5e1;"><strong style="color:#ffffff;">Project type</strong></td><td style="padding:6px 0;color:#ffffff;">${escapeHtml(projectTypeDisplay)}</td></tr>
+          <tr><td style="padding:6px 12px 6px 0;vertical-align:top;color:#cbd5e1;"><strong style="color:#ffffff;">Budget</strong></td><td style="padding:6px 0;color:#ffffff;">${escapeHtml(budgetDisplay)}</td></tr>
         </table>
-        <p style="font-family:system-ui,sans-serif;font-size:14px;margin:16px 0 6px;"><strong>Project description</strong></p>
-        <pre style="font-family:system-ui,sans-serif;font-size:14px;white-space:pre-wrap;background:#f4f4f5;padding:12px;border-radius:8px;margin:0;">${escapeHtml(
+        <p style="font-size:14px;margin:20px 0 8px;color:#ffffff;"><strong>Project description</strong></p>
+        <pre style="font-size:14px;line-height:1.5;white-space:pre-wrap;background:#1e293b;color:#f8fafc;padding:14px;border-radius:8px;margin:0;border:1px solid #334155;">${escapeHtml(
           messageDisplay
         )}</pre>
+        </div>
       `,
   });
 
@@ -115,29 +117,49 @@ export async function processContactSubmission(body: Record<string, unknown>): P
   const autoReply =
     lang === 'en'
       ? {
-          subject: 'We received your request — Virtus Decora',
+          subject: 'Thank you for your request — Virtus Decora',
+          text: [
+            `Hello ${name},`,
+            '',
+            'Thank you for contacting Virtus Decora. We have received your request and a member of our team will get back to you within 24 hours.',
+            '',
+            'Best regards,',
+            'Virtus Decora',
+          ].join('\n'),
           html: `
-              <p style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color:#111;">Hello ${escapeHtml(name)},</p>
-              <p style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color:#111;">
-                Thank you for contacting Virtus Decora. We have received your inquiry and will get back to you within <strong>24 hours</strong>.
+              <div style="background-color:#0f172a;padding:28px 24px;font-family:system-ui,-apple-system,sans-serif;color:#ffffff;">
+              <p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:#ffffff;">Hello ${escapeHtml(name)},</p>
+              <p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:#ffffff;">
+                Thank you for contacting Virtus Decora. We have received your request and a member of our team will get back to you within <strong style="color:#ffffff;">24 hours</strong>.
               </p>
-              <p style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color:#111;">
+              <p style="margin:0;font-size:15px;line-height:1.6;color:#ffffff;">
                 Best regards,<br />
                 Virtus Decora
               </p>
+              </div>
             `,
         }
       : {
-          subject: 'Получихме вашето запитване — Virtus Decora',
+          subject: 'Благодарим за запитването — Virtus Decora',
+          text: [
+            `Здравейте, ${name}!`,
+            '',
+            'Благодарим ви, че се свързахте с Virtus Decora. Получихме вашето запитване и колега от екипа ни ще се свърже с вас в рамките на 24 часа.',
+            '',
+            'Поздрави,',
+            'Екипът на Virtus Decora',
+          ].join('\n'),
           html: `
-              <p style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color:#111;">Здравейте, ${escapeHtml(name)},</p>
-              <p style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color:#111;">
-                Благодарим ви, че се свързахте с Virtus Decora. Получихме вашето запитване и ще отговорим в рамките на <strong>24 часа</strong>.
+              <div style="background-color:#0f172a;padding:28px 24px;font-family:system-ui,-apple-system,sans-serif;color:#ffffff;">
+              <p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:#ffffff;">Здравейте, ${escapeHtml(name)}!</p>
+              <p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:#ffffff;">
+                Благодарим ви, че се свързахте с Virtus Decora. Получихме вашето запитване и колега от екипа ни ще се свърже с вас в рамките на <strong style="color:#ffffff;">24 часа</strong>.
               </p>
-              <p style="font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;color:#111;">
+              <p style="margin:0;font-size:15px;line-height:1.6;color:#ffffff;">
                 Поздрави,<br />
                 Екипът на Virtus Decora
               </p>
+              </div>
             `,
         };
 
@@ -146,11 +168,15 @@ export async function processContactSubmission(body: Record<string, unknown>): P
     to: [email],
     replyTo: to,
     subject: autoReply.subject,
+    text: autoReply.text,
     html: autoReply.html,
   });
 
+  let autoReplySent = true;
   if (autoReplyError) {
-    console.error('[contact] Auto-reply Resend:', autoReplyError);
+    autoReplySent = false;
+    const autoDetails = resendErrorMessage(autoReplyError);
+    console.error('[contact] Auto-reply Resend:', autoReplyError, autoDetails);
   }
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -165,5 +191,5 @@ export async function processContactSubmission(body: Record<string, unknown>): P
     }
   }
 
-  return { ok: true };
+  return { ok: true, autoReplySent };
 }

@@ -180,7 +180,10 @@ export const translations = {
       send: 'Send Inquiry',
       sending: 'Sending...',
       successTitle: 'Thank you',
-      successMessage: 'Your inquiry has been received. A member of our team will be in touch within 24 hours.',
+      successMessage:
+        'Your inquiry has been received. You should get a short confirmation email at the address you provided; a member of our team will be in touch within 24 hours.',
+      successNoAutoReply:
+        'Your inquiry was received, but we could not send a confirmation email to your address (check spam, or try again later). Our team will still respond within 24 hours.',
       close: 'Close',
       error: 'Something went wrong. Please try again.',
       projectTypes: ['Residential', 'Commercial', 'Hospitality', 'Renovation', 'Architectural Design', 'Other'],
@@ -367,7 +370,10 @@ export const translations = {
       send: 'Изпратете запитване',
       sending: 'Изпращане...',
       successTitle: 'Благодарим ви',
-      successMessage: 'Вашето запитване е получено. Член на нашия екип ще се свърже с вас в рамките на 24 часа.',
+      successMessage:
+        'Вашето запитване е получено. Очаквайте кратък потвърдителен имейл на посочения от вас адрес; колега от екипа ни ще се свърже с вас в рамките на 24 часа.',
+      successNoAutoReply:
+        'Запитването ви е получено, но не успяхме да изпратим потвърждение на вашия имейл (проверете „Спам“ или опитайте по-късно). Екипът ни пак ще отговори в рамките на 24 часа.',
       close: 'Затвори',
       error: 'Нещо се обърка. Моля, опитайте отново.',
       projectTypes: ['Жилищен', 'Търговски', 'Хотелиерство', 'Ремонт', 'Архитектурен дизайн', 'Друго'],

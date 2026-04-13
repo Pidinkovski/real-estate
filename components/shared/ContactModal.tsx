@@ -27,6 +27,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [error, setError] = useState('');
   /** Server / Resend message when submit fails (helps debug without opening DevTools). */
   const [errorDetails, setErrorDetails] = useState('');
+  /** False when team email sent but visitor confirmation email failed (e.g. Resend sandbox). */
+  const [autoReplySent, setAutoReplySent] = useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -37,6 +39,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setLoading(true);
     setError('');
     setErrorDetails('');
+    setAutoReplySent(true);
 
     try {
       const res = await fetch('/api/contact', {
@@ -44,7 +47,11 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...form, lang }),
       });
-      const data = (await res.json().catch(() => null)) as { error?: string; details?: string } | null;
+      const data = (await res.json().catch(() => null)) as {
+        error?: string;
+        details?: string;
+        autoReplySent?: boolean;
+      } | null;
       if (!res.ok) {
         setError(t.modal.error);
         const hint =
@@ -53,6 +60,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         setErrorDetails(hint);
         return;
       }
+      setAutoReplySent(data?.autoReplySent !== false);
       setSuccess(true);
     } catch {
       setError(t.modal.error);
@@ -68,6 +76,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       setSuccess(false);
       setError('');
       setErrorDetails('');
+      setAutoReplySent(true);
       setForm({ name: '', email: '', phone: '', project_type: 'Residential', budget_range: '', message: '' });
     }, 400);
   };
@@ -105,7 +114,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <CheckCircle size={40} className="md:w-12 md:h-12 text-gold" />
                 <h3 className="text-xl md:text-2xl font-display font-semibold text-white">{t.modal.successTitle}</h3>
                 <p className="text-sm md:text-base text-slate-400 max-w-sm">
-                  {t.modal.successMessage}
+                  {autoReplySent ? t.modal.successMessage : t.modal.successNoAutoReply}
                 </p>
                 <button
                   onClick={handleClose}
