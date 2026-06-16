@@ -111,9 +111,9 @@ export default function Navbar() {
                 src="/vs-studio-logo.svg"
                 alt="VS Studio Logo"
                 width={220}
-                height={48}
+                height={220}
                 priority
-                className="h-10 w-auto md:h-12 transition-transform duration-300 group-hover:scale-[1.02]"
+                className="h-14 w-14 rounded-md object-contain transition-transform duration-300 group-hover:scale-[1.02] md:h-16 md:w-16"
               />
             </a>
 
