@@ -104,29 +104,17 @@ export default function Navbar() {
             <a
               href="#"
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="flex items-center gap-2 group"
+              className="group flex items-center"
+              aria-label="VS Studio home"
             >
-              <div className="relative w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden flex-shrink-0">
-                <Image
-                  src="/favicon.png"
-                  alt="Virtus Decora Logo"
-                  fill
-                  className="object-cover"
-                  sizes="40px"
-                />
-              </div>
-              <span className="relative text-base md:text-xl font-display font-bold tracking-wider text-white">
-                Virtus{' '}
-                <span className="relative text-gold" style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom' }}>
-                  Decora
-                  <motion.span
-                    initial={{ x: '-100%' }}
-                    animate={{ x: '200%' }}
-                    transition={{ duration: 3.8, repeat: Infinity, repeatDelay: 1.2, ease: 'easeInOut' }}
-                    className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 pointer-events-none"
-                  />
-                </span>
-              </span>
+              <Image
+                src="/vs-studio-logo.svg"
+                alt="VS Studio Logo"
+                width={220}
+                height={48}
+                priority
+                className="h-10 w-auto md:h-12 transition-transform duration-300 group-hover:scale-[1.02]"
+              />
             </a>
 
             <ul className="hidden lg:flex items-center gap-6">
