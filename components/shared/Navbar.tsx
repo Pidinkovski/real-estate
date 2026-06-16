@@ -31,47 +31,6 @@ function UKFlag({ size = 28 }: { size?: number }) {
   );
 }
 
-function VSStudioLogo() {
-  return (
-    <svg
-      width="64"
-      height="64"
-      viewBox="0 0 220 220"
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-14 w-14 rounded-md bg-[#f8f4ee] shadow-sm transition-transform duration-300 group-hover:scale-[1.02] md:h-16 md:w-16"
-      role="img"
-      aria-label="VS Studio Logo"
-    >
-      <rect width="220" height="220" fill="#f8f4ee" />
-      <path d="M58 64 L98 162 L137 64" fill="#111111" stroke="#b28b45" strokeWidth="5" strokeLinejoin="round" />
-      <path
-        d="M160 70 C135 58 111 70 111 94 C111 130 171 118 171 156 C171 183 135 194 104 174"
-        fill="none"
-        stroke="#111111"
-        strokeWidth="25"
-        strokeLinecap="round"
-      />
-      <path
-        d="M160 70 C135 58 111 70 111 94 C111 130 171 118 171 156 C171 183 135 194 104 174"
-        fill="none"
-        stroke="#b28b45"
-        strokeWidth="5"
-        strokeLinecap="round"
-      />
-      <path d="M106 60 L128 40 L172 76" fill="none" stroke="#b28b45" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
-      <line x1="105" y1="152" x2="174" y2="152" stroke="#b28b45" strokeWidth="3" />
-      <rect x="136" y="136" width="42" height="15" rx="3" fill="none" stroke="#b28b45" strokeWidth="3" />
-      <path d="M91 178 H129" stroke="#006341" strokeWidth="4" />
-      <text x="110" y="198" textAnchor="middle" fontFamily="Georgia, 'Times New Roman', serif" fontSize="16" letterSpacing="8" fill="#4c351c">
-        VS STUDIO
-      </text>
-      <text x="110" y="211" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="7" letterSpacing="2.4" fill="#4c351c">
-        BUILDING • INTERIORS • TURNKEY
-      </text>
-    </svg>
-  );
-}
-
 function LangButton({ langCode, current, onClick, title, children }: {
   langCode: string; current: string; onClick: () => void; title: string; children: React.ReactNode;
 }) {
@@ -147,7 +106,11 @@ export default function Navbar() {
               className="group flex items-center"
               aria-label="VS Studio home"
             >
-              <VSStudioLogo />
+              <img
+                src="/vs-studio-logo.svg"
+                alt="VS Studio Logo"
+                className="h-14 w-14 rounded-md object-cover shadow-sm transition-transform duration-300 group-hover:scale-[1.02] md:h-16 md:w-16"
+              />
             </a>
 
             <ul className="hidden lg:flex items-center gap-6">
