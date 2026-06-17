@@ -2,19 +2,19 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Building2, Clock, Globe, Layers } from 'lucide-react';
+import { Award, Building2, Globe, KeyRound } from 'lucide-react';
 import { useLang } from '@/lib/i18n';
 
-const icons = [Building2, Clock, Globe, Layers];
+const icons = [Building2, Award, Globe, KeyRound];
 
 export default function TrustBar() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-50px' });
-  const { t } = useLang();
-  const values = ['20+', t.trust.processControl, '3', t.trust.endToEnd];
+  const { lang, t } = useLang();
+  const values = ['20+', '10+', '3', lang === 'bg' ? 'До ключ' : 'Turnkey'];
   const labels = [
     t.trust.projectsDelivered,
-    t.trust.processControlSub,
+    lang === 'bg' ? 'Години опит' : 'Years of experience',
     t.trust.citiesOfOperation,
     t.trust.servicesProvided,
   ];
@@ -29,7 +29,7 @@ export default function TrustBar() {
             const Icon = stat.icon;
             return (
               <motion.div
-                key={['projects', 'process', 'cities', 'services'][i]}
+                key={['projects', 'experience', 'cities', 'turnkey'][i]}
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
