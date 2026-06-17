@@ -69,31 +69,23 @@ export default function IntroScreen({ onComplete, onIrisStart }: IntroScreenProp
   return (
     <>
       {phase === 'video' && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black">
-          <div className="relative h-[75vh] w-[75vw] max-h-[90vh] max-w-[92vw] overflow-hidden bg-black">
-            <video
-              ref={videoRef}
-              src={INTRO_VIDEO_SRC}
-              muted
-              playsInline
-              preload="auto"
-              className="absolute inset-0 h-full w-full bg-black object-contain [transform:translateZ(0)]"
-            />
-            <div
-              className="pointer-events-none absolute inset-0 z-[1]"
-              style={{
-                background:
-                  'radial-gradient(ellipse 96% 96% at 50% 50%, transparent 34%, rgba(0,0,0,0.22) 58%, rgba(0,0,0,0.72) 82%, #000 100%)',
-                boxShadow: [
-                  'inset 0 0 min(42vw, 480px) min(32vh, 340px) rgba(0,0,0,0.38)',
-                  'inset 0 0 min(22vw, 260px) min(16vh, 200px) rgba(0,0,0,0.72)',
-                  'inset 0 0 min(10vw, 140px) min(8vh, 110px) rgba(0,0,0,0.95)',
-                  'inset 0 0 min(4vw, 56px) min(3vh, 44px) #000',
-                ].join(', '),
-              }}
-              aria-hidden
-            />
-          </div>
+        <div className="fixed inset-0 z-[9999] overflow-hidden bg-black">
+          <video
+            ref={videoRef}
+            src={INTRO_VIDEO_SRC}
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 h-full w-full bg-black object-cover [transform:translateZ(0)]"
+          />
+          <div
+            className="pointer-events-none absolute inset-0 z-[1]"
+            style={{
+              background:
+                'radial-gradient(ellipse 96% 96% at 50% 50%, transparent 42%, rgba(0,0,0,0.16) 72%, rgba(0,0,0,0.42) 100%)',
+            }}
+            aria-hidden
+          />
           <button
             type="button"
             onClick={goToIris}
