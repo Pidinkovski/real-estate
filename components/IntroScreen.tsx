@@ -7,7 +7,7 @@ const INTRO_MAX_PLAY_SECONDS = 10;
 /** Matches `.reveal-*` animation duration in `globals.css`. */
 const IRIS_TRANSITION_MS = 1200;
 
-const INTRO_VIDEO_SRC = '/videos/virtus-intro.mp4';
+const INTRO_VIDEO_SRC = 'https://res.cloudinary.com/dtqaoposo/video/upload/v1781693600/%D0%90%D0%BD%D0%B8%D0%BC%D0%B0%D1%86%D0%B8%D1%8F_%D0%9B%D0%BE%D0%B3%D0%BE_dwixua.mp4';
 
 interface IntroScreenProps {
   onComplete: () => void;
