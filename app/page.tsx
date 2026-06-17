@@ -4,12 +4,24 @@ import LandingClient from '@/components/LandingClient';
 
 export const dynamic = 'force-dynamic';
 
+const featuredProjects: Project[] = [
+  {
+    id: 'modern-living-room',
+    name: 'Модерен хол с характер',
+    location: 'Частен дом',
+    sqm: 42,
+    category: 'Интериор',
+    image_url: '/projects/modern-living-room.jpg',
+    description:
+      'Дневна зона с модерна ТВ стена, вертикални декоративни ламели и прецизно подбрано осветление. Пространство, създадено за комфорт, визуален баланс и усещане за завършен интериор.',
+    year: 2026,
+    featured: true,
+    created_at: '2026-06-17T00:00:00.000Z',
+  },
+];
+
 async function getProjects(): Promise<Project[]> {
-  const { data } = await supabase
-    .from('projects')
-    .select('*')
-    .order('created_at', { ascending: false });
-  return data ?? [];
+  return featuredProjects;
 }
 
 async function getBlogPosts(): Promise<BlogPost[]> {
