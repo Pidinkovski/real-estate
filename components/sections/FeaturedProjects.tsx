@@ -100,9 +100,13 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: '-120px' });
   const hasAutoRevealed = useRef(false);
-  const { t } = useLang();
+  const { lang, t } = useLang();
 
   const displayed = projects.slice(0, 3);
+  const projectDescription =
+    lang === 'bg'
+      ? 'Създаваме пространства с характер — прецизни в детайла, спокойни в усещането и завършени с вкус.'
+      : 'We create spaces with character — precise in detail, calm in feeling, and finished with taste.';
   const [current, setCurrent] = useState(0);
   const [canAutoReveal, setCanAutoReveal] = useState(false);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
@@ -144,7 +148,7 @@ export default function FeaturedProjects({ projects }: FeaturedProjectsProps) {
             {t.projects.title1} <span className="italic text-gold">{t.projects.title2}</span>
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-sm leading-relaxed">
-            {t.projects.description}
+            {projectDescription}
           </p>
         </SectionWrapper>
 
