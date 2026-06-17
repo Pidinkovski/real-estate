@@ -1,11 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { MapPin, Phone, Mail, Instagram, Facebook, Music2 } from 'lucide-react';
 import { useLang } from '@/lib/i18n';
 import { SITE_CONTACT_EMAIL } from '@/lib/site';
 
 const quickLinkHrefs = ['#projects', '#services', '#process', '#why-us', '#blog', '#contact'];
+const socialLinks = [
+  { label: 'TikTok', icon: Music2 },
+  { label: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/v.s._studioo/' },
+  { label: 'Facebook', icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61590652031014' },
+];
 
 export default function Footer() {
   const { t } = useLang();
@@ -35,16 +40,38 @@ export default function Footer() {
               {t.footer.description}
             </p>
             <div className="flex items-center gap-4">
-              {[Linkedin, Instagram, Facebook].map((Icon, i) => (
-                <motion.a
-                  key={i}
-                  href="#"
-                  whileHover={{ scale: 1.1, color: '#C6A35A' }}
-                  className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:border-gold hover:text-gold transition-all duration-300"
-                >
-                  <Icon size={15} />
-                </motion.a>
-              ))}
+              {socialLinks.map((item) => {
+                const Icon = item.icon;
+                const className = 'w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:border-gold hover:text-gold transition-all duration-300';
+
+                if (!item.href) {
+                  return (
+                    <motion.span
+                      key={item.label}
+                      whileHover={{ scale: 1.1, color: '#C6A35A' }}
+                      className={className}
+                      aria-label={item.label}
+                      title="TikTok coming soon"
+                    >
+                      <Icon size={15} />
+                    </motion.span>
+                  );
+                }
+
+                return (
+                  <motion.a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={item.label}
+                    whileHover={{ scale: 1.1, color: '#C6A35A' }}
+                    className={className}
+                  >
+                    <Icon size={15} />
+                  </motion.a>
+                );
+              })}
             </div>
           </div>
 
