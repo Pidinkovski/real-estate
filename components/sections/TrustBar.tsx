@@ -29,7 +29,7 @@ function CountUpValue({ amount, suffix, active }: { amount: number; suffix: stri
     if (!active) return;
 
     let frame = 0;
-    const duration = 1200;
+    const duration = 2200;
     const start = performance.now();
 
     const tick = (now: number) => {
