@@ -100,18 +100,7 @@ export default function Navbar() {
                 : 'bg-white/5 backdrop-blur-sm border border-white/10 rounded-full py-2.5 md:py-3'
             }`}
           >
-            <a
-              href="#"
-              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="group flex items-center"
-              aria-label="VS Studio home"
-            >
-              <img
-                src="/vs-studio-logo.svg"
-                alt="VS Studio Logo"
-                className="h-14 w-14 rounded-md object-cover shadow-sm transition-transform duration-300 group-hover:scale-[1.02] md:h-16 md:w-16"
-              />
-            </a>
+            <div className="h-14 w-14 flex-shrink-0 md:h-16 md:w-16" aria-hidden="true" />
 
             <ul className="hidden lg:flex items-center gap-6">
               {navLinks.map((link) => (
