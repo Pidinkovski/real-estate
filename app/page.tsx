@@ -18,6 +18,19 @@ const featuredProjects: Project[] = [
     featured: true,
     created_at: '2026-06-17T00:00:00.000Z',
   },
+  {
+    id: 'modern-dining-kitchen',
+    name: 'Кухня и трапезария в светъл ритъм',
+    location: 'Частен дом',
+    sqm: 42,
+    category: 'Интериор',
+    image_url: '/projects/modern-dining-kitchen.jpg',
+    description:
+      'Светла кухня и трапезария с изчистени линии, гланцови повърхности и акцентно осветление. Пространство, в което ежедневният комфорт се среща с елегантна, завършена визия.',
+    year: 2026,
+    featured: true,
+    created_at: '2026-06-17T00:00:00.000Z',
+  },
 ];
 
 async function getProjects(): Promise<Project[]> {
