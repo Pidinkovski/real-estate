@@ -109,12 +109,12 @@ export const translations = {
       title1: 'Built on',
       title2: 'Four Pillars',
       description:
-        'Although we are a new company, we work with partners, craftspeople, and suppliers with many years of practical experience. For us, every project is built on clear communication, quality execution, careful material selection, and full transparency.',
+        'VS Studio works with experienced partners, craftspeople, and suppliers proven in real projects. For us, every site is built on clear communication, quality execution, careful material selection, and full transparency.',
       pillars: [
         {
           title: 'Experienced partners and craftspeople',
           description:
-            'We work with proven contractors and specialists with long-term experience across many types of projects. That lets us pair a fresh, client-first approach with real expertise on site.',
+            'We work with proven contractors and specialists with long-standing experience across many types of projects. This gives each client real on-site expertise and a well-organized process.',
         },
         {
           title: 'Curated materials',
@@ -302,12 +302,12 @@ export const translations = {
       title1: 'Изградени върху',
       title2: 'Четири стълба',
       description:
-        'Макар да сме нова компания, работим с партньори, майстори и доставчици с дългогодишен практически опит. За нас всеки проект се гради върху ясна комуникация, качествено изпълнение, внимателен подбор на материали и пълна прозрачност.',
+        'VS Studio работи с опитни партньори, майстори и доставчици, доказани в реални проекти. За нас всеки обект се гради върху ясна комуникация, качествено изпълнение, внимателен подбор на материали и пълна прозрачност.',
       pillars: [
         {
           title: 'Опитни партньори и майстори',
           description:
-            'Работим с доказани изпълнители и специалисти с дългосрочен опит в различни типове проекти. Така съчетаваме ново отношение към клиента с реална експертиза на терен.',
+            'Работим с доказани изпълнители и специалисти с дългогодишен опит в различни типове проекти. Така клиентът получава реална експертиза на терен и добре организиран процес.',
         },
         {
           title: 'Подбрани материали',
