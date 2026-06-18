@@ -56,7 +56,7 @@ export async function processContactSubmission(body: Record<string, unknown>): P
     return { ok: false, status: 503, error: 'Email not configured' };
   }
 
-  /** Team inbox: `CONTACT_TO_EMAIL` on the server, else same public address (defaults to info@virtusdecora.com). */
+  /** Team inbox: `CONTACT_TO_EMAIL` on the server, else same public address (defaults to info@vsstudiobg.com). */
   const to = process.env.CONTACT_TO_EMAIL?.trim() || SITE_CONTACT_EMAIL;
   const from =
     process.env.RESEND_FROM_EMAIL?.trim() || 'VS Studio <onboarding@resend.dev>';
@@ -127,11 +127,11 @@ export async function processContactSubmission(body: Record<string, unknown>): P
     lang === 'en'
       ? {
           // Neutral subject + plain “receipt” HTML: dark promo-style layouts often score as bulk mail.
-          subject: 'Contact form on virtusdecora.com',
+          subject: 'Contact form on vsstudiobg.com',
           text: [
             `Hello ${name},`,
             '',
-            'This is an automatic message to confirm we received your message via the contact form on virtusdecora.com.',
+            'This is an automatic message to confirm we received your message via the contact form on vsstudiobg.com.',
             '',
             'We will reply within 24 hours using the email address you entered on the form.',
             '',
@@ -142,7 +142,7 @@ export async function processContactSubmission(body: Record<string, unknown>): P
           html: `
               <div style="margin:0;padding:0;font-family:Georgia,'Times New Roman',Times,serif;font-size:16px;line-height:1.55;color:#111827;background:#ffffff;">
               <p style="margin:0 0 16px;">Hello ${escapeHtml(name)},</p>
-              <p style="margin:0 0 16px;">This is an automatic message to confirm we received your message via the contact form on <a href="https://virtusdecora.com" style="color:#111827;text-decoration:underline;">virtusdecora.com</a>.</p>
+              <p style="margin:0 0 16px;">This is an automatic message to confirm we received your message via the contact form on <a href="https://vsstudiobg.com" style="color:#111827;text-decoration:underline;">vsstudiobg.com</a>.</p>
               <p style="margin:0 0 16px;">We will reply within 24 hours using the email address you entered on the form.</p>
               <p style="margin:0 0 20px;font-size:14px;line-height:1.5;color:#4b5563;">If you did not fill in our contact form, you can ignore this email.</p>
               <p style="margin:0;font-size:15px;color:#111827;">VS Studio</p>
