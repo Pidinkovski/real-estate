@@ -9,7 +9,6 @@ import Hero from '@/components/sections/Hero';
 import TrustBar from '@/components/sections/TrustBar';
 import Services from '@/components/sections/Services';
 import FeaturedProjects from '@/components/sections/FeaturedProjects';
-import BeforeAfter from '@/components/sections/BeforeAfter';
 import Process from '@/components/sections/Process';
 import WhyUs from '@/components/sections/WhyUs';
 import BlogPreview from '@/components/sections/BlogPreview';
@@ -34,7 +33,6 @@ export default function LandingClient({ projects, posts }: LandingClientProps) {
           <TrustBar />
           <FeaturedProjects projects={projects} />
           <Services />
-          <BeforeAfter />
           <Process />
           <WhyUs />
           <BlogPreview posts={posts} />
