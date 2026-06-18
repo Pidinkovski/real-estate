@@ -31,6 +31,19 @@ const featuredProjects: Project[] = [
     featured: true,
     created_at: '2026-06-17T00:00:00.000Z',
   },
+  {
+    id: 'modern-exterior-facade',
+    name: 'Модерна фасада с прецизен детайл',
+    location: 'Частен дом',
+    sqm: 120,
+    category: 'Екстериор',
+    image_url: '/projects/modern-exterior-facade.jpg',
+    description:
+      'Съвременна фасадна визия с чисти линии, устойчиви материали и подреден външен подход. Изпълнение, което дава завършен характер на целия имот.',
+    year: 2026,
+    featured: true,
+    created_at: '2026-06-18T00:00:00.000Z',
+  },
 ];
 
 async function getProjects(): Promise<Project[]> {
