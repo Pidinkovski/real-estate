@@ -59,14 +59,14 @@ export async function processContactSubmission(body: Record<string, unknown>): P
   /** Team inbox: `CONTACT_TO_EMAIL` on the server, else same public address (defaults to info@virtusdecora.com). */
   const to = process.env.CONTACT_TO_EMAIL?.trim() || SITE_CONTACT_EMAIL;
   const from =
-    process.env.RESEND_FROM_EMAIL?.trim() || 'Virtus Decora <onboarding@resend.dev>';
+    process.env.RESEND_FROM_EMAIL?.trim() || 'VS Studio <onboarding@resend.dev>';
 
   const phoneDisplay = phone || '—';
   const projectTypeDisplay = project_type || '—';
   const budgetDisplay = budget_range || '—';
   const messageDisplay = message || '—';
 
-  const mailHref = `mailto:${email}?subject=${encodeURIComponent(`Re: Virtus Decora inquiry — ${name}`)}`;
+  const mailHref = `mailto:${email}?subject=${encodeURIComponent(`Re: VS Studio inquiry — ${name}`)}`;
   const telHref = phone ? `tel:${phone.replace(/[^\d+]/g, '')}` : '';
 
   const teamText = [
@@ -94,7 +94,7 @@ export async function processContactSubmission(body: Record<string, unknown>): P
     html: `
         <div style="background-color:#0f172a;padding:28px 24px;font-family:system-ui,-apple-system,sans-serif;color:#ffffff;">
         <h2 style="margin:0 0 16px;font-size:18px;font-weight:600;color:#ffffff;">New consultation request</h2>
-        <p style="font-size:13px;line-height:1.5;color:#e2e8f0;margin:0 0 16px;">Sent from the Virtus Decora site contact form. <strong style="color:#ffffff;">Reply</strong> uses the client’s email (<code style="background:#1e293b;padding:2px 6px;border-radius:4px;font-size:12px;color:#f8fafc;">${escapeHtml(
+        <p style="font-size:13px;line-height:1.5;color:#e2e8f0;margin:0 0 16px;">Sent from the VS Studio site contact form. <strong style="color:#ffffff;">Reply</strong> uses the client’s email (<code style="background:#1e293b;padding:2px 6px;border-radius:4px;font-size:12px;color:#f8fafc;">${escapeHtml(
           email
         )}</code>).</p>
         <table style="font-size:14px;line-height:1.6;color:#ffffff;border-collapse:collapse;">
@@ -137,7 +137,7 @@ export async function processContactSubmission(body: Record<string, unknown>): P
             '',
             'If you did not fill in our contact form, you can ignore this email.',
             '',
-            'Virtus Decora',
+            'VS Studio',
           ].join('\n'),
           html: `
               <div style="margin:0;padding:0;font-family:Georgia,'Times New Roman',Times,serif;font-size:16px;line-height:1.55;color:#111827;background:#ffffff;">
@@ -145,29 +145,29 @@ export async function processContactSubmission(body: Record<string, unknown>): P
               <p style="margin:0 0 16px;">This is an automatic message to confirm we received your message via the contact form on <a href="https://virtusdecora.com" style="color:#111827;text-decoration:underline;">virtusdecora.com</a>.</p>
               <p style="margin:0 0 16px;">We will reply within 24 hours using the email address you entered on the form.</p>
               <p style="margin:0 0 20px;font-size:14px;line-height:1.5;color:#4b5563;">If you did not fill in our contact form, you can ignore this email.</p>
-              <p style="margin:0;font-size:15px;color:#111827;">Virtus Decora</p>
+              <p style="margin:0;font-size:15px;color:#111827;">VS Studio</p>
               </div>
             `,
         }
       : {
-          subject: 'Благодарим за запитването — Virtus Decora',
+          subject: 'Благодарим за запитването — VS Studio',
           text: [
             `Здравейте, ${name}!`,
             '',
-            'Благодарим ви, че се свързахте с Virtus Decora. Получихме вашето запитване и колега от екипа ни ще се свърже с вас в рамките на 24 часа.',
+            'Благодарим ви, че се свързахте с VS Studio. Получихме вашето запитване и колега от екипа ни ще се свърже с вас в рамките на 24 часа.',
             '',
             'Поздрави,',
-            'Екипът на Virtus Decora',
+            'Екипът на VS Studio',
           ].join('\n'),
           html: `
               <div style="background-color:#0f172a;padding:28px 24px;font-family:system-ui,-apple-system,sans-serif;color:#ffffff;">
               <p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:#ffffff;">Здравейте, ${escapeHtml(name)}!</p>
               <p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:#ffffff;">
-                Благодарим ви, че се свързахте с Virtus Decora. Получихме вашето запитване и колега от екипа ни ще се свърже с вас в рамките на <strong style="color:#ffffff;">24 часа</strong>.
+                Благодарим ви, че се свързахте с VS Studio. Получихме вашето запитване и колега от екипа ни ще се свърже с вас в рамките на <strong style="color:#ffffff;">24 часа</strong>.
               </p>
               <p style="margin:0;font-size:15px;line-height:1.6;color:#ffffff;">
                 Поздрави,<br />
-                Екипът на Virtus Decora
+                Екипът на VS Studio
               </p>
               </div>
             `,

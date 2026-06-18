@@ -25,9 +25,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12">
           <div className="lg:col-span-1">
             <div className="relative text-2xl md:text-3xl font-display font-bold tracking-wider text-white mb-4 inline-block">
-              Virtus{' '}
+              VS{' '}
               <span className="relative text-gold" style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom' }}>
-                Decora
+                Studio
                 <motion.span
                   initial={{ x: '-100%' }}
                   animate={{ x: '200%' }}

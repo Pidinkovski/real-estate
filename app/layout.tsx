@@ -15,15 +15,15 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Virtus Decora — Turnkey Construction & Architecture',
-  description: 'Premium turnkey construction, architectural design, and interior furnishing. From concept to completion — across Europe and the Middle East.',
+  title: 'VS Studio — Turnkey Construction & Interiors',
+  description: 'Turnkey construction, architectural design, and interior furnishing. From concept to completed space — based in Plovdiv, Bulgaria.',
   icons: {
     icon: '/favicon.png',
     apple: '/favicon.png',
   },
   openGraph: {
-    title: 'Virtus Decora — Turnkey Construction & Architecture',
-    description: 'Premium turnkey construction, architectural design, and interior furnishing.',
+    title: 'VS Studio — Turnkey Construction & Interiors',
+    description: 'Turnkey construction, architectural design, and interior furnishing.',
     images: [{ url: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg' }],
   },
 };

@@ -105,7 +105,7 @@ export const translations = {
       ],
     },
     whyUs: {
-      label: 'Why Virtus Decora',
+      label: 'Why VS Studio',
       title1: 'Built on',
       title2: 'Four Pillars',
       description:
@@ -158,14 +158,14 @@ export const translations = {
       completionLabel: 'Final control and handover of the finished space',
     },
     footer: {
-      description: 'Premium turnkey construction and architectural design. From first concept to final key — across Europe and the Middle East.',
+      description: 'Turnkey construction, interiors, and furnishing. From first idea to finished space — with clear coordination, precise detail, and a calm process.',
       quickLinks: 'Quick Links',
       services: 'Services',
       contact: 'Contact',
       links: ['Projects', 'Services', 'Our Process', 'Why Us', 'Blog', 'Contact'],
       servicesList: ['Turnkey Construction', 'Architectural Design', 'Interior & Furnishing', 'Project Management', 'Structural Engineering', 'Renovation Works'],
       address: 'Bulgaria\nPlovdiv',
-      copyright: 'Virtus Decora Construction Group. All rights reserved.',
+      copyright: 'VS Studio. All rights reserved.',
       privacy: 'Privacy Policy',
       terms: 'Terms of Service',
       imprint: 'Imprint',
@@ -298,7 +298,7 @@ export const translations = {
       ],
     },
     whyUs: {
-      label: 'Защо Virtus Decora',
+      label: 'Защо VS Studio',
       title1: 'Изградени върху',
       title2: 'Четири стълба',
       description:
@@ -351,14 +351,14 @@ export const translations = {
       completionLabel: 'Финален контрол и предаване на готово пространство',
     },
     footer: {
-      description: 'Премиум строителство до ключ и архитектурен дизайн. От първата концепция до финалния ключ — из цяла Европа и Близкия изток.',
+      description: 'Строителство, интериор и обзавеждане до ключ. От първата идея до завършеното пространство — с ясна организация и внимание към всеки детайл.',
       quickLinks: 'Бързи връзки',
       services: 'Услуги',
       contact: 'Контакт',
       links: ['Проекти', 'Услуги', 'Нашият процес', 'Защо ние', 'Блог', 'Контакт'],
       servicesList: ['Строителство до ключ', 'Архитектурен дизайн', 'Интериор и обзавеждане', 'Управление на проекти', 'Конструктивно инженерство', 'Ремонтни работи'],
       address: 'България\nгр. Пловдив',
-      copyright: 'Virtus Decora Construction Group. Всички права запазени.',
+      copyright: 'VS Studio. Всички права запазени.',
       privacy: 'Политика за поверителност',
       terms: 'Условия за ползване',
       imprint: 'Импресум',
