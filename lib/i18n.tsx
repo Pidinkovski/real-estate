@@ -150,9 +150,12 @@ export const translations = {
       description:
         "A good project starts with the right conversation.\nSend an inquiry and let's turn your idea into a real plan together.",
       requestConsultation: 'Request a Consultation',
-      euLabel: 'Licensed in Austria, Germany, France, Croatia',
-      uaeLabel: 'RERA & Dubai Municipality Registered',
-      mcLabel: 'Monaco Principality Certified',
+      planningValue: 'Design',
+      planningLabel: 'Concept, layout, and visual direction',
+      executionValue: 'Execution',
+      executionLabel: 'Coordination of teams, timelines, and details',
+      completionValue: 'Completion',
+      completionLabel: 'Final control and handover of the finished space',
     },
     footer: {
       description: 'Premium turnkey construction and architectural design. From first concept to final key — across Europe and the Middle East.',
@@ -340,9 +343,12 @@ export const translations = {
       description:
         'Добрият проект започва с точния разговор.\nИзпратете запитване и нека заедно превърнем идеята ви в реален план.',
       requestConsultation: 'Заявете консултация',
-      euLabel: 'Лицензиран в Австрия, Германия, Франция, Хърватия',
-      uaeLabel: 'Регистриран в RERA и Дубайска община',
-      mcLabel: 'Сертифициран в Монако',
+      planningValue: 'Проектиране',
+      planningLabel: 'Идея, разпределение и визуална посока',
+      executionValue: 'Изпълнение',
+      executionLabel: 'Координация на майстори, срокове и детайли',
+      completionValue: 'Завършване',
+      completionLabel: 'Финален контрол и предаване на готово пространство',
     },
     footer: {
       description: 'Премиум строителство до ключ и архитектурен дизайн. От първата концепция до финалния ключ — из цяла Европа и Близкия изток.',

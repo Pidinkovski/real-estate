@@ -81,19 +81,19 @@ export default function FinalCTA({ onRequestConsultation }: FinalCTAProps) {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.7 }}
-          className="mt-12 md:mt-16 lg:mt-20 grid grid-cols-3 gap-3 md:gap-4 lg:gap-6 px-4 md:px-0"
+          className="mt-12 md:mt-16 lg:mt-20 grid w-full max-w-5xl grid-cols-1 gap-3 px-4 sm:grid-cols-3 md:gap-4 md:px-0 lg:gap-6"
         >
           {[
-            { value: 'EU', label: t.cta.euLabel },
-            { value: 'UAE', label: t.cta.uaeLabel },
-            { value: 'MC', label: t.cta.mcLabel },
+            { value: t.cta.planningValue, label: t.cta.planningLabel },
+            { value: t.cta.executionValue, label: t.cta.executionLabel },
+            { value: t.cta.completionValue, label: t.cta.completionLabel },
           ].map((item) => (
             <div
               key={item.value}
               className="text-center px-2 md:px-4 py-2 md:py-3 rounded-2xl border border-white/10 backdrop-blur-md"
               style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%)' }}
             >
-              <div className="text-xs md:text-sm font-display font-bold text-gold mb-0.5">{item.value}</div>
+              <div className="text-[11px] md:text-sm font-display font-bold text-gold mb-0.5 tracking-[0.12em] uppercase">{item.value}</div>
               <div className="text-[9px] md:text-[11px] text-slate-400 leading-snug">{item.label}</div>
             </div>
           ))}
