@@ -1,6 +1,6 @@
-import { supabase } from '@/lib/supabase';
 import type { Project, BlogPost } from '@/lib/supabase';
 import LandingClient from '@/components/LandingClient';
+import { BLOG_ARTICLES } from '@/lib/blog';
 
 export const dynamic = 'force-dynamic';
 
@@ -51,12 +51,7 @@ async function getProjects(): Promise<Project[]> {
 }
 
 async function getBlogPosts(): Promise<BlogPost[]> {
-  const { data } = await supabase
-    .from('blog_posts')
-    .select('*')
-    .order('published_at', { ascending: false })
-    .limit(3);
-  return data ?? [];
+  return BLOG_ARTICLES;
 }
 
 export default async function Home() {
